@@ -1,5 +1,10 @@
 <template>
-  <div>{{ msg }}</div>
+  <div>
+    <v-btn color="success">Success</v-btn>
+    <v-btn color="error">Error</v-btn>
+    <v-btn color="warning">Warning</v-btn>
+    <v-btn color="info">Info</v-btn>
+  </div>
 </template>
 
 <script>
@@ -16,9 +21,9 @@ export default {
       query: getAllUsers,
       result(res) {
         this.msg = res;
-        console.log('🚀 ---------------------')
-        console.log('🚀 ~ result ~ res', res)
-        console.log('🚀 ---------------------')
+        console.log("🚀 ---------------------");
+        console.log("🚀 ~ result ~ res", res);
+        console.log("🚀 ---------------------");
       }
     }
   }
@@ -26,6 +31,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 h1,
 h2 {
