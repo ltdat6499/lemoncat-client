@@ -8,7 +8,17 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  mounted() {
+    window.onpopstate = event => {
+      if (
+        this.$cookies.get("token") !== null &&
+        this.$route.path === "/login"
+      ) {
+        this.$router.push("/");
+      }
+    };
+  }
 };
 </script>
 

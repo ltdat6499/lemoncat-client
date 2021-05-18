@@ -2,6 +2,19 @@
   <v-app>
     <v-dialog v-model="dialog" persistent max-width="600px" min-width="360px">
       <div>
+        <v-snackbar
+          top
+          absolute
+          centered
+          color="red darken-2"
+          v-model="snackbar"
+          :timeout="timeout"
+        >
+          {{ text }}
+          <v-icon dark>
+            mdi-cancel
+          </v-icon>
+        </v-snackbar>
         <v-tabs
           v-model="tab"
           show-arrows
@@ -9,7 +22,7 @@
           icons-and-text
           grow
         >
-          <v-tabs-slider color="purple darken-4"></v-tabs-slider>
+          <v-tabs-slider color="teal darken-4"></v-tabs-slider>
           <v-tab v-for="i in tabs" :key="i.name">
             <v-icon large>{{ i.icon }}</v-icon>
             <div class="caption py-1">{{ i.name }}</div>
@@ -46,7 +59,7 @@
                         x-large
                         block
                         :disabled="!valid"
-                        color="success"
+                        color="light-green accent-3"
                         @click="validate"
                       >
                         Login
@@ -54,7 +67,15 @@
                     </v-col>
                   </v-row>
                 </v-form>
+                <v-spacer></v-spacer>
                 <span>Or Login with</span>
+                <v-spacer></v-spacer>
+                <v-btn elevation="4" color="grey lighten-3" icon large>
+                  <img :src="google" alt="" style="width:30px" />
+                </v-btn>
+                <v-btn elevation="4" color="grey lighten-3" icon large>
+                  <img :src="facebook" alt="" style="width:30px" />
+                </v-btn>
               </v-card-text>
             </v-card>
           </v-tab-item>
@@ -65,18 +86,9 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="firstName"
+                        v-model="name"
                         :rules="[rules.required]"
-                        label="First Name"
-                        maxlength="20"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        v-model="lastName"
-                        :rules="[rules.required]"
-                        label="Last Name"
+                        label="Name"
                         maxlength="20"
                         required
                       ></v-text-field>
@@ -119,7 +131,7 @@
                         x-large
                         block
                         :disabled="!valid"
-                        color="success"
+                        color="light-green accent-3"
                         @click="validate"
                         >Register</v-btn
                       >
@@ -165,8 +177,12 @@ export default {
             email: this.loginEmail,
             password: this.loginPassword
           });
-          alert(JSON.stringify(data));
-          console.log("Logged in");
+          if (data === "auth failed") {
+            this.snackbar = true;
+            return;
+          }
+          this.$cookies.set("token", data);
+          alert(JSON.stringify(this.$cookies.get("token")));
           this.$router.push("/");
         } catch (error) {
           alert(errors);
@@ -181,6 +197,8 @@ export default {
     }
   },
   data: () => ({
+    google: require("@/icons/google.svg"),
+    facebook: require("@/icons/facebook.svg"),
     dialog: true,
     tab: 0,
     tabs: [
@@ -188,9 +206,10 @@ export default {
       { name: "Register", icon: "mdi-account-outline" }
     ],
     valid: true,
-
-    firstName: "",
-    lastName: "",
+    snackbar: false,
+    text: "Authenticate Failed",
+    timeout: 2000,
+    name: "",
     email: "",
     password: "",
     verify: "",

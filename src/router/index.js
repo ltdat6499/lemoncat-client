@@ -11,11 +11,17 @@ export default new Router({
     {
       path: "/",
       name: "HelloWorld",
+      meta: {
+        requiresAuth: true
+      },
       component: HelloWorld
     },
     {
       path: "/login",
       name: "Login",
+      meta: {
+        requiresAuth: false
+      },
       component: Login
     }
   ]
