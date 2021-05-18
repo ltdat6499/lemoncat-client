@@ -10,6 +10,9 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import fullCalendar from "vue-fullcalendar";
 import swatches from "vue-swatches";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 import "vue-swatches/dist/vue-swatches.min.css";
 import "vuetify/dist/vuetify.min.css";
 import "font-awesome/css/font-awesome.css";
@@ -41,6 +44,10 @@ const apolloClient = new ApolloClient({
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 });
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue);
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
 
 Vue.use(Vuetify);
 Vue.config.productionTip = false;
