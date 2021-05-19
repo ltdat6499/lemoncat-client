@@ -56,7 +56,6 @@ Vue.config.productionTip = false;
 Vue.$cookies.config("7d");
 
 router.beforeEach((to, from, next) => {
-  console.log(Vue.$cookies.get("token"));
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.

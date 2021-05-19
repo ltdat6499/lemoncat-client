@@ -10,7 +10,7 @@
 <script>
 import getAllUsers from "@/apollo/queries/getAllUsers.gql";
 export default {
-  name: "HelloWorld",
+  name: "Home",
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
@@ -21,9 +21,6 @@ export default {
       query: getAllUsers,
       result(res) {
         this.msg = res;
-        console.log("🚀 ---------------------");
-        console.log("🚀 ~ result ~ res", res);
-        console.log("🚀 ---------------------");
       }
     }
   }
