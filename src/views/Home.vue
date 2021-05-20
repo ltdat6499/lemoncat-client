@@ -1,12 +1,14 @@
 <template>
-  <v-card elevation="1">
+  <div>
     <!-- Header -->
-    <div><navbar></navbar></div>
-    <!-- Body -->
-    <div></div>
-    <!-- Footer -->
-    <div></div>
-  </v-card>
+    <navbar class="navbar container"></navbar>
+    <v-card tile outlined elevation="0" class="container body-container">
+      <!-- Body -->
+      <div></div>
+      <!-- Footer -->
+      <div></div>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -33,5 +35,10 @@ export default {
 };
 </script>
 <style scoped>
-
+.container {
+  background-color: #48cf73;
+}
+.body-container {
+  background-color: #434e47 !important;
+}
 </style>
