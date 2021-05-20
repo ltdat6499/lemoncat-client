@@ -70,9 +70,7 @@
               <span>Or Login with</span>
               <v-spacer></v-spacer>
               <google-login></google-login>
-              <v-btn elevation="4" color="grey lighten-3" icon large>
-                <img :src="facebook" alt="" style="width:30px" />
-              </v-btn>
+              <facebook-login></facebook-login>
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -145,9 +143,11 @@
 <script>
 import axios from "axios";
 import GoogleLogin from "@/components/GoogleLogin";
+import FacebookLogin from "@/components/FacebookLogin";
 export default {
   components: {
-    GoogleLogin
+    GoogleLogin,
+    FacebookLogin
   },
   data() {
     return {

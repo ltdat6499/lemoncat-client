@@ -1,48 +1,37 @@
 <template>
-  <div>
-    <v-btn color="success">Success</v-btn>
-    <v-btn color="error">Error</v-btn>
-    <v-btn color="warning">Warning</v-btn>
-    <v-btn color="info">Info</v-btn>
-  </div>
+  <v-card elevation="1">
+    <!-- Header -->
+    <div><navbar></navbar></div>
+    <!-- Body -->
+    <div></div>
+    <!-- Footer -->
+    <div></div>
+  </v-card>
 </template>
 
 <script>
-import getAllUsers from "@/apollo/queries/getAllUsers.gql";
+// import getAllUsers from "@/apollo/queries/getAllUsers.gql";
+import Navbar from "@/components/Navbar";
 export default {
   name: "Home",
+  components: {
+    Navbar
+  },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      // msg: "Welcome to Your Vue.js App"
     };
-  },
-  apollo: {
-    users: {
-      query: getAllUsers,
-      result(res) {
-        this.msg = res;
-      }
-    }
   }
+  // apollo: {
+  //   users: {
+  //     query: getAllUsers,
+  //     result(res) {
+  //       this.msg = res;
+  //     }
+  //   }
+  // }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
