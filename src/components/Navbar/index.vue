@@ -25,7 +25,10 @@
         </b-input-group>
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
-
+      <b-navbar-nav class="ml-auto" style="display:flex;align-items: center;">
+        <mega-menu />
+        <!-- <b-nav-item href="#">Link</b-nav-item> -->
+      </b-navbar-nav>
       <!-- <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="Lang" right>
           <b-dropdown-item href="#">EN</b-dropdown-item>
@@ -47,8 +50,12 @@
 </template>
 
 <script>
+import MegaMenu from "../MegaMenu";
 export default {
   name: "App",
+  components: {
+    MegaMenu
+  },
   data() {
     return {};
   }
