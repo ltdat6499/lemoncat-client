@@ -57,7 +57,7 @@
               </span>
             </li>
           </ul>
-          <ul class="w-full lg:w-1/4 ">
+          <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
@@ -95,7 +95,7 @@
               </span>
             </li>
           </ul>
-          <ul class="w-full lg:w-1/4 ">
+          <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
@@ -120,7 +120,11 @@
                 class="block text-black-800 flex items-center"
                 >CERTIFIED FRESH PICK</span
               >
-              <div></div>
+              <div style="display:flex;">
+                <fresh-pick-card style="margin-right:20px"></fresh-pick-card>
+                <fresh-pick-card style="margin-right:20px"></fresh-pick-card
+                ><fresh-pick-card style="margin-right:20px"></fresh-pick-card>
+              </div>
             </li>
           </ul>
         </div>
@@ -130,7 +134,11 @@
 </template>
 
 <script>
+import FreshPickCard from "@/components/FreshPickCard";
 export default {
+  components: {
+    FreshPickCard
+  },
   mounted() {
     this.menuItems = document.querySelectorAll(".mega-menu a");
   },

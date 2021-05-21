@@ -27,6 +27,8 @@
       </b-navbar-nav>
       <b-navbar-nav class="navbar-row-item">
         <mega-menu />
+        <mega-menu />
+
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
       <!-- <b-navbar-nav class="ml-auto">
