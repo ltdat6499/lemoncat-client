@@ -6,7 +6,7 @@
     style="display: flex;align-items: center;"
   >
     <img
-      style="max-width: 20%; margin-right:20px"
+      style="max-width: 17%; margin-right:20px"
       src="../../icons/home-logo-white.png"
     />
 
@@ -25,7 +25,7 @@
         </b-input-group>
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
-      <b-navbar-nav class="ml-auto" style="display:flex;align-items: center;">
+      <b-navbar-nav class="navbar-row-item">
         <mega-menu />
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
@@ -61,4 +61,10 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.navbar-row-item {
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+}
+</style>
