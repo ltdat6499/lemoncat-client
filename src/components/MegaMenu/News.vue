@@ -12,7 +12,7 @@
       @keydown.up.exact.prevent="startArrowKeys"
       @keydown.down.exact.prevent="startArrowKeys"
     >
-      TV SHOWS
+      NEWS
     </a>
 
     <transition
@@ -29,57 +29,73 @@
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                 class="block text-black-800 flex items-center"
-                >NEW TV TONIGHT</span
+                >MOVIES IN THEATERS</span
+              ><span
+                class="block font-weight-normal text-black-800  flex items-center"
               >
-              <div>
-                <div
-                  v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-                  :key="i"
-                >
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                </div>
-                <b-link
-                  style="display: flex;margin-top:20px;color:#007BFF"
-                  href="#"
-                  >View all</b-link
-                >
-              </div>
+                Opening This Week
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Top Box Office
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Coming Soon to Theaters
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Weekend Earnings
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Certified Fresh Movies
+              </span>
             </li>
           </ul>
-          <ul style="margin-left:-25px" class="w-full lg:w-1/4 ">
+          <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                 class="block text-black-800 flex items-center"
-                >MOST POPULAR TV ON LC</span
+                >ON DVD & STREAMING</span
+              ><span
+                class="block font-weight-normal text-black-800  flex items-center"
               >
-              <div>
-                <div v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i">
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                </div>
-                <b-link
-                  style="display: flex;margin-top:20px;color:#007BFF"
-                  href="#"
-                  >View all</b-link
-                >
-              </div>
+                Netfix
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Amazon Prime
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Disney+
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                HBO Max
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Certified Fresh Movies
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Browse All
+              </span>
             </li>
           </ul>
-          <ul style="margin-left:-10px" class="w-full lg:w-1/4 ">
+          <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
@@ -88,33 +104,16 @@
               ><span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Top TV Shows
+                Top Movies
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Certified Fresh TVs
+                New Trailers
               </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                &nbsp;
-              </span>
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >EPISODIC REVIEWS</span
-              >
-              <div>
-                <div v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i">
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                </div>
-              </div>
             </li>
           </ul>
-          <ul style="margin-left:-25px" class="w-full lg:w-1/4 ">
+          <ul style="margin-left:-90px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
@@ -122,9 +121,9 @@
                 >CERTIFIED FRESH PICK</span
               >
               <div style="display:flex;">
-                <fresh-pick-card style="margin-right:40px"></fresh-pick-card>
-                <fresh-pick-card style="margin-right:40px"></fresh-pick-card
-                >
+                <fresh-pick-card style="margin-right:20px"></fresh-pick-card>
+                <fresh-pick-card style="margin-right:20px"></fresh-pick-card
+                ><fresh-pick-card style="margin-right:20px"></fresh-pick-card>
               </div>
             </li>
           </ul>

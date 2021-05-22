@@ -12,7 +12,7 @@
       @keydown.up.exact.prevent="startArrowKeys"
       @keydown.down.exact.prevent="startArrowKeys"
     >
-      Movies
+      MOVIES
     </a>
 
     <transition

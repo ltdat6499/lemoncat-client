@@ -28,7 +28,7 @@
       <b-navbar-nav class="navbar-row-item">
         <menu-movies />
         <menu-t-v-shows />
-
+        <no-menu :name="'LC PODCAST'"/>
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
       <!-- <b-navbar-nav class="ml-auto">
@@ -54,11 +54,14 @@
 <script>
 import MenuMovies from "../MegaMenu/Movies";
 import MenuTVShows from "../MegaMenu/TVShows";
+import NoMenu from "../MegaMenu";
+
 export default {
   name: "App",
   components: {
     MenuMovies,
-    MenuTVShows
+    MenuTVShows,
+    NoMenu
   },
   data() {
     return {};
