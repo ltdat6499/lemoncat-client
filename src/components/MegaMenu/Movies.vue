@@ -24,7 +24,7 @@
         class="mega-menu absolute normal-case font-normal bg-white mt-4 w-full lg:w-160 z-30 lg:z-10 left-0"
       >
         <div class="flex flex-col lg:flex-row px-8 py-6 border-b -mx-4">
-          <ul class="w-full lg:w-1/4 ">
+          <ul style="margin-left:25px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
@@ -81,7 +81,7 @@
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                HBO Go
+                HBO Max
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"

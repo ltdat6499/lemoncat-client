@@ -26,8 +26,8 @@
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
       <b-navbar-nav class="navbar-row-item">
-        <mega-menu />
-        <mega-menu />
+        <menu-movies />
+        <menu-t-v-shows />
 
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
@@ -52,11 +52,13 @@
 </template>
 
 <script>
-import MegaMenu from "../MegaMenu";
+import MenuMovies from "../MegaMenu/Movies";
+import MenuTVShows from "../MegaMenu/TVShows";
 export default {
   name: "App",
   components: {
-    MegaMenu
+    MenuMovies,
+    MenuTVShows
   },
   data() {
     return {};
