@@ -27,103 +27,157 @@
           <ul style="margin-left:25px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
               <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
+                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-3px"
                 class="block text-black-800 flex items-center"
-                >MOVIES IN THEATERS</span
+                >COLUMNS</span
               ><span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Opening This Week
+                24 Frames
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Top Box Office
+                All-Time Lists
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Coming Soon to Theaters
+                Binge Guide
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Weekend Earnings
+                Countdown
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Certified Fresh Movies
+                Critics Consensus
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Five Favorite Films
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Now Streaming
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Parental Guidance
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Red Carpet Roundup
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Scorecards
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Sub-Cult
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Total Recall
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Video Interviews
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Weekend Box Office
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                Weekly Ketchup
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                What to Watch
+              </span>
+              <span
+                class="block font-weight-normal text-black-800  flex items-center"
+              >
+                The Zeros
               </span>
             </li>
           </ul>
-          <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
+          <ul style="margin-left:-100px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >ON DVD & STREAMING</span
-              ><span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Netfix
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Amazon Prime
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Disney+
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                HBO Max
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Certified Fresh Movies
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Browse All
-              </span>
+              <div style="display: flex;align-items: baseline;">
+                <span
+                  style="display: flex;justify-content: flex-start;font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
+                  class="block text-black-800 flex items-center"
+                >
+                  BEST AND WORST
+                </span>
+                <b-link
+                  style="justify-content: flex-end;display: flex;color: rgb(0, 123, 255);"
+                  href="#"
+                  >View all</b-link
+                >
+              </div>
+
+              <div style="margin-left:-20px">
+                <news-menu-card />
+                <news-menu-card />
+              </div>
             </li>
           </ul>
-          <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
+          <ul style="margin-left:50px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >MORE</span
-              ><span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Top Movies
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                New Trailers
-              </span>
+              <div style="display: flex;align-items: baseline;">
+                <span
+                  style="display: flex;justify-content: flex-start;font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
+                  class="block text-black-800 flex items-center"
+                >
+                  GUIDES
+                </span>
+                <b-link
+                  style="justify-content: flex-end;display: flex;color: rgb(0, 123, 255);"
+                  href="#"
+                  >View all</b-link
+                >
+              </div>
+              <div style="margin-left:-20px">
+                <news-menu-card />
+                <news-menu-card />
+              </div>
             </li>
           </ul>
-          <ul style="margin-left:-90px" class="w-full lg:w-1/4 ">
+          <ul style="margin-left:50px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >CERTIFIED FRESH PICK</span
-              >
-              <div style="display:flex;">
-                <fresh-pick-card style="margin-right:20px"></fresh-pick-card>
-                <fresh-pick-card style="margin-right:20px"></fresh-pick-card
-                ><fresh-pick-card style="margin-right:20px"></fresh-pick-card>
+              <div style="display: flex;align-items: baseline;">
+                <span
+                  style="display: flex;justify-content: flex-start;font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
+                  class="block text-black-800 flex items-center"
+                >
+                  LC NEWS
+                </span>
+                <b-link
+                  style="justify-content: flex-end;display: flex;color: rgb(0, 123, 255);"
+                  href="#"
+                  >View all</b-link
+                >
+              </div>
+              <div style="margin-left:-20px">
+                <news-menu-card />
+                <news-menu-card />
               </div>
             </li>
           </ul>
@@ -134,10 +188,10 @@
 </template>
 
 <script>
-import FreshPickCard from "@/components/FreshPickCard";
+import NewsMenuCard from "@/components/NewsMenuCard";
 export default {
   components: {
-    FreshPickCard
+    NewsMenuCard
   },
   mounted() {
     this.menuItems = document.querySelectorAll(".mega-menu a");

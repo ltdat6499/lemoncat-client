@@ -16,7 +16,7 @@
       <b-navbar-nav style="display:flex;align-items: center;">
         <b-input-group style="display:flex;">
           <b-form-input
-            style="border:none; min-width:300px"
+            style="border:none; min-width:280px"
             placeholder="Search movies, TV, actors, more..."
           ></b-form-input>
           <b-button style="background-color:white; border:none; color:black;"
@@ -28,40 +28,29 @@
       <b-navbar-nav class="navbar-row-item">
         <menu-movies />
         <menu-t-v-shows />
-        <no-menu :name="'LC PODCAST'"/>
-        <!-- <b-nav-item href="#">Link</b-nav-item> -->
+        <no-menu :name="'LC PODCAST'" />
+        <news />
+        <no-menu :name="'SHOWTIMES'" />
+        <avata-login />
       </b-navbar-nav>
-      <!-- <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown text="Lang" right>
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">ES</b-dropdown-item>
-          <b-dropdown-item href="#">RU</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
-        </b-nav-item-dropdown>
-
-        <b-nav-item-dropdown right>
-          <template #button-content>
-            <em>User</em>
-          </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown>
-      </b-navbar-nav> -->
     </b-collapse>
   </b-navbar>
 </template>
 
 <script>
+import AvataLogin from "../AvataLogin";
 import MenuMovies from "../MegaMenu/Movies";
 import MenuTVShows from "../MegaMenu/TVShows";
+import News from "../MegaMenu/News";
 import NoMenu from "../MegaMenu";
-
 export default {
   name: "App",
   components: {
     MenuMovies,
     MenuTVShows,
-    NoMenu
+    NoMenu,
+    News,
+    AvataLogin
   },
   data() {
     return {};
