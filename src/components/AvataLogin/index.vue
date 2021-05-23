@@ -1,36 +1,46 @@
 <template>
-  <v-menu bottom right min-width="150px" rounded offset-y>
+  <v-menu open-on-hover bottom right min-width="110px" rounded offset-y>
     <template v-slot:activator="{ on }">
       <v-btn icon x-large v-on="on">
-        <v-avatar color="brown" size="35">
-          <span class="white--text headline">{{ user.initials }}</span>
+        <v-avatar>
+          <img src="../../icons/logo.png" />
         </v-avatar>
       </v-btn>
     </template>
     <v-card>
-      <v-list-item-content class="justify-center">
-        <div class="mx-auto text-center" style="padding-bottom:10px">
-          <v-avatar style="margin-top:10px" color="brown">
-            <span class="white--text headline">{{ user.initials }}</span>
-          </v-avatar>
-          <h3>{{ user.fullName }}</h3>
-          <p class="caption mt-1">
-            {{ user.email }}
-          </p>
-          <hr />
-          <v-list dense>
-            <v-list-item-group
-              style="display:flex;flex-direction: column"
-              v-model="selectedItem"
-              color="primary"
-            >
-              <v-list-item v-for="(item, i) in items" :key="i">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
+      <v-list-item-content>
+        <div class="mx-auto">
+          <b-button tile class="block" variant="outline-success">
+            <span class="title-container">
+              <span
+                ><v-icon class="icon">
+                  mdi-account-circle-outline
+                </v-icon></span
+              >
+              <span>Profile</span>
+            </span>
+          </b-button>
+          <b-button tile class="block" variant="outline-success">
+            <span class="title-container">
+              <span
+                ><v-icon class="icon">
+                  mdi-settings
+                </v-icon></span
+              >
+              <span>Settings</span>
+            </span>
+          </b-button>
+          <v-divider></v-divider>
+          <b-button tile class="block" variant="outline-danger">
+            <span class="title-container">
+              <span
+                ><v-icon class="icon">
+                  mdi-logout
+                </v-icon></span
+              >
+              <span>Logout</span>
+            </span>
+          </b-button>
         </div>
       </v-list-item-content>
     </v-card>
@@ -41,12 +51,41 @@
 export default {
   data: () => ({
     user: {
-      initials: "JD",
-      fullName: "John Doe",
-      email: "john.doe@doe.com"
-    },
-    selectedItem: 1,
-    items: [{ text: "Profile" }, { text: "Account" }, { text: "Logout" }]
+      fullName: "Ly Thanh Dat",
+      email: "ltdat6499@gmail.com"
+    }
   })
 };
 </script>
+
+<style scoped>
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.block {
+  margin: 0;
+  display: block;
+  width: 100%;
+  border: none;
+  text-align: center;
+  color: black;
+}
+.icon {
+  color: black;
+  margin-right: 5px;
+}
+.block:hover .icon {
+  color: white;
+  margin-right: 5px;
+}
+.block:hover {
+  margin: 0;
+  display: block;
+  width: 100%;
+  border: none;
+  text-align: center;
+  color: white !important;
+}
+</style>

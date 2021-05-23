@@ -16,14 +16,13 @@
       <b-navbar-nav style="display:flex;align-items: center;">
         <b-input-group style="display:flex;">
           <b-form-input
-            style="border:none; min-width:280px"
+            style="border:none; min-width:260px"
             placeholder="Search movies, TV, actors, more..."
           ></b-form-input>
           <b-button style="background-color:white; border:none; color:black;"
             ><i class="fa fa-search"></i
           ></b-button>
         </b-input-group>
-        <!-- <b-nav-item href="#">Link</b-nav-item> -->
       </b-navbar-nav>
       <b-navbar-nav class="navbar-row-item">
         <menu-movies />
@@ -31,7 +30,8 @@
         <no-menu :name="'LC PODCAST'" />
         <news />
         <no-menu :name="'SHOWTIMES'" />
-        <avata-login />
+        <no-menu v-if="!isLogin" :name="'LOGIN'" />
+        <avata-login v-else />
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -53,7 +53,9 @@ export default {
     AvataLogin
   },
   data() {
-    return {};
+    return {
+      isLogin: !!this.$cookies.get("token")
+    };
   }
 };
 </script>
