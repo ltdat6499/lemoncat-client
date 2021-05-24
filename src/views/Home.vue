@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <navbar class="navbar container"></navbar>
+    <navbar id="myHeader" class="navbar container"></navbar>
     <v-card tile outlined elevation="0" class="container body-container">
       <!-- Body -->
       <div></div>
@@ -33,6 +33,20 @@ export default {
   //   }
   // }
 };
+// window.onscroll = function() {
+//   myFunction();
+// };
+
+// var header = document.getElementById("myHeader");
+// var sticky = header.offsetTop;
+
+// function myFunction() {
+//   if (window.pageYOffset > sticky) {
+//     header.classList.add("sticky");
+//   } else {
+//     header.classList.remove("sticky");
+//   }
+// }
 </script>
 <style scoped>
 .container {
@@ -40,5 +54,9 @@ export default {
 }
 .body-container {
   background-color: #434e47 !important;
+}
+.sticky {
+  position: fixed;
+  top: 0;
 }
 </style>
