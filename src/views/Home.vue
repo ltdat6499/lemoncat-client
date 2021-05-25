@@ -2,12 +2,17 @@
   <div>
     <!-- Header -->
     <navbar id="myHeader" class="navbar container"></navbar>
+    <!-- Body -->
     <v-card tile outlined elevation="0" class="container body-container">
-      <!-- Body -->
-      <div></div>
-      <!-- Footer -->
-      <div></div>
+      <div>
+        
+      </div>
+      <div>
+
+      </div>
     </v-card>
+    <!-- Footer -->
+    <div></div>
   </div>
 </template>
 

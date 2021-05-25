@@ -3,7 +3,7 @@
     toggleable="lg"
     type="dark"
     variant="#48CF73"
-    style="display: flex;align-items: center;"
+    style="display: flex;align-items: center;background-color:rgb(37 186 57)"
   >
     <img
       style="max-width: 17%; margin-right:20px"
@@ -93,7 +93,7 @@
             </div>
           </div>
           <b-button
-            style="display: block;width: 100%;margin-top:20px"
+            style="display: block;width: 100%;margin-top:10px"
             variant="success"
             >VIEW ALL 1000+ RESULTS</b-button
           >
