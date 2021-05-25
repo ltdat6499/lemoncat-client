@@ -3,13 +3,17 @@
     <!-- Header -->
     <navbar id="myHeader" class="navbar container"></navbar>
     <!-- Body -->
-    <v-card tile outlined elevation="0" class="container body-container">
-      <div>
-        
-      </div>
-      <div>
-
-      </div>
+    <v-card
+      tile
+      outlined
+      elevation="0"
+      class="container body-container row-style"
+    >
+      <b-row cols="12">
+        <b-col lg="6"> <carousel-home style="width:100%" /> </b-col>
+        <b-col lg="3">Variable width content</b-col>
+        <b-col lg="3">3 of 3</b-col>
+      </b-row>
     </v-card>
     <!-- Footer -->
     <div></div>
@@ -19,10 +23,12 @@
 <script>
 // import getAllUsers from "@/apollo/queries/getAllUsers.gql";
 import Navbar from "@/components/Navbar";
+import CarouselHome from "@/components/CarouselHome";
 export default {
   name: "Home",
   components: {
-    Navbar
+    Navbar,
+    CarouselHome
   },
   data() {
     return {
@@ -58,10 +64,13 @@ export default {
   background-color: #48cf73;
 }
 .body-container {
-  background-color: #434e47 !important;
+  background-color: #ffffff !important;
 }
 .sticky {
   position: fixed;
   top: 0;
+}
+.row-style {
+  padding: 0 !important;
 }
 </style>
