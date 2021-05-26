@@ -8,11 +8,14 @@
       outlined
       elevation="0"
       class="container body-container row-style"
+      style="display:block;"
     >
-      <b-row cols="12">
-        <b-col lg="6"> <carousel-home style="width:100%" /> </b-col>
-        <b-col lg="3">Variable width content</b-col>
-        <b-col lg="3">3 of 3</b-col>
+      <b-row style="width:100%;" no-gutters="true">
+        <b-col lg="6">
+          <carousel-home style="width:100%" />
+        </b-col>
+        <b-col lg="3"><news-home style="width:100%"/></b-col>
+        <b-col lg="3"><news-home style="width:100%"/></b-col>
       </b-row>
     </v-card>
     <!-- Footer -->
@@ -24,11 +27,14 @@
 // import getAllUsers from "@/apollo/queries/getAllUsers.gql";
 import Navbar from "@/components/Navbar";
 import CarouselHome from "@/components/CarouselHome";
+import NewsHome from "@/components/NewsHome";
+
 export default {
   name: "Home",
   components: {
     Navbar,
-    CarouselHome
+    CarouselHome,
+    NewsHome
   },
   data() {
     return {
@@ -72,5 +78,8 @@ export default {
 }
 .row-style {
   padding: 0 !important;
+}
+.row {
+  --bs-gutter-x: 0 !important;
 }
 </style>

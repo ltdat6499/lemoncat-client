@@ -23,7 +23,10 @@
               style="display: flex;justify-content:flex-start;align-items: flex-start;flex-direction:column;"
             >
               <h5 style="text-align: left;">
-                John Krasinski, Emily Blunt Tap Into 'Primal Instincts' For Quiet Place
+                <strong
+                  >John Krasinski, Emily Blunt Tap Into 'Primal Instincts' For
+                  Quiet Place</strong
+                >
               </h5>
               <p>
                 Plus, Krasinski reveals how he kept up terror in anticipated
@@ -37,6 +40,7 @@
           :src="require('../../assets/img/sample-news.jpg')"
           height="100%"
           width="100%"
+          style="max-height:300px"
         ></v-img>
       </v-sheet>
     </v-carousel-item>
