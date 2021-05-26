@@ -31,7 +31,7 @@
           >TV Premiere Dates
         </b-link>
         <b-link class="trending-link" style="margin-left:10px"
-          >The Rotten Tomatoes Channel
+          >The Lemoncat Channel
         </b-link>
         <b-link
           style="text-decoration:none;margin-left: auto;margin-right:10px"
