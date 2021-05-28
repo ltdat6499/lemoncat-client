@@ -79,7 +79,7 @@
     </v-card>
 
     <!-- Footer -->
-    <div></div>
+    <div><footer /></div>
   </div>
 </template>
 
@@ -88,13 +88,15 @@
 import Navbar from "@/components/Navbar";
 import CarouselHome from "@/components/CarouselHome";
 import NewsHome from "@/components/NewsHome";
+import Footer from "@/components/Footer";
 
 export default {
   name: "Home",
   components: {
     Navbar,
     CarouselHome,
-    NewsHome
+    NewsHome,
+    Footer
   },
   data() {
     return {
