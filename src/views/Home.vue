@@ -87,6 +87,23 @@
       <slider-movie>
         <span slot="header">NEW & UPCOMING MOVIES </span>
       </slider-movie>
+      <b-row>
+        <b-col
+          ><home-table>
+            <span slot="header">POPULAR STREAMING MOVIES </span>
+          </home-table></b-col
+        >
+        <b-col
+          ><home-table>
+            <span slot="header">MOST POPULAR TV ON LC </span></home-table
+          ></b-col
+        >
+        <b-col
+          ><home-table>
+            <span slot="header">NEW TV THIS WEEK </span></home-table
+          ></b-col
+        >
+      </b-row>
       <slider-movie>
         <span slot="header">POPULAR IN THEATERS </span>
       </slider-movie>
@@ -102,7 +119,7 @@
       <slider-movie>
         <span slot="header">BEST ASIAN-AMERICAN MOVIES </span>
       </slider-movie>
-       <slider-movie>
+      <slider-movie>
         <span slot="header">NEWLY CERTIFIED FRESH CLASSICS </span>
       </slider-movie>
     </v-card>
@@ -126,6 +143,7 @@ import CarouselHome from "@/components/CarouselHome";
 import NewsHome from "@/components/NewsHome";
 import PageFooter from "@/components/Footer";
 import SliderMovie from "@/components/SliderMovie";
+import HomeTable from "@/components/HomeTable";
 
 export default {
   name: "Home",
@@ -134,7 +152,8 @@ export default {
     CarouselHome,
     NewsHome,
     PageFooter,
-    SliderMovie
+    SliderMovie,
+    HomeTable
   },
   data() {
     return {
