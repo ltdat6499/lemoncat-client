@@ -15,7 +15,7 @@
       style="display:block;"
     >
       <div
-        style="justify-content:flex-start;display:flex;z-index:1000;position:absolute;height:20px;width:100%;background-color:black;opacity:0.6;color:white"
+        style="padding-top:4px;display:flex;align-items:center;z-index:1000;max-height:20px;position:absolute;height:20px;width:100%;background-color:black;opacity:0.6;color:white"
       >
         <span style="color: #F6DC24;margin-left:10px"
           ><strong>TRENDING ON LC</strong></span
@@ -77,9 +77,16 @@
         <b-col lg="3"><news-home style="width:100%"/></b-col>
       </b-row>
     </v-card>
-
     <!-- Footer -->
-    <div><footer /></div>
+    <v-card
+      tile
+      outlined
+      elevation="0"
+      class="container body-container row-style"
+      style="display:block;"
+    >
+      <page-footer />
+    </v-card>
   </div>
 </template>
 
@@ -88,7 +95,7 @@
 import Navbar from "@/components/Navbar";
 import CarouselHome from "@/components/CarouselHome";
 import NewsHome from "@/components/NewsHome";
-import Footer from "@/components/Footer";
+import PageFooter from "@/components/Footer";
 
 export default {
   name: "Home",
@@ -96,7 +103,7 @@ export default {
     Navbar,
     CarouselHome,
     NewsHome,
-    Footer
+    PageFooter
   },
   data() {
     return {
