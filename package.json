@@ -5,9 +5,9 @@
   "author": "Ly Thanh Dat <dat6499proo@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "node --max-old-space-size=8192 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node --max-old-space-size=8192 build/build.js"
   },
   "dependencies": {
     "apollo-boost": "^0.4.9",
@@ -26,6 +26,7 @@
     "vue": "^2.6.12",
     "vue-apollo": "^3.0.7",
     "vue-axios": "^2.1.4",
+    "vue-carousel": "^0.18.0",
     "vue-fullcalendar": "^1.0.9",
     "vue-router": "^3.0.1",
     "vue-swatches": "^1.0.2",

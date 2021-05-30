@@ -77,6 +77,35 @@
         <b-col lg="3"><news-home style="width:100%"/></b-col>
       </b-row>
     </v-card>
+    <v-card
+      tile
+      outlined
+      elevation="0"
+      class="container body-container row-style"
+      style="display:block;"
+    >
+      <slider-movie>
+        <span slot="header">NEW & UPCOMING MOVIES </span>
+      </slider-movie>
+      <slider-movie>
+        <span slot="header">POPULAR IN THEATERS </span>
+      </slider-movie>
+      <slider-movie>
+        <span slot="header">ESSENTIAL ZOMBIE MOVIES </span>
+      </slider-movie>
+      <slider-movie>
+        <span slot="header">BEST SERIES ON NETFLIX </span>
+      </slider-movie>
+      <slider-movie>
+        <span slot="header">EVERY '90S BLOCKBUSTER MOVIE RANKED </span>
+      </slider-movie>
+      <slider-movie>
+        <span slot="header">BEST ASIAN-AMERICAN MOVIES </span>
+      </slider-movie>
+       <slider-movie>
+        <span slot="header">NEWLY CERTIFIED FRESH CLASSICS </span>
+      </slider-movie>
+    </v-card>
     <!-- Footer -->
     <v-card
       tile
@@ -96,6 +125,7 @@ import Navbar from "@/components/Navbar";
 import CarouselHome from "@/components/CarouselHome";
 import NewsHome from "@/components/NewsHome";
 import PageFooter from "@/components/Footer";
+import SliderMovie from "@/components/SliderMovie";
 
 export default {
   name: "Home",
@@ -103,7 +133,8 @@ export default {
     Navbar,
     CarouselHome,
     NewsHome,
-    PageFooter
+    PageFooter,
+    SliderMovie
   },
   data() {
     return {
