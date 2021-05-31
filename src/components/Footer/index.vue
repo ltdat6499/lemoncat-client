@@ -55,24 +55,24 @@
     </b-row>
     <div style="display:flex;margin: 25px 20px 25px 20px;">
       <span style="color:#6D7A84;margin-right:30px">
-        Copyright © Fandango. All rights reserved.
+        Copyright © Kaido Jin. All rights reserved.
       </span>
       <span
-        style="margin-right:30px;padding-right:20px;border-right:1px solid #F1DEBE;color: #F1DEBE"
+        style="margin-right:30px;padding-right:20px;border-right:1px solid #F8FFF8;color: #F8FFF8"
       >
         Privacy Policy
       </span>
       <span
-        style="margin-right:30px;padding-right:20px;border-right:1px solid #F1DEBE;color: #F1DEBE"
+        style="margin-right:30px;padding-right:20px;border-right:1px solid #F8FFF8;color: #F8FFF8"
       >
         Terms and Policies
       </span>
       <span
-        style="margin-right:30px;padding-right:20px;border-right:1px solid #F1DEBE;color: #F1DEBE"
+        style="margin-right:30px;padding-right:20px;border-right:1px solid #F8FFF8;color: #F8FFF8"
       >
         Do Not Sell My Info
       </span>
-      <span style="margin-right:30px;padding-right:20px;color: #F1DEBE">
+      <span style="margin-right:30px;padding-right:20px;color: #F8FFF8">
         AdChoices
       </span>
     </div>

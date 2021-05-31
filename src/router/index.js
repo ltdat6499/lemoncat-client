@@ -12,7 +12,7 @@ export default new Router({
       path: "/",
       name: "Home",
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       },
       component: Home
     },

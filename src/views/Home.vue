@@ -128,6 +128,9 @@
       <movie-guide>
         <span slot="header">MOVIE & TV GUIDES </span>
       </movie-guide>
+      <top-headline>
+        <span slot="header">TOP HEADLINES </span>
+      </top-headline>
     </v-card>
     <!-- Footer -->
     <v-card
@@ -152,7 +155,7 @@ import SliderMovie from "@/components/SliderMovie";
 import HomeTable from "@/components/HomeTable";
 import NewsPreview from "@/components/NewsPreview";
 import MovieGuide from "@/components/MovieGuide";
-
+import TopHeadline from "@/components/TopHeadline";
 export default {
   name: "Home",
   components: {
@@ -163,7 +166,8 @@ export default {
     SliderMovie,
     HomeTable,
     NewsPreview,
-    MovieGuide
+    MovieGuide,
+    TopHeadline
   },
   data() {
     return {
