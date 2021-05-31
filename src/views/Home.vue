@@ -122,6 +122,12 @@
       <slider-movie>
         <span slot="header">NEWLY CERTIFIED FRESH CLASSICS </span>
       </slider-movie>
+      <news-preview>
+        <span slot="header">TRAILERS & VIDEOS </span>
+      </news-preview>
+      <movie-guide>
+        <span slot="header">MOVIE & TV GUIDES </span>
+      </movie-guide>
     </v-card>
     <!-- Footer -->
     <v-card
@@ -144,6 +150,8 @@ import NewsHome from "@/components/NewsHome";
 import PageFooter from "@/components/Footer";
 import SliderMovie from "@/components/SliderMovie";
 import HomeTable from "@/components/HomeTable";
+import NewsPreview from "@/components/NewsPreview";
+import MovieGuide from "@/components/MovieGuide";
 
 export default {
   name: "Home",
@@ -153,7 +161,9 @@ export default {
     NewsHome,
     PageFooter,
     SliderMovie,
-    HomeTable
+    HomeTable,
+    NewsPreview,
+    MovieGuide
   },
   data() {
     return {
