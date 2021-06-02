@@ -16,6 +16,14 @@ export default {
         this.$router.push("/");
       }
     };
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        document.title = to.meta.title || "the-conjuring-the-devil-made-me-do-it";
+      }
+    }
   }
 };
 </script>
