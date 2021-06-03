@@ -11,6 +11,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import fullCalendar from "vue-fullcalendar";
 import swatches from "vue-swatches";
+import Viewer from "v-viewer";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -18,6 +19,7 @@ import "vue-swatches/dist/vue-swatches.min.css";
 import "vuetify/dist/vuetify.min.css";
 import "font-awesome/css/font-awesome.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
+import "viewerjs/dist/viewer.css";
 
 import App from "./App";
 import router from "./router";
@@ -51,6 +53,12 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 Vue.use(Vuetify);
+Vue.use(Viewer, {
+  debug: true,
+  defaultOptions: {
+    zIndex: 9999
+  }
+});
 Vue.config.productionTip = false;
 
 Vue.$cookies.config("7d");
