@@ -89,17 +89,10 @@
             style="height:100px;background-color:white;padding:10px;display:flex"
           >
             <div>
-              <b-img
-                v-bind="{
-                  blank: true,
-                  blankColor: '#777',
-                  width: 150,
-                  height: 210,
-                  class: 'm1'
-                }"
-                rounded
-                alt="Rounded image"
-              ></b-img>
+              <img
+                style="width: 145px;height:210px;border-radius:4px"
+                src="../assets/img/sample-poster.png"
+              />
             </div>
             <div
               style="margin-left:10px;width:100%;height: 210px;background-color:#F3F3F3;border-radius:4px"
@@ -112,9 +105,45 @@
                 >
                 2013, Horror/Mystery & thriller, 1h 51m
               </h6>
-              <div>
-                <b-button v-b-modal.modal-1>Launch demo modal</b-button>
-
+              <div style="display:flex;justify-content:center;margin-top:20px">
+                <div style="margin-right:40px">
+                  <b-link
+                    v-b-modal.modal-1
+                    style="margin-bottom:12px;text-decoration: none;display:flex;align-items: center;color:#2A2C32"
+                  >
+                    <img
+                      style="width:45px;height:45px"
+                      src="../icons/certified_fresh_lc.svg"
+                    />
+                    <span class="rating" style="font-size:30px;margin-left:5px">
+                      <strong>86%</strong>
+                    </span>
+                  </b-link>
+                  <span><strong>LEMONCATER</strong></span
+                  ><br />
+                  <span style="color:#4f86d9;font-size:12px;align-self:right"
+                    >223 Reviews</span
+                  >
+                </div>
+                <div>
+                  <b-link
+                    v-b-modal.modal-1
+                    style="margin-bottom:12px;margin-left:20px;text-decoration: none;display:flex;align-items: center;color:#2A2C32"
+                  >
+                    <img
+                      style="width:45px;height:45px"
+                      src="../icons/fresh-score-user.svg"
+                    />
+                    <span class="rating" style="font-size:30px;margin-left:5px">
+                      <strong>35%</strong>
+                    </span>
+                  </b-link>
+                  <span><strong>AUDIENCE SCORE</strong></span
+                  ><br />
+                  <span style="color:#4f86d9;font-size:12px;align-self:right"
+                    >100,000+ Ratings</span
+                  >
+                </div>
                 <b-modal
                   size="lg"
                   hide-footer
@@ -123,7 +152,9 @@
                   centered
                 >
                   <b-row>
-                    <b-col style="margin-left:20px;margin-top:20px;border-right:1px solid #E9E9EA">
+                    <b-col
+                      style="margin-left:20px;margin-top:20px;border-right:1px solid #E9E9EA"
+                    >
                       <h4>
                         <strong>LEMONCATER</strong>
                         <v-icon id="popover-target-1"
@@ -150,12 +181,63 @@
                           size="md"
                           name="radios-btn-default"
                           buttons
-                        ></b-form-radio-group>
+                        ></b-form-radio-group
+                        ><br />
+                        <div style="display: flex;align-items: center;">
+                          <img
+                            style="margin-top:20px;width:45px;height:45px"
+                            src="../icons/certified_fresh_lc.svg"
+                          />
+                          <h1 style="margin-top:20px;margin-right:30px">86%</h1>
+                        </div>
+                        <span style="color:#707176">223 Reviews</span
+                        ><br /><br />
+                        <span style="color: #707176"
+                          ><strong style="color: #707176"
+                            >7.20 out of 10</strong
+                          >
+                          average rating</span
+                        >
+                        <div class="row mb-1">
+                          <div style="color:#707176" class="col-sm-2">
+                            Fresh:
+                          </div>
+                          <div class="col-sm-8 pt-1 w-50">
+                            <b-progress
+                              :value="75"
+                              :variant="'secondary'"
+                            ></b-progress>
+                          </div>
+                          <div
+                            style="color:#707176;padding-left:20px"
+                            class="col-sm-2"
+                          >
+                            191
+                          </div>
+                        </div>
+                        <div class="row mb-1">
+                          <div style="color:#707176" class="col-sm-2">
+                            Rotten:
+                          </div>
+                          <div class="col-sm-8 pt-1 w-50">
+                            <b-progress
+                              height="15px"
+                              :value="35"
+                              :variant="'secondary'"
+                            ></b-progress>
+                          </div>
+                          <div
+                            style="color:#707176;padding-left:20px"
+                            class="col-sm-2"
+                          >
+                            32
+                          </div>
+                        </div>
                       </b-form-group>
                     </b-col>
                     <b-col style="margin-left:20px;margin-top:20px"
                       ><h4>
-                        <strong>AUDIENCE</strong
+                        <strong>AUDIENCE </strong
                         ><v-icon id="popover-target-2"
                           >mdi-help-circle-outline</v-icon
                         >
@@ -168,6 +250,29 @@
                         The percentage of users who rated this 3.5 stars or
                         higher.
                       </b-popover>
+                      <div style="display: flex;align-items: center;">
+                        <img
+                          style="margin-top:20px;width:45px;height:45px"
+                          src="../icons/fresh-score-user.svg"
+                        />
+                        <h1 style="margin-top:20px;margin-right:30px">86%</h1>
+                      </div>
+                      <span style="color:#707176">100,000+ Ratings</span
+                      ><br /><br />
+                      <div style="dislay:flex;align-items: center;">
+                        <b-form-rating
+                          v-model="audienceRating"
+                          readonly
+                          inline
+                          no-border
+                          precision="2"
+                          color="#ff8800"
+                        ></b-form-rating>
+                        <span style="color: #707176"
+                          ><strong style="color: #707176">3.55 out of 5</strong>
+                          average rating</span
+                        >
+                      </div>
                     </b-col>
                   </b-row>
                 </b-modal>
@@ -207,7 +312,8 @@ export default {
   },
   data() {
     return {
-      popoverCriticSelected: "all"
+      popoverCriticSelected: "all",
+      audienceRating: 3.55
       // msg: "Welcome to Your Vue.js App"
     };
   }
@@ -245,5 +351,8 @@ export default {
 .trending-link:hover {
   text-decoration: none;
   color: #f6dc24;
+}
+.rating:hover {
+  color: #4f86d9;
 }
 </style>
