@@ -78,8 +78,103 @@
       style="display:block;"
     >
       <b-row style="padding-top:30px">
-        <b-col cols="4"><left-tab-bar style="margin-left:10px;margin-right:10px"></left-tab-bar></b-col>
-        <b-col cols="8">col-8</b-col>
+        <b-col cols="4"
+          ><left-tab-bar
+            style="margin-left:10px;margin-right:10px"
+          ></left-tab-bar
+        ></b-col>
+        <b-col cols="8">
+          <div
+            class="container"
+            style="height:100px;background-color:white;padding:10px;display:flex"
+          >
+            <div>
+              <b-img
+                v-bind="{
+                  blank: true,
+                  blankColor: '#777',
+                  width: 150,
+                  height: 210,
+                  class: 'm1'
+                }"
+                rounded
+                alt="Rounded image"
+              ></b-img>
+            </div>
+            <div
+              style="margin-left:10px;width:100%;height: 210px;background-color:#F3F3F3;border-radius:4px"
+            >
+              <h4 style="margin-top:30px"><strong>THE CONJURING</strong></h4>
+              <h6>
+                <span
+                  style="border: 1px solid #CCCFD1;border-radius:3px;padding-top:2px;padding-left:2px;padding-right:2px;"
+                  >R+</span
+                >
+                2013, Horror/Mystery & thriller, 1h 51m
+              </h6>
+              <div>
+                <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+
+                <b-modal
+                  size="lg"
+                  hide-footer
+                  hide-header
+                  id="modal-1"
+                  centered
+                >
+                  <b-row>
+                    <b-col style="margin-left:20px;margin-top:20px;border-right:1px solid #E9E9EA">
+                      <h4>
+                        <strong>LEMONCATER</strong>
+                        <v-icon id="popover-target-1"
+                          >mdi-help-circle-outline</v-icon
+                        >
+                      </h4>
+                      <b-popover
+                        target="popover-target-1"
+                        triggers="hover"
+                        placement="topleft"
+                      >
+                        The percentage of Approved Lemoncater Critics who have
+                        given this movie a positive review.
+                      </b-popover>
+                      <b-form-group>
+                        <b-form-radio-group
+                          id="btn-radios-1"
+                          v-model="popoverCriticSelected"
+                          :options="[
+                            { text: 'ALL CRITICS', value: 'all' },
+                            { text: 'TOP CRITICS', value: 'top' }
+                          ]"
+                          button-variant="outline-secondary"
+                          size="md"
+                          name="radios-btn-default"
+                          buttons
+                        ></b-form-radio-group>
+                      </b-form-group>
+                    </b-col>
+                    <b-col style="margin-left:20px;margin-top:20px"
+                      ><h4>
+                        <strong>AUDIENCE</strong
+                        ><v-icon id="popover-target-2"
+                          >mdi-help-circle-outline</v-icon
+                        >
+                      </h4>
+                      <b-popover
+                        target="popover-target-2"
+                        triggers="hover"
+                        placement="topleft"
+                      >
+                        The percentage of users who rated this 3.5 stars or
+                        higher.
+                      </b-popover>
+                    </b-col>
+                  </b-row>
+                </b-modal>
+              </div>
+            </div>
+          </div>
+        </b-col>
       </b-row>
     </v-card>
     <!-- Footer -->
@@ -112,6 +207,7 @@ export default {
   },
   data() {
     return {
+      popoverCriticSelected: "all"
       // msg: "Welcome to Your Vue.js App"
     };
   }
