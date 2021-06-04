@@ -302,7 +302,7 @@
               </header-bar>
             </div></b-row
           >
-          <b-row style="padding-top: 20px;padding-bottom:20px">
+          <b-row style="padding-top: 20px;padding-bottom:10px">
             <div style="padding-left:10px;padding-right:10px">
               <div
                 style="padding-left:5px;padding-right:5px;display:flex;flex-direction: column;text-align: left;"
@@ -365,10 +365,296 @@
             </div></b-row
           >
           <b-row
-            style="padding-top:20px;padding-bottom:20px;padding-left:10px;padding-right:10px;width:100%;"
+            style="padding-top:20px;padding-left:10px;padding-right:10px;width:100%;"
           >
-          <slider-image></slider-image>
+            <slider-image></slider-image>
           </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">MOVIE INFO</span>
+              </header-bar>
+            </div></b-row
+          >
+          <b-row style="padding-top: 20px;padding-bottom:20px">
+            <div style="padding-left:10px;padding-right:10px">
+              <div
+                style="padding-left:5px;padding-right:5px;display:flex;flex-direction: column;text-align: left;"
+              >
+                <p style="text-align: justify">
+                  In 1970, paranormal investigators and demonologists Lorraine
+                  (Vera Farmiga) and Ed (Patrick Wilson) Warren are summoned to
+                  the home of Carolyn (Lili Taylor) and Roger (Ron Livingston)
+                  Perron. The Perrons and their five daughters have recently
+                  moved into a secluded farmhouse, where a supernatural presence
+                  has made itself known. Though the manifestations are
+                  relatively benign at first, events soon escalate in horrifying
+                  fashion, especially after the Warrens discover the house's
+                  macabre history.
+                </p>
+                <div style="font-size:15px">
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Rating:
+                    </b-col>
+                    <b-col cols="8"> R (Disturbing Violence and Terror) </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Genre:
+                    </b-col>
+                    <b-col cols="8"> Horror, Mystery & Thriller </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Original Language:
+                    </b-col>
+                    <b-col cols="8"> English </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Director:
+                    </b-col>
+                    <b-col cols="8">
+                      <b-link style="text-decoration:none;">James Wan</b-link>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Producer:
+                    </b-col>
+                    <b-col cols="8">
+                      <b-link style="text-decoration:none;">
+                        Tony DeRosa-Grund</b-link
+                      >,
+                      <b-link style="text-decoration:none;">Peter Safran</b-link
+                      >,
+                      <b-link style="text-decoration:none;">Rob Cowan</b-link>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Writer:
+                    </b-col>
+                    <b-col cols="8">
+                      <b-link style="text-decoration:none;">Chad Hayes</b-link>,
+                      <b-link style="text-decoration:none;"
+                        >Carey W. Hayes</b-link
+                      >
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Release Date (Theaters):
+                    </b-col>
+                    <b-col cols="8"> Jul 19, 2013 </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Release Date (Streaming):
+                    </b-col>
+                    <b-col cols="8"> Jul 9, 2015 </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Box Office (Gross USA):
+                    </b-col>
+                    <b-col cols="8"> $137.4M </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Runtime:
+                    </b-col>
+                    <b-col cols="8"> 1h 51m </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Production Co:
+                    </b-col>
+                    <b-col cols="8">
+                      Safran Company, Evergreen Media Group
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Sound Mix:
+                    </b-col>
+                    <b-col cols="8"> SDDS, Dolby Digital, Datasat </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      Aspect Ratio:
+                    </b-col>
+                    <b-col cols="8"> Scope (2.35:1) </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col
+                      cols="4"
+                      style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
+                    >
+                      View the collection:
+                    </b-col>
+                    <b-col cols="8">
+                      <b-link style="text-decoration:none;"
+                        >The Conjuring Universe</b-link
+                      >
+                    </b-col>
+                  </b-row>
+                </div>
+              </div>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">CAST & CREW</span>
+              </header-bar>
+            </div></b-row
+          >
+          <b-row style="padding-top: 20px;padding-bottom:10px">
+            <div style="padding-left:10px;padding-right:10px;">
+              <div style="display:flex;margin-bottom:15px">
+                <cast-card style="margin-right:11px"></cast-card>
+                <cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card>
+              </div>
+              <div
+                v-if="overCrew && showAllCrew"
+                style="display:flex;margin-bottom:15px"
+              >
+                <cast-card style="margin-right:11px"></cast-card>
+                <cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card>
+              </div>
+              <div
+                v-if="overCrew && showAllCrew"
+                style="display:flex;margin-bottom:15px"
+              >
+                <cast-card style="margin-right:11px"></cast-card>
+                <cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card>
+              </div>
+              <div
+                v-if="overCrew && showAllCrew"
+                style="display:flex;margin-bottom:15px"
+              >
+                <cast-card style="margin-right:11px"></cast-card>
+                <cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card
+                ><cast-card style="margin-right:11px"></cast-card>
+              </div>
+              <div style="width:100%;text-align:right;">
+                <b-link
+                  v-if="overCrew && showAllCrew"
+                  style="text-decoration:none;"
+                  @click="showAllCrew = false"
+                  ><strong>Hide Cast & Crew</strong>
+                  <v-icon color="#4993DB" small>mdi-arrow-up-bold</v-icon>
+                </b-link>
+                <b-link
+                  v-if="overCrew && !showAllCrew"
+                  style="text-decoration:none;"
+                  @click="showAllCrew = true"
+                  ><strong>Show all Cast & Crew</strong>
+                  <v-icon color="#4993DB" small>mdi-arrow-down-bold</v-icon>
+                </b-link>
+              </div>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">NEWS & INTERVIEWS FOR THE CONJURING </span>
+              </header-bar>
+            </div></b-row
+          >
+          <b-row style="padding-top: 20px;padding-bottom:10px;">
+            <div
+              style="padding-left:10px;padding-right:10px;display:flex;justify-content:space-around"
+            >
+              <news-card></news-card>
+              <news-card></news-card>
+              <news-card></news-card>
+            </div>
+            <b-link
+              style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"
+              ><strong>View All</strong>
+            </b-link></b-row
+          >
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">CRITIC REVIEWS FOR THE CONJURING</span>
+              </header-bar>
+            </div></b-row
+          >
+          <b-row style="padding-top: 20px;padding-bottom:10px">
+            <div style="padding-left:10px;padding-right:10px; display:flex">
+              <div
+                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;"
+              >
+                <b-link style="text-decoration:none;">All Critics (223)</b-link>
+                |
+                <b-link style="text-decoration:none;">Top Critics (62) </b-link>
+                | <b-link style="text-decoration:none;">Fresh (191)</b-link> |
+                <b-link style="text-decoration:none;">Rotten (32)</b-link>
+              </div>
+            </div></b-row
+          >
         </b-col>
       </b-row>
     </v-card>
@@ -396,6 +682,8 @@ import HeaderBar from "@/components/Movie/HeaderBar";
 import MovieCard from "@/components/Movie/MovieCard";
 import StreamingCard from "@/components/Movie/StreamingCard";
 import SliderImage from "@/components/Movie/SliderImage";
+import CastCard from "@/components/CastCard";
+import NewsCard from "@/components/Movie/NewsCard";
 export default {
   name: "Home",
   components: {
@@ -406,16 +694,20 @@ export default {
     HeaderBar,
     MovieCard,
     StreamingCard,
-    SliderImage
+    SliderImage,
+    CastCard,
+    NewsCard
   },
   data() {
     return {
       popoverCriticSelected: "all",
-      audienceRating: 3.55
-      
+      audienceRating: 3.55,
+      showAllCrew: false,
+      overCrew: true
+
       // msg: "Welcome to Your Vue.js App"
     };
-  },
+  }
 
   // apollo: {
   //   users: {
