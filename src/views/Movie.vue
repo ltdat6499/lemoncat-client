@@ -729,16 +729,56 @@
                 style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
   flex-wrap: wrap;justify-content:space-around"
               >
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
+                <critic-card></critic-card>
+                <critic-card></critic-card>
+                <critic-card></critic-card>
+                <critic-card></critic-card>
+                <critic-card></critic-card>
+                <critic-card></critic-card>
 
                 <b-link
-                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;padding-bottom:50px"
+                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;"
                   ><strong>See all Audience reviews</strong>
                 </b-link>
               </div>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">THE CONJURING QUOTES</span>
+              </header-bar>
+            </div></b-row
+          ><b-row style="padding-top: 20px;padding-bottom:10px;width:60%">
+            <div style="padding-left:10px;padding-right:10px; display:flex">
+              <div
+                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
+  flex-wrap: wrap;justify-content:space-around"
+              >
+                <quote-card></quote-card>
+                <quote-card></quote-card>
+                <quote-card></quote-card>
+                <quote-card></quote-card>
+                <quote-card></quote-card>
+                <quote-card></quote-card>
+                <quote-card></quote-card>
+
+                <b-link
+                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;padding-bottom:50px"
+                  ><strong>View All Quotes</strong>
+                </b-link>
+              </div>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">RATE AND REVIEW</span>
+              </header-bar>
+            </div></b-row
+          ><b-row style="padding-top: 20px;padding-bottom:10px;width:60%">
+            <div style="padding-left:10px;padding-right:10px; display:flex">
+              <v-card elevation="5" outlined shaped></v-card>
             </div>
           </b-row>
         </b-col>
@@ -771,6 +811,9 @@ import SliderImage from "@/components/Movie/SliderImage";
 import CastCard from "@/components/CastCard";
 import NewsCard from "@/components/Movie/NewsCard";
 import TopCriticCard from "@/components/Movie/TopCriticCard";
+import CriticCard from "@/components/Movie/CriticCard";
+import QuoteCard from "@/components/Movie/QuoteCard";
+
 export default {
   name: "Home",
   components: {
@@ -784,14 +827,40 @@ export default {
     SliderImage,
     CastCard,
     NewsCard,
-    TopCriticCard
+    TopCriticCard,
+    CriticCard,
+    QuoteCard
   },
   data() {
     return {
       popoverCriticSelected: "all",
       audienceRating: 3.55,
       showAllCrew: false,
-      overCrew: true
+      overCrew: true,
+      quotes: [
+        {
+          name: "Ed Warren",
+          text:
+            "It was big mistake, acknowledging this doll. Though it. The inhuman spirit tricked you.."
+        },
+        {
+          name: "Roger Perron",
+          text:
+            "I don't know what you are! But you leave my wife alone damn you!"
+        },
+        {
+          name: "Bathsheba",
+          text: "She's already gone.. And now your all gonna die"
+        },
+        {
+          name: "Ed Warren",
+          text: "Sometimes it's better to keep the genie in the bottle."
+        },
+        {
+          name: "Drew",
+          text: "You can't shoot a ghost"
+        }
+      ]
 
       // msg: "Welcome to Your Vue.js App"
     };
