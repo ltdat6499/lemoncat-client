@@ -693,8 +693,54 @@
                 | <b-link style="text-decoration:none;">Fresh (191)</b-link> |
                 <b-link style="text-decoration:none;">Rotten (32)</b-link>
               </div>
+            </div>
+          </b-row>
+          <b-row style="padding-top: 20px;padding-bottom:10px">
+            <div style="padding-left:10px;padding-right:10px; display:flex">
+              <div
+                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
+  flex-wrap: wrap;justify-content:space-around"
+              >
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <b-link
+                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"
+                  ><strong>View All Critic Reviews (252)</strong>
+                </b-link>
+              </div>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
+                <span slot="header">AUDIENCE REVIEWS FOR THE CONJURING</span>
+              </header-bar>
             </div></b-row
           >
+          <b-row style="padding-top: 20px;padding-bottom:10px">
+            <div style="padding-left:10px;padding-right:10px; display:flex">
+              <div
+                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
+  flex-wrap: wrap;justify-content:space-around"
+              >
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+                <top-critic-card></top-critic-card>
+
+                <b-link
+                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;padding-bottom:50px"
+                  ><strong>See all Audience reviews</strong>
+                </b-link>
+              </div>
+            </div>
+          </b-row>
         </b-col>
       </b-row>
     </v-card>
@@ -724,6 +770,7 @@ import StreamingCard from "@/components/Movie/StreamingCard";
 import SliderImage from "@/components/Movie/SliderImage";
 import CastCard from "@/components/CastCard";
 import NewsCard from "@/components/Movie/NewsCard";
+import TopCriticCard from "@/components/Movie/TopCriticCard";
 export default {
   name: "Home",
   components: {
@@ -736,7 +783,8 @@ export default {
     StreamingCard,
     SliderImage,
     CastCard,
-    NewsCard
+    NewsCard,
+    TopCriticCard
   },
   data() {
     return {
