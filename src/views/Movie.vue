@@ -400,6 +400,47 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
+                <span slot="header">RATE AND REVIEW</span>
+              </header-bar>
+            </div></b-row
+          ><b-row style="padding-top: 20px;padding-bottom:10px;width:100%">
+            <div
+              style="padding-left:10px;padding-right:10px; display:flex;justify-content:center"
+            >
+              <v-card elevation="5" outlined shaped>
+                <div v-if="showReview" style="padding: 5px">
+                  <span >
+                    Your Rate
+                  </span>
+                  <v-slider
+                    v-model="slider"
+                    :thumb-size="30"
+                    thumb-label="always"
+                    style="width: 60%"
+                  >
+                    <template v-slot:thumb-label="{ value }">
+                      {{
+                        satisfactionEmojis[Math.min(Math.floor(value / 10), 9)]
+                      }}
+                    </template>
+                  </v-slider>
+                  <tinymce ref="editor" v-model="content"></tinymce>
+                  <b-button
+                    style="margin-top:15px;margin-bottom:10px"
+                    block
+                    variant="outline-success"
+                    >Submit your Review</b-button
+                  >
+                </div>
+                <b-button v-else size="lg" variant="outline-success"
+                  >Write Your Review</b-button
+                >
+              </v-card>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
                 <span slot="header">THE CONJURING PHOTOS</span>
               </header-bar>
             </div></b-row
@@ -770,17 +811,6 @@
               </div>
             </div>
           </b-row>
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">RATE AND REVIEW</span>
-              </header-bar>
-            </div></b-row
-          ><b-row style="padding-top: 20px;padding-bottom:10px;width:60%">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <v-card elevation="5" outlined shaped></v-card>
-            </div>
-          </b-row>
         </b-col>
       </b-row>
     </v-card>
@@ -802,6 +832,7 @@
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import TopHeadline from "@/components/TopHeadline";
+import Tinymce from "@/components/Tinymce";
 
 import LeftTabBar from "@/components/Movie/TabBar";
 import HeaderBar from "@/components/Movie/HeaderBar";
@@ -829,7 +860,8 @@ export default {
     NewsCard,
     TopCriticCard,
     CriticCard,
-    QuoteCard
+    QuoteCard,
+    Tinymce
   },
   data() {
     return {
@@ -837,6 +869,20 @@ export default {
       audienceRating: 3.55,
       showAllCrew: false,
       overCrew: true,
+      showReview: true,
+      satisfactionEmojis: [
+        "🤬",
+        "😡",
+        "😠",
+        "😐",
+        "😶",
+        "🙂",
+        "😊",
+        "😁",
+        "😄",
+        "😍"
+      ],
+      content: "<p><strong>gsdfgdfgsdfgsdfgsdfgdfgfdgsdfgfdgsdfg</strong></p>",
       quotes: [
         {
           name: "Ed Warren",
