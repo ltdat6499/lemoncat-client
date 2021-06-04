@@ -83,6 +83,40 @@
           ></left-tab-bar
         ></b-col>
         <b-col cols="8">
+          <b-row style="padding-top: 20px;padding-bottom:10px;cursor:pointer">
+            <div
+              style="padding-left:10px;padding-right:10px;"
+              v-b-modal.modal-trailer
+            >
+              <v-parallax
+                style="border-radius:4px"
+                class="shadow-box"
+                height="300"
+                :src="require('../assets/img/horizontal-poster.jpg')"
+              ></v-parallax>
+              <b-modal
+                size="xl"
+                hide-footer
+                hide-header
+                id="modal-trailer"
+                centered
+              >
+                <b-embed
+                  style="width:100%;height:500px;"
+                  type="iframe"
+                  aspect="16by9"
+                  src="https://www.youtube-nocookie.com/embed/ju3dY0V6Wb0"
+                  allowfullscreen
+                ></b-embed>
+              </b-modal>
+              <v-icon
+                color="white"
+                style="top: 145px;font-size: 100px;position: absolute;left: 749px;"
+                x-large
+                >mdi-play-circle-outline</v-icon
+              >
+            </div></b-row
+          >
           <b-row>
             <div
               style="height:210px;background-color:white;padding:10px;display:flex;margin-bottom:40px;"
@@ -312,6 +346,12 @@
                   Well-crafted and gleefully creepy, The Conjuring ratchets up
                   dread through a series of effective old-school scares. Read
                   critic reviews
+                </p>
+                <h5><strong>AUDIENCE SAYS</strong></h5>
+                <p>
+                  Almost as scary and intense as the original, A Quiet Place
+                  Part II will leave audiences on the edge of their seats -- and
+                  waiting for Part III. Read audience reviews
                 </p>
               </div>
             </div></b-row
@@ -746,5 +786,9 @@ export default {
 }
 .rating:hover {
   color: #4f86d9;
+}
+.shadow-box {
+  -webkit-box-shadow: 1px 1px 17px 0px rgba(0, 0, 0, 0.38);
+  box-shadow: 1px 1px 17px 0px rgba(0, 0, 0, 0.38);
 }
 </style>
