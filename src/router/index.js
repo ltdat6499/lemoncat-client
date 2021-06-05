@@ -3,6 +3,8 @@ import Router from "vue-router";
 import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Movie from "@/views/Movie";
+import TvShow from "@/views/TvShow";
+
 
 
 Vue.use(Router);
@@ -33,6 +35,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Movie
+    },
+    {
+      path: "/tv/:slug",
+      name: "TVShow",
+      meta: {
+        requiresAuth: false
+      },
+      component: TvShow
     }
   ]
 });
