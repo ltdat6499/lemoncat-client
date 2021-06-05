@@ -117,19 +117,32 @@
               >
             </div></b-row
           >
+
           <b-row>
             <div
-              style="height:210px;background-color:white;padding:10px;display:flex;margin-bottom:40px;"
+              style="height:250px;background-color:white;padding:10px;display:flex;margin-bottom:40px;"
             >
               <div>
                 <img
                   style="width: 145px;height:210px;border-radius:4px"
                   src="../assets/img/sample-poster.png"
                 />
+                <b-row style="width:145px">
+                  <v-select
+                    v-model="selected"
+                    :items="options"
+                    single-line
+                    label="SEASON"
+                    item-color="success"
+                  ></v-select>
+                </b-row>
               </div>
               <div
-                style="margin-left:10px;width:100%;height: 210px;background-color:#F3F3F3;border-radius:4px"
+                style="margin-left:10px;width:100%;height: 250px;background-color:#F3F3F3;border-radius:4px;"
               >
+                <h2 class="season-text" style="padding-top: 17px">
+                  <span><strong>SEASON 10</strong></span>
+                </h2>
                 <h4 style="margin-top:30px">
                   <strong>THE WALKING DEAD</strong>
                 </h4>
@@ -401,73 +414,6 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">SEASONS </span>
-              </header-bar>
-            </div></b-row
-          >
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;flex-direction: column;text-align: left;"
-              >
-                <season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card>
-              </div></div
-          ></b-row>
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">RATE AND REVIEW</span>
-              </header-bar>
-            </div></b-row
-          ><b-row style="padding-top: 20px;padding-bottom:10px;width:100%">
-            <div
-              style="padding-left:10px;padding-right:10px; display:flex;justify-content:center"
-            >
-              <v-card elevation="5" outlined shaped>
-                <div v-if="showReview" style="padding: 5px">
-                  <b-form-rating
-                    v-model="ratingValue"
-                    variant="warning"
-                    size="lg"
-                    stars="10"
-                    no-border
-                  ></b-form-rating>
-                  <tinymce ref="editor" v-model="content"></tinymce>
-                  <b-button
-                    style="margin-top:15px;margin-bottom:10px"
-                    block
-                    variant="outline-success"
-                    >Submit your Review</b-button
-                  >
-                </div>
-                <b-button v-else size="lg" variant="outline-success"
-                  >Write Your Review</b-button
-                >
-              </v-card>
-            </div>
-          </b-row>
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
                 <span slot="header">THE WALKING DEAD PHOTOS</span>
               </header-bar>
             </div></b-row
@@ -674,6 +620,133 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
+                <span slot="header">EPISODES</span>
+              </header-bar>
+            </div></b-row
+          >
+          <b-row style="padding-top: 20px;padding-bottom:10px;">
+            <div
+              style="padding-left:10px;padding-right:10px;display:flex;justify-content:space-around"
+            >
+              <div style="width:100%;display:flex;flex-direction: column">
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+                <b-link
+                  style="margin-bottom:10px;margin-left:5px;margin-right:5px;background-color: #EFEFEF;padding:15px;border-radius:4px;display: flex;flex-direction: column;justify-content:flex-start;text-decoration:none;align-items: start"
+                >
+                  <strong style="color:black">1. Lines We Cross</strong>
+                  <span style="color:gray">Air date: Oct 6, 2019</span>
+                  <span style="text-align:justify;color:black;"
+                    >In the Season 10 premiere, the group in Oceanside continues
+                    to train in case the Whisperers return. Tensions are high as
+                    the heroes struggle to hold onto their concept of
+                    civilization.<strong
+                      style="color: #1976D2;float:right!important;"
+                    >
+                      View More</strong
+                    ></span
+                  >
+                </b-link>
+              </div>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
                 <span slot="header"
                   >NEWS & INTERVIEWS FOR THE WALKING DEAD
                 </span>
@@ -693,74 +766,6 @@
               ><strong>View All</strong>
             </b-link></b-row
           >
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">CRITIC REVIEWS FOR THE WALKING DEAD</span>
-              </header-bar>
-            </div></b-row
-          >
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;"
-              >
-                <b-link style="text-decoration:none;">All Critics (223)</b-link>
-                |
-                <b-link style="text-decoration:none;">Top Critics (62) </b-link>
-                | <b-link style="text-decoration:none;">Fresh (191)</b-link> |
-                <b-link style="text-decoration:none;">Rotten (32)</b-link>
-              </div>
-            </div>
-          </b-row>
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
-  flex-wrap: wrap;justify-content:space-around"
-              >
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <b-link
-                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"
-                  ><strong>View All Critic Reviews (252)</strong>
-                </b-link>
-              </div>
-            </div>
-          </b-row>
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">AUDIENCE REVIEWS FOR THE WALKING DEAD</span>
-              </header-bar>
-            </div></b-row
-          >
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
-  flex-wrap: wrap;justify-content:space-around"
-              >
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-
-                <b-link
-                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;"
-                  ><strong>See all Audience reviews</strong>
-                </b-link>
-              </div>
-            </div>
-          </b-row>
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
@@ -874,6 +879,19 @@ export default {
           name: "Drew",
           text: "You can't shoot a ghost"
         }
+      ],
+      selected: { value: "season 10", text: "Season 10" },
+      options: [
+        { value: "season 10", text: "Season 10" },
+        { value: "season 9", text: "Season 9" },
+        { value: "season 8", text: "Season 8" },
+        { value: "season 7", text: "Season 7" },
+        { value: "season 6", text: "Season 6" },
+        { value: "season 5", text: "Season 5" },
+        { value: "season 4", text: "Season 4" },
+        { value: "season 3", text: "Season 3" },
+        { value: "season 2", text: "Season 2" },
+        { value: "season 1", text: "Season 1" }
       ]
 
       // msg: "Welcome to Your Vue.js App"
@@ -921,5 +939,16 @@ export default {
 .shadow-box {
   -webkit-box-shadow: 1px 1px 17px 0px rgba(0, 0, 0, 0.38);
   box-shadow: 1px 1px 17px 0px rgba(0, 0, 0, 0.38);
+}
+.season-text {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #000;
+  line-height: 0em;
+  margin: 10px 0;
+}
+.season-text span {
+  background: #f3f3f3;
+  padding: 0 10px;
 }
 </style>

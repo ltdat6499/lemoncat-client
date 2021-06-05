@@ -117,21 +117,34 @@
               >
             </div></b-row
           >
+
           <b-row>
             <div
-              style="height:210px;background-color:white;padding:10px;display:flex;margin-bottom:40px;"
+              style="height:250px;background-color:white;padding:10px;display:flex;margin-bottom:40px;"
             >
               <div>
                 <img
                   style="width: 145px;height:210px;border-radius:4px"
                   src="../assets/img/sample-poster.png"
                 />
+                <b-row style="width:145px">
+                  <v-select
+                    v-model="selected"
+                    :items="options"
+                    single-line
+                    label="EPISODE"
+                    item-color="success"
+                  ></v-select>
+                </b-row>
               </div>
               <div
-                style="margin-left:10px;width:100%;height: 210px;background-color:#F3F3F3;border-radius:4px"
+                style="margin-left:10px;width:100%;height: 250px;background-color:#F3F3F3;border-radius:4px;"
               >
+                <h2 class="season-text" style="padding-top: 17px">
+                  <span><strong>LINES WE CROSS</strong></span>
+                </h2>
                 <h4 style="margin-top:30px">
-                  <strong>THE WALKING DEAD</strong>
+                  <strong>THE WALKING DEAD SEASON 10</strong>
                 </h4>
                 <h6>
                   <span
@@ -397,41 +410,6 @@
               <streaming-card></streaming-card>
             </div>
           </b-row>
-
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">SEASONS </span>
-              </header-bar>
-            </div></b-row
-          >
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;flex-direction: column;text-align: left;"
-              >
-                <season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card
-                ><season-card style="margin-bottom:15px"></season-card>
-                <season-card style="margin-bottom:15px"></season-card>
-              </div></div
-          ></b-row>
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
@@ -696,7 +674,7 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">CRITIC REVIEWS FOR THE WALKING DEAD</span>
+                <span slot="header">CRITIC REVIEWS FOR THE CONJURING</span>
               </header-bar>
             </div></b-row
           >
@@ -737,7 +715,7 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">AUDIENCE REVIEWS FOR THE WALKING DEAD</span>
+                <span slot="header">AUDIENCE REVIEWS FOR THE CONJURING</span>
               </header-bar>
             </div></b-row
           >
@@ -874,6 +852,19 @@ export default {
           name: "Drew",
           text: "You can't shoot a ghost"
         }
+      ],
+      selected: { value: "episode 10", text: "Episode 10" },
+      options: [
+        { value: "episode 10", text: "Episode 10" },
+        { value: "episode 9", text: "Episode 9" },
+        { value: "episode 8", text: "Episode 8" },
+        { value: "episode 7", text: "Episode 7" },
+        { value: "episode 6", text: "Episode 6" },
+        { value: "episode 5", text: "Episode 5" },
+        { value: "episode 4", text: "Episode 4" },
+        { value: "episode 3", text: "Episode 3" },
+        { value: "episode 2", text: "Episode 2" },
+        { value: "episode 1", text: "Episode 1" }
       ]
 
       // msg: "Welcome to Your Vue.js App"
@@ -921,5 +912,16 @@ export default {
 .shadow-box {
   -webkit-box-shadow: 1px 1px 17px 0px rgba(0, 0, 0, 0.38);
   box-shadow: 1px 1px 17px 0px rgba(0, 0, 0, 0.38);
+}
+.season-text {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #000;
+  line-height: 0em;
+  margin: 10px 0;
+}
+.season-text span {
+  background: #f3f3f3;
+  padding: 0 10px;
 }
 </style>

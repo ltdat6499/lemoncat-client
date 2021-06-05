@@ -4,9 +4,8 @@ import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Movie from "@/views/Movie";
 import TvShow from "@/views/TvShow";
-
-
-
+import TvShowSeason from "@/views/TvShowSeason";
+import TvShowEpisode from "@/views/TvShowEpisode";
 Vue.use(Router);
 
 export default new Router({
@@ -43,6 +42,22 @@ export default new Router({
         requiresAuth: false
       },
       component: TvShow
+    },
+    {
+      path: "/tv/:slug/:season",
+      name: "TVShow",
+      meta: {
+        requiresAuth: false
+      },
+      component: TvShowSeason
+    },
+    {
+      path: "/tv/:slug/:season/:episode",
+      name: "TVShow",
+      meta: {
+        requiresAuth: false
+      },
+      component: TvShowEpisode
     }
   ]
 });

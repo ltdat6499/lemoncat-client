@@ -359,6 +359,24 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
+                <span slot="header">COLLECTION OF THE WALKING DEAD </span>
+              </header-bar>
+            </div></b-row
+          >
+          <b-row>
+            <div
+              style="padding-top:20px;padding-bottom:20px;padding-left:10px;padding-right:10px;width:100%;display:flex;justify-content:space-between"
+            >
+              <movie-card></movie-card>
+              <movie-card></movie-card>
+              <movie-card></movie-card>
+              <movie-card></movie-card>
+              <movie-card></movie-card>
+            </div>
+          </b-row>
+          <b-row>
+            <div style="padding-left:10px;padding-right:10px;width:100%">
+              <header-bar>
                 <span slot="header">YOU MIGHT ALSO LIKE</span>
               </header-bar>
             </div></b-row
@@ -432,39 +450,6 @@
                 <season-card style="margin-bottom:15px"></season-card>
               </div></div
           ></b-row>
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">RATE AND REVIEW</span>
-              </header-bar>
-            </div></b-row
-          ><b-row style="padding-top: 20px;padding-bottom:10px;width:100%">
-            <div
-              style="padding-left:10px;padding-right:10px; display:flex;justify-content:center"
-            >
-              <v-card elevation="5" outlined shaped>
-                <div v-if="showReview" style="padding: 5px">
-                  <b-form-rating
-                    v-model="ratingValue"
-                    variant="warning"
-                    size="lg"
-                    stars="10"
-                    no-border
-                  ></b-form-rating>
-                  <tinymce ref="editor" v-model="content"></tinymce>
-                  <b-button
-                    style="margin-top:15px;margin-bottom:10px"
-                    block
-                    variant="outline-success"
-                    >Submit your Review</b-button
-                  >
-                </div>
-                <b-button v-else size="lg" variant="outline-success"
-                  >Write Your Review</b-button
-                >
-              </v-card>
-            </div>
-          </b-row>
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
@@ -693,74 +678,6 @@
               ><strong>View All</strong>
             </b-link></b-row
           >
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">CRITIC REVIEWS FOR THE WALKING DEAD</span>
-              </header-bar>
-            </div></b-row
-          >
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;"
-              >
-                <b-link style="text-decoration:none;">All Critics (223)</b-link>
-                |
-                <b-link style="text-decoration:none;">Top Critics (62) </b-link>
-                | <b-link style="text-decoration:none;">Fresh (191)</b-link> |
-                <b-link style="text-decoration:none;">Rotten (32)</b-link>
-              </div>
-            </div>
-          </b-row>
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
-  flex-wrap: wrap;justify-content:space-around"
-              >
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <top-critic-card></top-critic-card>
-                <b-link
-                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"
-                  ><strong>View All Critic Reviews (252)</strong>
-                </b-link>
-              </div>
-            </div>
-          </b-row>
-          <b-row>
-            <div style="padding-left:10px;padding-right:10px;width:100%">
-              <header-bar>
-                <span slot="header">AUDIENCE REVIEWS FOR THE WALKING DEAD</span>
-              </header-bar>
-            </div></b-row
-          >
-          <b-row style="padding-top: 20px;padding-bottom:10px">
-            <div style="padding-left:10px;padding-right:10px; display:flex">
-              <div
-                style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
-  flex-wrap: wrap;justify-content:space-around"
-              >
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-                <critic-card></critic-card>
-
-                <b-link
-                  style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;"
-                  ><strong>See all Audience reviews</strong>
-                </b-link>
-              </div>
-            </div>
-          </b-row>
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
