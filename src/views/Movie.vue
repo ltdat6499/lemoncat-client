@@ -409,21 +409,13 @@
             >
               <v-card elevation="5" outlined shaped>
                 <div v-if="showReview" style="padding: 5px">
-                  <span >
-                    Your Rate
-                  </span>
-                  <v-slider
-                    v-model="slider"
-                    :thumb-size="30"
-                    thumb-label="always"
-                    style="width: 60%"
-                  >
-                    <template v-slot:thumb-label="{ value }">
-                      {{
-                        satisfactionEmojis[Math.min(Math.floor(value / 10), 9)]
-                      }}
-                    </template>
-                  </v-slider>
+                  <b-form-rating
+                    v-model="ratingValue"
+                    variant="warning"
+                    size="lg"
+                    stars="10"
+                    no-border
+                  ></b-form-rating>
                   <tinymce ref="editor" v-model="content"></tinymce>
                   <b-button
                     style="margin-top:15px;margin-bottom:10px"
@@ -869,19 +861,8 @@ export default {
       audienceRating: 3.55,
       showAllCrew: false,
       overCrew: true,
-      showReview: true,
-      satisfactionEmojis: [
-        "🤬",
-        "😡",
-        "😠",
-        "😐",
-        "😶",
-        "🙂",
-        "😊",
-        "😁",
-        "😄",
-        "😍"
-      ],
+      showReview: false,
+      ratingValue: 5,
       content: "<p><strong>gsdfgdfgsdfgsdfgsdfgdfgfdgsdfgfdgsdfg</strong></p>",
       quotes: [
         {
