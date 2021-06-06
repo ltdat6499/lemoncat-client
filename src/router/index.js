@@ -6,6 +6,8 @@ import Movie from "@/views/Movie";
 import TvShow from "@/views/TvShow";
 import TvShowSeason from "@/views/TvShowSeason";
 import TvShowEpisode from "@/views/TvShowEpisode";
+import Reviews from "@/views/Reviews";
+
 Vue.use(Router);
 
 export default new Router({
@@ -58,6 +60,14 @@ export default new Router({
         requiresAuth: false
       },
       component: TvShowEpisode
+    },
+    {
+      path: "/tv/:slug/:season/:episode/reviews",
+      name: "TVReviews",
+      meta: {
+        requiresAuth: false
+      },
+      component: Reviews
     }
   ]
 });
