@@ -1,7 +1,9 @@
 <template>
-  <b-container fluid>
+  <b-container fluid style="min-height:600px">
     <!-- User Interface controls -->
-    <b-row style="margin-top:20px;display:flex;flex-direction: column;align-items: center;">
+    <b-row
+      style="margin-top:20px;display:flex;flex-direction: column;align-items: center;"
+    >
       <b-input-group style="width:80%">
         <b-form-input
           id="filter-input"
@@ -15,22 +17,35 @@
 
       <div style="display: flex;float:left;align-items: center;width:80%">
         <h5 style="margin-right:20px">Filter On:</h5>
-        <v-checkbox v-model="filterOn" value="name" label="Name"></v-checkbox>
-        <v-checkbox v-model="filterOn" value="age" label="Age"></v-checkbox>
         <v-checkbox
           v-model="filterOn"
-          value="isActive"
-          label="Active"
+          value="name"
+          label="Name"
+          color="success"
+        ></v-checkbox>
+        <v-checkbox
+          v-model="filterOn"
+          value="age"
+          label="Age"
+          color="success"
         ></v-checkbox>
         <v-checkbox
           v-model="filterOn"
           value="isActive"
           label="Active"
+          color="success"
         ></v-checkbox>
         <v-checkbox
           v-model="filterOn"
           value="isActive"
           label="Active"
+          color="success"
+        ></v-checkbox>
+        <v-checkbox
+          v-model="filterOn"
+          value="isActive"
+          label="Active"
+          color="success"
         ></v-checkbox>
       </div>
     </b-row>
@@ -47,6 +62,7 @@
       :sort-direction="sortDirection"
       stacked="md"
       show-empty
+      fixed
       @filtered="onFiltered"
     >
       <template #cell(name)="row">
@@ -54,13 +70,6 @@
       </template>
 
       <template #cell(actions)="row">
-        <b-button
-          size="sm"
-          @click="info(row.item, row.index, $event.target)"
-          class="mr-1"
-        >
-          Info modal
-        </b-button>
         <b-button size="sm" @click="row.toggleDetails">
           {{ row.detailsShowing ? "Hide" : "Show" }} Details
         </b-button>
@@ -96,15 +105,6 @@
       </div>
     </div>
 
-    <!-- Info modal -->
-    <b-modal
-      :id="infoModal.id"
-      :title="infoModal.title"
-      ok-only
-      @hide="resetInfoModal"
-    >
-      <pre>{{ infoModal.content }}</pre>
-    </b-modal>
   </b-container>
 </template>
 <script>
@@ -148,7 +148,7 @@ export default {
           key: "name",
           label: "Person full name",
           sortable: true,
-          sortDirection: "desc"
+          sortDirection: "desc",
         },
         {
           key: "age",
@@ -176,12 +176,7 @@ export default {
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
-      filterOn: [],
-      infoModal: {
-        id: "info-modal",
-        title: "",
-        content: ""
-      }
+      filterOn: []
     };
   },
   computed: {
@@ -202,15 +197,6 @@ export default {
     this.totalRows = this.items.length;
   },
   methods: {
-    info(item, index, button) {
-      this.infoModal.title = `Row index: ${index}`;
-      this.infoModal.content = JSON.stringify(item, null, 2);
-      this.$root.$emit("bv::show::modal", this.infoModal.id, button);
-    },
-    resetInfoModal() {
-      this.infoModal.title = "";
-      this.infoModal.content = "";
-    },
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
