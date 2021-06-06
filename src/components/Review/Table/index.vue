@@ -1,115 +1,40 @@
 <template>
   <b-container fluid>
     <!-- User Interface controls -->
-    <b-row>
-      <b-col lg="4" class="my-1">
-        <b-form-group
-          label="Sort"
-          label-for="sort-by-select"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-          v-slot="{ ariaDescribedby }"
-        >
-          <b-input-group size="sm">
-            <b-form-select
-              id="sort-by-select"
-              v-model="sortBy"
-              :options="sortOptions"
-              :aria-describedby="ariaDescribedby"
-              class="w-75"
-            >
-              <template #first>
-                <option value="">-- none --</option>
-              </template>
-            </b-form-select>
+    <b-row style="margin-top:20px;display:flex;flex-direction: column;align-items: center;">
+      <b-input-group style="width:80%">
+        <b-form-input
+          id="filter-input"
+          v-model="filter"
+          type="search"
+          placeholder="Type to Search"
+        ></b-form-input>
 
-            <b-form-select
-              v-model="sortDesc"
-              :disabled="!sortBy"
-              :aria-describedby="ariaDescribedby"
-              size="sm"
-              class="w-25"
-            >
-              <option :value="false">Asc</option>
-              <option :value="true">Desc</option>
-            </b-form-select>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
+        <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+      </b-input-group>
 
-      <b-col lg="6" class="my-1">
-        <b-form-group
-          label="Filter"
-          label-for="filter-input"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-        >
-          <b-input-group size="sm">
-            <b-form-input
-              id="filter-input"
-              v-model="filter"
-              type="search"
-              placeholder="Type to Search"
-            ></b-form-input>
-
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''"
-                >Clear</b-button
-              >
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-
-      <b-col lg="6" class="my-1">
-        <b-form-group
-          v-model="sortDirection"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-          v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            v-model="filterOn"
-            :aria-describedby="ariaDescribedby"
-            class="mt-1"
-          >
-            <b-form-checkbox value="name">Name</b-form-checkbox>
-            <b-form-checkbox value="age">Age</b-form-checkbox>
-            <b-form-checkbox value="isActive">Active</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
-      </b-col>
-
-      <b-col sm="5" md="6" class="my-1">
-        <b-form-group
-          label="Per page"
-          label-for="per-page-select"
-          label-cols-sm="6"
-          label-cols-md="4"
-          label-cols-lg="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-        >
-          <b-form-select
-            id="per-page-select"
-            v-model="perPage"
-            :options="pageOptions"
-            size="sm"
-          ></b-form-select>
-        </b-form-group>
-      </b-col>
-
-      <b-col sm="7" md="6" class="my-1"> </b-col>
+      <div style="display: flex;float:left;align-items: center;width:80%">
+        <h5 style="margin-right:20px">Filter On:</h5>
+        <v-checkbox v-model="filterOn" value="name" label="Name"></v-checkbox>
+        <v-checkbox v-model="filterOn" value="age" label="Age"></v-checkbox>
+        <v-checkbox
+          v-model="filterOn"
+          value="isActive"
+          label="Active"
+        ></v-checkbox>
+        <v-checkbox
+          v-model="filterOn"
+          value="isActive"
+          label="Active"
+        ></v-checkbox>
+        <v-checkbox
+          v-model="filterOn"
+          value="isActive"
+          label="Active"
+        ></v-checkbox>
+      </div>
     </b-row>
 
-    <!-- Main table element -->
     <b-table
       :items="items"
       :fields="fields"
@@ -122,7 +47,6 @@
       :sort-direction="sortDirection"
       stacked="md"
       show-empty
-      small
       @filtered="onFiltered"
     >
       <template #cell(name)="row">
@@ -152,14 +76,25 @@
         </b-card>
       </template>
     </b-table>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="totalRows"
-      :per-page="perPage"
-      align="fill"
-      size="sm"
-      class="my-0"
-    ></b-pagination>
+    <div style="width: 100%;display:flex;align-items: center;">
+      <span style="margin-right:10px;float:right">Reviews/Page: </span>
+      <v-select
+        style="max-width:5%;float:right"
+        v-model="perPage"
+        :items="pageOptions"
+      ></v-select>
+      <div style="width: 100%;display:flex;justify-content:flex-end">
+        <b-pagination
+          style="width: 60%"
+          v-model="currentPage"
+          :total-rows="totalRows"
+          :per-page="perPage"
+          align="fill"
+          size="sm"
+          class="my-0"
+        ></b-pagination>
+      </div>
+    </div>
 
     <!-- Info modal -->
     <b-modal
@@ -236,8 +171,8 @@ export default {
       totalRows: 1,
       currentPage: 1,
       perPage: 5,
-      pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
-      sortBy: "",
+      pageOptions: [5, 10, 50, 100],
+      sortBy: { text: "none", value: null },
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
@@ -252,11 +187,14 @@ export default {
   computed: {
     sortOptions() {
       // Create an options list from our fields
-      return this.fields
-        .filter(f => f.sortable)
-        .map(f => {
-          return { text: f.label, value: f.key };
-        });
+      return [
+        ...{ text: "none", value: null },
+        ...this.fields
+          .filter(f => f.sortable)
+          .map(f => {
+            return { text: f.label, value: f.key };
+          })
+      ];
     }
   },
   mounted() {
