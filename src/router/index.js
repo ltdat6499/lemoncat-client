@@ -7,6 +7,8 @@ import TvShow from "@/views/TvShow";
 import TvShowSeason from "@/views/TvShowSeason";
 import TvShowEpisode from "@/views/TvShowEpisode";
 import Reviews from "@/views/Reviews";
+import Post from "@/views/Post";
+
 
 Vue.use(Router);
 
@@ -68,6 +70,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Reviews
+    },
+    {
+      path: "/post/:slug/",
+      name: "Post",
+      meta: {
+        requiresAuth: false
+      },
+      component: Post
     }
   ]
 });
