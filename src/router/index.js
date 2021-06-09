@@ -87,6 +87,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Posts
+    },
+    {
+      path: "/tags/:tag",
+      name: "Tags",
+      meta: {
+        requiresAuth: false
+      },
+      component: Posts
     }
   ]
 });
