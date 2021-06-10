@@ -244,10 +244,89 @@
               <div class="sort-button">Lemoncater</div>
             </div>
           </div>
-          <!-- CONTENT BODY -->
-          <div>
-            
+          <!-- View Mode -->
+          <div style="display:flex;align-items: center;padding:10px;width:100%">
+            <span>Showing 32 of 7462</span>
+            <v-btn-toggle
+              elevation="0"
+              v-model="viewMode"
+              style="float:right;margin-left:auto;margin-"
+            >
+              <v-btn color="success" style="color:white">
+                <v-icon>mdi-view-grid</v-icon>
+              </v-btn>
+
+              <v-btn color="success" style="color:white">
+                <v-icon>mdi-view-list</v-icon>
+              </v-btn>
+            </v-btn-toggle>
           </div>
+          <hr style="width: 95%;margin-left: auto;margin-right: auto;" />
+
+          <!-- CONTENT BODY -->
+          <!-- Grid View -->
+          <div
+            v-if="viewMode === 'grid'"
+            style="display:flex;padding:10px;flex-wrap: wrap;justify-content: space-between;margin-bottom:15px"
+          >
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+            <grid-card style="margin-bottom:15px"></grid-card>
+          </div>
+          <!-- List View -->
+          <div
+            style="display:flex;padding:10px;flex-wrap: wrap;justify-content: space-between;margin-bottom:15px"
+          >
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+            <list-card style="margin-bottom:15px"></list-card>
+          </div>
+          <b-pagination
+            v-model="currentPage"
+            align="center"
+            :total-rows="rows"
+            :per-page="perPage"
+            first-number
+            last-number
+          ></b-pagination>
         </b-col>
       </b-row>
     </v-card>
@@ -272,6 +351,9 @@ import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import HeaderBar from "@/components/Movie/HeaderBar";
 import NewsCard from "@/components/NewsCard";
+import GridCard from "@/components/Movies/GridCard";
+import ListCard from "@/components/Movies/ListCard";
+
 export default {
   name: "Home",
   components: {
@@ -279,7 +361,9 @@ export default {
     PageFooter,
     HeaderBar,
     NewsCard,
-    VueRangeSlider
+    VueRangeSlider,
+    GridCard,
+    ListCard
   },
   computed: {
     tags() {
@@ -288,6 +372,10 @@ export default {
   },
   data() {
     return {
+      currentPage: 1,
+      rows: 32000,
+      perPage: 20,
+      viewMode: 0,
       selected: [],
       genres: "Action, Adventure, Comedy, Crime and mystery, Fantasy, Historical, Historical fiction, Horror, Romance, Satire, Science fiction, Cyberpunk and derivatives, Speculative, Thriller, Western".split(
         ", "
