@@ -76,7 +76,7 @@
       elevation="0"
       class="container body-container row-style"
     >
-      <b-row style="padding-top:50px">
+      <b-row style="padding-top:50px;padding:50px 10px 10px 10px">
         <b-col cols="3">
           <div
             style="display:flex;flex-direction: column;text-align:left;margin-left:10px"
@@ -117,7 +117,9 @@
               ><strong>CERTIFIED FRESH TV</strong></b-link
             >
           </div>
-          <div style="padding: 20px;background-color: #F3F3F3;margin: 20px;border-radius:4px">
+          <div
+            style="padding: 20px;background-color: #F3F3F3;margin: 20px;border-radius:4px"
+          >
             <img
               src="../icons/certified_fresh_lc.svg"
               style="width:50px; height:50px;margin-bottom:15px"
@@ -134,8 +136,118 @@
         </b-col>
         <b-col cols="9" style="padding-left:10px">
           <header-bar>
-            <span slot="header">MOVIE & TV NEWS</span>
+            <span slot="header">ALL MOVIES</span>
           </header-bar>
+          <!-- Filters -->
+          <div
+            style="border: 1px solid gray;border-radius: 4px;padding:10px;width:100%;display:flex;flex-wrap:wrap;align-items: center;"
+          >
+            <!-- Left -->
+            <div style="float:left;">
+              <!-- Search -->
+              <b-input-group style="width:95%">
+                <b-form-input
+                  v-model="filter"
+                  type="search"
+                  placeholder="Type to Search"
+                ></b-form-input>
+
+                <b-button :disabled="!filter" @click="filter = ''"
+                  >Clear</b-button
+                >
+              </b-input-group>
+            </div>
+            <!-- Filter Score -->
+            <div
+              style="float:left;color:gray;border: 1px solid #CED4DA;padding:4px;border-radius: 4px;cursor:pointer"
+            >
+              <img
+                src="../icons/certified-fresh.svg"
+                style="width:20px; height:20px"
+              />
+              <span>4%</span>
+              <span> - </span>
+              <img
+                src="../icons/certified-fresh.svg"
+                style="width:20px; height:20px"
+              />
+              <span>100% <v-icon>mdi-menu-down</v-icon></span>
+            </div>
+            <!-- Filter Genres -->
+            <div
+              style="margin-left:10px;float:left;color:gray;border: 1px solid #CED4DA;padding:4px;border-radius: 4px;cursor:pointer"
+            >
+              <span
+                >Genres: <span style="color:black"><strong>ALL</strong></span>
+                <v-icon>mdi-menu-down</v-icon></span
+              >
+            </div>
+            <!-- Options -->
+            <div
+              v-if="true === false"
+              style="padding: 5px; border-radius: 4px; border: 1px solid gray; position: absolute; top: 151px; right: 404px; background-color: white;"
+            >
+              <strong>LEMONCATER</strong>
+              <div class="app-content">
+                <vue-range-slider
+                  style="width:200px"
+                  v-model="value"
+                  :min="min"
+                  :max="max"
+                  :enable-cross="enableCross"
+                  :tooltip="false"
+                ></vue-range-slider>
+              </div>
+              <v-checkbox
+                v-model="selected"
+                color="success"
+                value="success"
+                hide-details
+              >
+                <template v-slot:label>
+                  <img
+                    src="../icons/certified_fresh_lc.svg"
+                    style="width:20px;height:20px;"
+                  /><span>Certified Fresh Only</span>
+                </template>
+              </v-checkbox>
+            </div>
+            <div
+              v-if="true === false"
+              style="padding: 10px; border-radius: 4px; border: 1px solid gray; position: absolute; top: 151px; right: 171px; background-color: white;"
+            >
+              <div v-for="item in genres" :key="item">
+                <v-checkbox
+                  v-model="selected"
+                  color="success"
+                  :value="item"
+                  :label="item"
+                  hide-details
+                >
+                </v-checkbox>
+              </div>
+            </div>
+            <!-- Right -->
+            <div
+              style="float:right;margin-left:auto;color:gray;border: 1px solid #CED4DA;padding:4px;border-radius: 4px;cursor:pointer"
+            >
+              <span
+                >Sort by: <strong>Release Date</strong>
+                <v-icon>mdi-menu-down</v-icon></span
+              >
+            </div>
+            <div
+              v-if="true === false"
+              style="border-radius: 4px; border: 1px solid gray; position: absolute; top: 151px; right: 10px; background-color: white; width: 193px;"
+            >
+              <div class="sort-button">Release Date</div>
+              <div class="sort-button">Lemoncater</div>
+            </div>
+          </div>
+          <!-- CONTENT BODY -->
+          <div>
+            
+          </div>
         </b-col>
       </b-row>
     </v-card>
@@ -153,6 +265,8 @@
 </template>
 
 <script>
+import "vue-range-component/dist/vue-range-slider.css";
+import VueRangeSlider from "vue-range-component";
 // import getAllUsers from "@/apollo/queries/getAllUsers.gql";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
@@ -164,7 +278,8 @@ export default {
     Navbar,
     PageFooter,
     HeaderBar,
-    NewsCard
+    NewsCard,
+    VueRangeSlider
   },
   computed: {
     tags() {
@@ -173,11 +288,23 @@ export default {
   },
   data() {
     return {
+      selected: [],
+      genres: "Action, Adventure, Comedy, Crime and mystery, Fantasy, Historical, Historical fiction, Horror, Romance, Satire, Science fiction, Cyberpunk and derivatives, Speculative, Thriller, Western".split(
+        ", "
+      ),
+      status: false,
+      value: [0, 100],
+      filter: "",
       tagsString:
         "gameofthrones FirstLook werewolf Spectrum Originals DC Comics GLAAD CBS All Access laika anthology adaptation GIFs TNT hist Tarantino 007 TCM ghosts justice league 2016 El Rey zombie TCA Winter 2020 Super Bowl Amazon Studios series MCU Disney The Academy festival Endgame Film Festival Best and Worst NBC IFC Films parents Emmy Nominations stop motion jurassic park TV renewals Teen Turner Classic Movies criterion Toys BBC One finale Food Network popular documentary A24 IFC Trivia kids Pop stand-up comedy science fiction cats Holidays cancelled television book adaptation richard e. Grant child's play 2021 Disney Channel The CW Dark Horse Comics Crunchyroll directors superman Legendary Tumblr comiccon Television Critics Association binge worst movies facebook Paramount Network Action boxoffice mission: impossible Mary Poppins Returns Reality disaster NYCC cancelled APB Creative Arts Emmys spain social media Universal Calendar BAFTA E3 Premiere Dates Exclusive Video australia period drama composers The Arrangement hispanic SundanceTV children's TV medical drama 72 Emmy Awards Classic Film Fall TV San Diego Comic-Con indie singing competition cults unscripted FX rotten movies we love know your critic festivals worst christmas movies travel PlayStation award winner reviews DGA Comic Book video on demand WGN boxing Writers Guild of America Sneak Peek Set visit FOX strong female leads Box Office Avengers hollywood canceled TV shows MSNBC ITV The Walking Dead 20th Century Fox universal monsters a nightmare on elm street asian-american Awards Tour Discovery Channel women Fox News Logo Fantasy Watching Series E! YA toronto Baby Yoda Tubi 93rd Oscars Ghostbusters dramedy cancelled TV shows Tomatazos sequels Warner Bros. high school Oscars marvel cinematic universe Opinion diversity Rock japanese nfl Amazon Prime Video Spring TV kaiju The Witch war Countdown TV One Family zombies joker news tv talk aapi LGBT crime Lifetime Christmas movies Winners emmy awards live action revenge DC streaming service cancelled TV series 2019 Masterpiece dceu godzilla TBS mockumentary Academy Awards teaser Anna Paquin Hulu dogs Apple TV Red Carpet docudrama twilight police drama game show Valentine's Day Reality Competition Amazon Prime Animation blaxploitation pirates of the caribbean spy thriller talk show comedies TruTV Black History Month elevated horror Acorn TV movie historical drama vampires casting Television Academy video new star wars movies TCA Esquire Sci-Fi Crackle stoner serial killer 78th Annual Golden Globe Awards SXSW doctor who VICE Superheroes Cannes foreign 21st Century Fox YouTube adventure king kong golden globes Nickelodeon Schedule scary movies Photos Starz Certified Fresh based on movie heist movie comic thriller spanish language chucky Emmys Black Mirror Martial Arts new york Music crime drama james bond Heroines Columbia Pictures supernatural what to watch YouTube Red Disney Plus psychological thriller Trailer 4/20 Elton John GoT Cosplay See It Skip It ratings ESPN First Reviews Netflix Christmas movies TLC all-time Comedy obituary AMC Musical Ovation USA Network Comedy Central nbcuniversal sitcom Brie Larson Apple TV Plus critics renewed TV shows RT History VH1 PBS Biopics Nominations 2015 Funimation 2020 green book Adult Swim X-Men psycho Summer crime thriller MTV black politics latino robots rt archives Quiz Star Wars lord of the rings Character Guide Western mutant ABC Family President Star Trek Disney+ Disney Plus natural history french ViacomCBS Travel Channel Freeform Britbox BBC America Spike RT21 theme song indiana jones CNN OWN south america Holiday fresh superhero nature anime Women's History Month transformers Lucasfilm Nat Geo hidden camera Chernobyl classics versus blockbuster sequel Lifetime kong Peacock Marvel spanish discovery franchise cars Polls and Games Binge Guide streaming Hear Us Out dark Pacific Islander Podcast History Unbreakable Kimmy Schmidt Marathons documentaries cooking PaleyFest Rocketman spider-man Hallmark Christmas movies razzies die hard comics cartoon animated Pop TV Shudder FXX football canceled Mudbound Video Games Syfy true crime Apple TV+ witnail screen actors guild jamie lee curtis TIFF Pixar Sundance TV name the review sports Pride Month slashers Year in Review ABC Signature Drama 99% New York Comic Con YouTube Premium reboot American Society of Cinematographers spinoff DC Universe Fox Searchlight dc TCA 2017 Amazon OneApp italian golden globe awards Showtime DirecTV biography HBO docuseries Chilling Adventures of Sabrina Sundance Paramount Thanksgiving television concert best Walt Disney Pictures BET fast and furious Netflix 71st Emmy Awards remakes Winter TV CMT The Purge Pirates monster movies Extras movies venice TCA Awards scene in color deadpool National Geographic Mary Tyler Moore Pet Sematary 2017 HBO Max cops ID 2018 Disney streaming service Christmas sag awards scorecard political drama WarnerMedia Broadway Country 45 Election prank Captain marvel breaking bad dragons Grammys Marvel Television Shondaland miniseries Paramount Plus Sony Pictures blockbusters Sundance Now 24 frames romance Mindy Kaling FX on Hulu target Arrowverse BET Awards HBO Go Comics on TV quibi Lionsgate free movies Vudu Ellie Kemper Alien Stephen King Horror international USA VOD batman Superheroe Hallmark films technology screenings zero dark thirty ABC archives LGBTQ rotten satire halloween tv independent trailers Trophy Talk harry potter Epix rom-coms comic books saw Rocky cinemax The Walt Disney Company Song of Ice and Fire Infographic Marvel Studios halloween Mary poppins crossover A&E Cartoon Network BBC aliens Interview toy story Kids & Family CW Seed SDCC book Bravo Mystery Film Turner telelvision space Awards CBS TV Land romantic comedy Musicals Rom-Com"
     };
+  },
+  created() {
+    this.min = 1;
+    this.max = 99;
+    this.enableCross = false;
+    this.tooltipMerge = false;
   }
-
   // apollo: {
   //   users: {
   //     query: getAllUsers,
@@ -189,6 +316,18 @@ export default {
 };
 </script>
 <style scoped>
+.sort-button {
+  cursor: pointer;
+  padding: 5px;
+  width: 100%;
+}
+.sort-button:hover {
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+  background-color: #3976dc;
+  color: white;
+}
 .tab-link-active {
   text-decoration: none;
   padding: 10px 20px;
@@ -280,5 +419,8 @@ export default {
   border: none;
   max-width: 260px;
   margin: 10px;
+}
+.app-content {
+  padding: 10px 10px;
 }
 </style>

@@ -50,6 +50,14 @@ export default new Router({
       component: Movies
     },
     {
+      path: "/m/:slug",
+      name: "MoviesTrending",
+      meta: {
+        requiresAuth: false
+      },
+      component: Movies
+    },
+    {
       path: "/tv/:slug",
       name: "TVShow",
       meta: {
