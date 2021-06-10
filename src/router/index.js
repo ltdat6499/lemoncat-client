@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Movie from "@/views/Movie";
+import Movies from "@/views/Movies";
 import TvShow from "@/views/TvShow";
 import TvShowSeason from "@/views/TvShowSeason";
 import TvShowEpisode from "@/views/TvShowEpisode";
@@ -39,6 +40,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Movie
+    },
+    {
+      path: "/m",
+      name: "Movies",
+      meta: {
+        requiresAuth: false
+      },
+      component: Movies
     },
     {
       path: "/tv/:slug",
