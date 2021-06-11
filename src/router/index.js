@@ -10,6 +10,8 @@ import TvShowEpisode from "@/views/TvShowEpisode";
 import Reviews from "@/views/Reviews";
 import Post from "@/views/Post";
 import Posts from "@/views/Posts";
+import Tops from "@/views/Tops";
+
 
 
 Vue.use(Router);
@@ -112,6 +114,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Posts
+    },
+    {
+      path: "/top",
+      name: "Top",
+      meta: {
+        requiresAuth: false
+      },
+      component: Tops
     }
   ]
 });

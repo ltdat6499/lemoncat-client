@@ -32,10 +32,95 @@
                 >NEW TV TONIGHT</span
               >
               <div>
-                <div
-                  v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-                  :key="i"
-                >
+                <div>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
                   <p style="display: flex;margin-bottom:5px">
                     <img
                       src="../../icons/certified-fresh.svg"
@@ -61,7 +146,79 @@
                 >MOST POPULAR TV ON LC</span
               >
               <div>
-                <div v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i">
+                <div>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <img
+                      src="../../icons/certified-fresh.svg"
+                      style="height:20px;width:20px;margin-right:5px"
+                    />
+                    <span style="margin-right:20px">92%</span>
+                    <span>Sample name ...</span>
+                  </p>
                   <p style="display: flex;margin-bottom:5px">
                     <img
                       src="../../icons/certified-fresh.svg"
@@ -106,7 +263,34 @@
                 >EPISODIC REVIEWS</span
               >
               <div>
-                <div v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i">
+                <div>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
+                  <p style="display: flex;margin-bottom:5px">
+                    <span>WandaVision: Season 5</span>
+                  </p>
                   <p style="display: flex;margin-bottom:5px">
                     <span>WandaVision: Season 5</span>
                   </p>
@@ -123,8 +307,7 @@
               >
               <div style="display:flex;">
                 <fresh-pick-card style="margin-right:40px"></fresh-pick-card>
-                <fresh-pick-card style="margin-right:40px"></fresh-pick-card
-                >
+                <fresh-pick-card style="margin-right:40px"></fresh-pick-card>
               </div>
             </li>
           </ul>

@@ -33,7 +33,88 @@
         <span style="display: flex;margin-top:15px;margin-bottom:10px"
           ><strong>TOP BOX OFFICE</strong></span
         >
-        <div v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i">
+        <div>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
+          <p style="display: flex;margin-bottom:5px">
+            <img
+              src="../../../icons/certified-fresh.svg"
+              style="height:20px;width:20px;margin-right:5px"
+            />
+            <span style="margin-right:30px"><strong>92%</strong></span>
+            <span style="margin-right:30px">Sample name ...</span>
+            <span>JUN 04</span>
+          </p>
           <p style="display: flex;margin-bottom:5px">
             <img
               src="../../../icons/certified-fresh.svg"
