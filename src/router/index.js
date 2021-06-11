@@ -11,7 +11,7 @@ import Reviews from "@/views/Reviews";
 import Post from "@/views/Post";
 import Posts from "@/views/Posts";
 import Tops from "@/views/Tops";
-
+import DetailTop from "@/views/DetailTop";
 
 
 Vue.use(Router);
@@ -122,6 +122,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Tops
+    },
+    {
+      path: "/top/detail",
+      name: "DetailTop",
+      meta: {
+        requiresAuth: false
+      },
+      component: DetailTop
     }
   ]
 });
