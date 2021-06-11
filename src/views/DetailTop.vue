@@ -82,7 +82,7 @@
             <span slot="header">TOP 100 FLIMS OF 1995</span>
           </header-bar>
 
-          <div style="display:flex;align-items: center;margin-bottom: 20px">
+          <div style="display:flex;align-items: center;margin-bottom: 20px;margin-top:20px">
             <img
               src="../assets/img/oscal-chibi.jpg"
               style="width:115px;height:115px;margin-right:10px"
