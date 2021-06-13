@@ -92,7 +92,7 @@ export default new Router({
       component: Reviews
     },
     {
-      path: "/post/:slug/",
+      path: "/post/:slug",
       name: "Post",
       meta: {
         requiresAuth: false
@@ -100,7 +100,7 @@ export default new Router({
       component: Post
     },
     {
-      path: "/posts",
+      path: "/post",
       name: "Posts",
       meta: {
         requiresAuth: false
