@@ -12,7 +12,7 @@ import Post from "@/views/Post";
 import Posts from "@/views/Posts";
 import Tops from "@/views/Tops";
 import DetailTop from "@/views/DetailTop";
-
+import User from "@/views/User";
 
 Vue.use(Router);
 
@@ -46,14 +46,6 @@ export default new Router({
     {
       path: "/m",
       name: "Movies",
-      meta: {
-        requiresAuth: false
-      },
-      component: Movies
-    },
-    {
-      path: "/m/:slug",
-      name: "MoviesTrending",
       meta: {
         requiresAuth: false
       },
@@ -130,6 +122,14 @@ export default new Router({
         requiresAuth: false
       },
       component: DetailTop
+    },
+    {
+      path: "/user/:slug",
+      name: "User",
+      meta: {
+        requiresAuth: false
+      },
+      component: User
     }
   ]
 });

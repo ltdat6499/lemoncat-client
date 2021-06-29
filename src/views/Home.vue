@@ -73,8 +73,8 @@
         <b-col lg="6">
           <carousel-home style="width:100%" />
         </b-col>
-        <b-col lg="3"><news-home style="width:100%"/></b-col>
-        <b-col lg="3"><news-home style="width:100%"/></b-col>
+        <b-col lg="3"><news-home :collection="'Critics Consensus'" style="width:100%"/></b-col>
+        <b-col lg="3"><news-home :collection="'Weekend Box Office'" style="width:100%"/></b-col>
       </b-row>
     </v-card>
     <v-card

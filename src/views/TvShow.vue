@@ -172,7 +172,7 @@
                     >
                       <img
                         style="width:45px;height:45px"
-                        src="../icons/fresh-score-user.svg"
+                        src="../icons/fresh-score-user.png"
                       />
                       <span
                         class="rating"
@@ -298,7 +298,7 @@
                         <div style="display: flex;align-items: center;">
                           <img
                             style="margin-top:20px;width:45px;height:45px"
-                            src="../icons/fresh-score-user.svg"
+                            src="../icons/fresh-score-user.png"
                           />
                           <h1 style="margin-top:20px;margin-right:30px">
                             86%

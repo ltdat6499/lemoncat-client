@@ -6,59 +6,69 @@
     height="300"
     hide-delimiter-background
   >
-    <v-carousel-item v-for="(slide, i) in slides" :key="i">
-      <v-sheet
-        style="display:flex;justify-content:center;align-items: center;"
-        height="100%"
-        tile
-      >
-        <v-row
-          style="z-index:999;position: absolute;display:flex;align-items: flex-end;width:100%"
-          class="fill-height"
+    <v-carousel-item v-for="item in posts" :key="item.id">
+      <b-link :href="'/post/' + item.slug">
+        <v-sheet
+          style="display:flex;justify-content:center;align-items: center;"
+          height="100%"
+          tile
         >
-          <div
-            style="overflow: hidden;display:block;border-left: 5px solid #24BA3A;margin-bottom:45px;background-color:black;width:100%;height:30%;margin-left:10%;margin-right:10%;background-color: rgba(0,0,0,.5);color:white;padding:10px"
+          <v-row
+            style="z-index:999;position: absolute;display:flex;align-items: flex-end;width:100%"
+            class="fill-height"
           >
             <div
-              style="display: flex;justify-content:flex-start;align-items: flex-start;flex-direction:column;"
+              style="overflow: hidden;display:block;border-left: 5px solid #24BA3A;margin-bottom:45px;background-color:black;width:100%;height:30%;margin-left:10%;margin-right:10%;background-color: rgba(0,0,0,.5);color:white;padding:10px"
             >
-              <h5 style="text-align: left;">
-                <strong
-                  >John Krasinski, Emily Blunt Tap Into 'Primal Instincts' For
-                  Quiet Place</strong
-                >
-              </h5>
-              <p>
-                Plus, Krasinski reveals how he kept up terror in anticipated
-                sequel
-              </p>
+              <div
+                style="display: flex;justify-content:flex-start;align-items: flex-start;flex-direction:column;"
+              >
+                <h5 style="text-align: left;">
+                  <strong>{{ item.title }}</strong>
+                </h5>
+                <p>
+                  {{ item.sideTitle.substring(0, 50) + "..." }}
+                </p>
+              </div>
             </div>
-          </div>
-        </v-row>
-        <v-img
-          :lazy-src="require('../../assets/img/sample-news.jpg')"
-          :src="require('../../assets/img/sample-news.jpg')"
-          height="100%"
-          width="100%"
-          style="max-height:300px"
-        ></v-img>
-      </v-sheet>
+          </v-row>
+          <v-img
+            :src="item.data.previewPoster"
+            height="100%"
+            width="100%"
+            style="max-height:300px"
+          ></v-img>
+        </v-sheet>
+      </b-link>
     </v-carousel-item>
   </v-carousel>
 </template>
 <script>
+import getNews from "@/apollo/queries/getPosts.gql";
 export default {
   data() {
     return {
-      colors: [
-        "indigo",
-        "warning",
-        "pink darken-2",
-        "red lighten-1",
-        "deep-purple accent-4"
-      ],
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+      posts: []
     };
+  },
+  apollo: {
+    posts: {
+      query: getNews,
+      variables() {
+        return {
+          page: 1,
+          size: 5,
+          type: "news",
+          collection: "Weekly Ketchup",
+          sortKey: "DATE"
+        };
+      },
+      result(result) {
+        if (result && result.length) {
+          this.posts = result.data.posts;
+        }
+      }
+    }
   }
 };
 </script>

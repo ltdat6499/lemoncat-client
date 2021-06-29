@@ -27,7 +27,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -44,7 +44,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -61,7 +61,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -78,7 +78,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -95,7 +95,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -112,7 +112,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -129,7 +129,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -146,7 +146,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -163,7 +163,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>
@@ -180,7 +180,7 @@
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
               <img
-                src="../../icons/fresh-score.svg"
+                src="../../icons/fresh-score.png"
                 style="height:20px;width:20px"
               />
               <strong style="color:black">75%</strong>

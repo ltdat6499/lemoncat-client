@@ -19,7 +19,11 @@
       </div>
     </div>
     <div style="margin:0px 20px">
-      <carousel :paginationEnabled="false" :per-page="6" :navigate-to="someLocalProperty">
+      <carousel
+        :paginationEnabled="false"
+        :per-page="6"
+        :navigate-to="someLocalProperty"
+      >
         <slide>
           <movie-pick-card></movie-pick-card>
         </slide>
@@ -38,6 +42,7 @@
 </template>
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import getFlims from "@/apollo/queries/getFlims.gql";
 import MoviePickCard from "@/components/MoviePickCard";
 
 export default {
@@ -45,6 +50,39 @@ export default {
     Carousel,
     Slide,
     MoviePickCard
+  },
+  props: {
+    sortKey: {
+      type: String,
+      default: "DATE"
+    }
+  },
+  data() {
+    return {
+      flims: []
+    };
+  },
+  computed: {
+    thisSortKey() {
+      return this.sortKey;
+    }
+  },
+  apollo: {
+    flims: {
+      query: getFlims,
+      variables() {
+        return {
+          page: 1,
+          size: 10,
+          type: "movie",
+          sortKey: this.thisSortKey
+        };
+      },
+      result(result) {
+        this.flims = result.data.flims;
+        console.log("🚀 ~ result ~ flims", this.flims);
+      }
+    }
   }
 };
 </script>

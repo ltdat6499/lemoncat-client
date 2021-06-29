@@ -1,0 +1,20 @@
+query getFlims($page: Int, $size: Int, $type: String, $sortKey: FlimSortKey) {
+  flims(page: $page, size: $size, type: $type, sortKey: $sortKey) {
+    id
+    userScore
+    lemonScore
+    info {
+      name
+      poster
+    }
+    data {
+      rottenTomatoes {
+        audienceScore
+        tomatometerScore
+      }
+    }
+    slug
+    createdAt
+    updatedAt
+  }
+}

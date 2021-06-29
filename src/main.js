@@ -32,7 +32,7 @@ Vue.component("swatches", swatches);
 Vue.use(VueApollo);
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: "http://localhost:3841/admin-graphql"
+  uri: "http://localhost:3841/graphql"
 });
 
 // Cache implementation

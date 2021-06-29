@@ -1,0 +1,32 @@
+query getNews(
+  $page: Int
+  $size: Int
+  $type: String
+  $collection: String
+  $sortKey: PostSortKey
+) {
+  posts(
+    page: $page
+    size: $size
+    type: $type
+    collection: $collection
+    sortKey: $sortKey
+  ) {
+    id
+    user {
+      id
+    }
+    sideTitle
+    title
+    rawContent
+    data {
+      section
+      previewPoster
+    }
+    content
+    tags
+    slug
+    createdAt
+    updatedAt
+  }
+}

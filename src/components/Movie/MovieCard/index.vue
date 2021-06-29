@@ -21,7 +21,7 @@ align-items: center;flex-direction: column"
         </div>
         <div style="margin-top:5px;margin-left:10px">
           <img
-            src="../../../icons/fresh-score-user.svg"
+            src="../../../icons/fresh-score-user.png"
             style="height:20px;width:20px"
           />
           <span style="color:black"
