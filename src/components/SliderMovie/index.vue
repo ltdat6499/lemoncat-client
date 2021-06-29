@@ -24,18 +24,14 @@
         :per-page="6"
         :navigate-to="someLocalProperty"
       >
-        <slide>
-          <movie-pick-card></movie-pick-card>
+        <slide v-for="item in flims" :key="item.id">
+          <movie-pick-card
+            :url="'/m/' + item.slug"
+            :src="item.info.poster"
+            :name="item.info.name"
+            :score="item.lemonScore"
+          ></movie-pick-card>
         </slide>
-        <slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide
-        ><slide> <movie-pick-card></movie-pick-card> </slide>
       </carousel>
     </div>
   </div>
