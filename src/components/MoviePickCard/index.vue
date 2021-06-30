@@ -8,7 +8,9 @@ align-items: center;flex-direction: column"
       <img :src="thisSrc" style="height:250px;width:165px" />
       <div style="margin-top:5px">
         <img :src="thisIcon" style="height:20px;width:20px" />
-        <strong style="color:black">{{ thisScore }}%</strong>
+        <strong style="color:black">{{
+          thisScore === -1 ? "_ _" : thisScore + "%"
+        }}</strong>
       </div>
       <span style="margin-top:5px;color:black">{{ thisName }}</span>
     </b-link>
@@ -39,12 +41,13 @@ export default {
       return this.url;
     },
     thisIcon() {
-      if (this.score >= 80) return "https://live.staticflickr.com/65535/51277934541_948999dc8e_o.png";
+      if (this.score >= 80)
+        return "https://live.staticflickr.com/65535/51277934541_948999dc8e_o.png";
       else if (this.score >= 60 && this.score < 80)
         return "https://live.staticflickr.com/65535/51278953905_faf87b0d90_o.png";
       else if (this.score < 60 && this.score >= 0)
         return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
-      else return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+      return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
     },
     thisSrc() {
       return this.src;
@@ -53,6 +56,7 @@ export default {
       return this.score;
     },
     thisName() {
+      if (this.name.length > 25) return this.name.substring(0, 15) + " ...";
       return this.name;
     }
   }

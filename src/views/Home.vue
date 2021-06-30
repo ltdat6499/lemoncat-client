@@ -73,8 +73,12 @@
         <b-col lg="6">
           <carousel-home style="width:100%" />
         </b-col>
-        <b-col lg="3"><news-home :collection="'Critics Consensus'" style="width:100%"/></b-col>
-        <b-col lg="3"><news-home :collection="'Weekend Box Office'" style="width:100%"/></b-col>
+        <b-col lg="3"
+          ><news-home :collection="'Critics Consensus'" style="width:100%"
+        /></b-col>
+        <b-col lg="3"
+          ><news-home :collection="'Weekend Box Office'" style="width:100%"
+        /></b-col>
       </b-row>
     </v-card>
     <v-card
@@ -104,22 +108,19 @@
           ></b-col
         >
       </b-row>
-      <slider-movie>
+      <slider-movie sortKey="POPULARINTHEATERS">
         <span slot="header">POPULAR IN THEATERS </span>
       </slider-movie>
-      <slider-movie>
+      <slider-movie sortKey="ZOMBIETAG">
         <span slot="header">ESSENTIAL ZOMBIE MOVIES </span>
       </slider-movie>
-      <slider-movie>
-        <span slot="header">BEST SERIES ON NETFLIX </span>
+      <slider-movie sortKey="NETFLIX">
+        <span slot="header">BEST MOVIES ON NETFLIX </span>
       </slider-movie>
-      <slider-movie>
+      <slider-movie sortKey="BLOCKBUSTER">
         <span slot="header">EVERY '90S BLOCKBUSTER MOVIE RANKED </span>
       </slider-movie>
-      <slider-movie>
-        <span slot="header">BEST ASIAN-AMERICAN MOVIES </span>
-      </slider-movie>
-      <slider-movie>
+      <slider-movie sortKey="NEWLYCERTIFIEDFRESH">
         <span slot="header">NEWLY CERTIFIED FRESH CLASSICS </span>
       </slider-movie>
       <news-preview>
