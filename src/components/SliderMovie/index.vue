@@ -76,7 +76,6 @@ export default {
       },
       result(result) {
         this.flims = result.data.flims;
-        console.log("🚀 ~ result ~ flims", this.flims);
       }
     }
   }

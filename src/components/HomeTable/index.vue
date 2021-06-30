@@ -19,176 +19,85 @@
       </div>
     </div>
     <div style="margin:0px 20px">
-      <div>
-        <b-link
+      <div v-for="item in flims" :key="item.id">
+        <b-link :href="'/m/' + item.slug"
           style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
         >
-          <span>Army Of The Dead</span>
+          <span>{{ item.info.name }}</span>
           <span style="margin-left:auto;display:flex;align-items: center">
             <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
+              <img :src="item.icon" style="height:20px;width:20px" />
+              <strong style="color:black">{{
+                item.lemonScore === -1 ? "_ _ _" : item.lemonScore + "%"
+              }}</strong>
             </div>
           </span>
         </b-link>
+        <hr />
       </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
-      <div>
-        <b-link
-          style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
-        >
-          <span>Army Of The Dead</span>
-          <span style="margin-left:auto;display:flex;align-items: center">
-            <div>
-              <img
-                src="../../icons/fresh-score.png"
-                style="height:20px;width:20px"
-              />
-              <strong style="color:black">75%</strong>
-            </div>
-          </span>
-        </b-link>
-      </div>
-      <hr />
     </div>
   </div>
 </template>
+<script>
+import getFlims from "@/apollo/queries/getFlims.gql";
+export default {
+  props: {
+    sortKey: {
+      type: String,
+      default: "DATE"
+    }
+  },
+  data() {
+    return {
+      flims: []
+      // thisIcon() {
+      //   if (this.score >= 80)
+      //     return "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+      //   else if (this.score >= 60 && this.score < 80)
+      //     return "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+      //   else if (this.score < 60 && this.score >= 0)
+      //     return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+      //   return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+      // }
+    };
+  },
+  computed: {
+    thisSortKey() {
+      return this.sortKey;
+    }
+  },
+  apollo: {
+    flims: {
+      query: getFlims,
+      variables() {
+        return {
+          page: 1,
+          size: 10,
+          type: "movie",
+          sortKey: this.thisSortKey
+        };
+      },
+      result(result) {
+        this.flims = result.data.flims;
+        this.flims = this.flims.map(item => {
+          if (item.info.name.length > 30)
+            item.info.name = item.info.name.substring(0, 30) + " ...";
+          if (item.lemonScore >= 80)
+            item.icon =
+              "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+          else if (item.lemonScore >= 60 && item.lemonScore < 80)
+            item.icon =
+              "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+          else if (item.lemonScore < 60 && item.lemonScore >= 0)
+            item.icon =
+              "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+          else
+            item.icon =
+              "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+          return item;
+        });
+      }
+    }
+  }
+};
+</script>

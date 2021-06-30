@@ -42,9 +42,9 @@ export default {
     },
     thisIcon() {
       if (this.score >= 80)
-        return "https://live.staticflickr.com/65535/51277934541_948999dc8e_o.png";
+        return "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
       else if (this.score >= 60 && this.score < 80)
-        return "https://live.staticflickr.com/65535/51278953905_faf87b0d90_o.png";
+        return "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
       else if (this.score < 60 && this.score >= 0)
         return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
       return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";

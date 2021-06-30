@@ -93,18 +93,18 @@
       </slider-movie>
       <b-row>
         <b-col
-          ><home-table>
+          ><home-table sortKey="POPULARSTREAMINGMOVIES">
             <span slot="header">POPULAR STREAMING MOVIES </span>
           </home-table></b-col
         >
         <b-col
-          ><home-table>
-            <span slot="header">MOST POPULAR TV ON LC </span></home-table
+          ><home-table sortKey="MOSTPOPULARMOVIESONLC">
+            <span slot="header">MOST POPULAR MOVIES ON LC </span></home-table
           ></b-col
         >
         <b-col
-          ><home-table>
-            <span slot="header">NEW TV THIS WEEK </span></home-table
+          ><home-table sortKey="NEWMOVIESTHISWEEK">
+            <span slot="header">NEW MOVIES THIS WEEK </span></home-table
           ></b-col
         >
       </b-row>
@@ -113,6 +113,9 @@
       </slider-movie>
       <slider-movie sortKey="ZOMBIETAG">
         <span slot="header">ESSENTIAL ZOMBIE MOVIES </span>
+      </slider-movie>
+      <slider-movie sortKey="SUPERHEROTAG">
+        <span slot="header">ESSENTIAL SUPER HERO MOVIES </span>
       </slider-movie>
       <slider-movie sortKey="NETFLIX">
         <span slot="header">BEST MOVIES ON NETFLIX </span>
