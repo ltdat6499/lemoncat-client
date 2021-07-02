@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.flim">
     <!-- Header -->
     <navbar
       style="z-index:9999"
@@ -92,7 +92,7 @@
                 style="border-radius:4px"
                 class="shadow-box"
                 height="300"
-                :src="require('../assets/img/horizontal-poster.jpg')"
+                :src="flim.data.trailerPhoto"
               ></v-parallax>
               <b-modal
                 size="xl"
@@ -105,7 +105,7 @@
                   style="width:100%;height:500px;"
                   type="iframe"
                   aspect="16by9"
-                  src="https://www.youtube-nocookie.com/embed/ju3dY0V6Wb0"
+                  :src="flim.info.trailer"
                   allowfullscreen
                 ></b-embed>
               </b-modal>
@@ -124,21 +124,23 @@
               <div>
                 <img
                   style="width: 145px;height:210px;border-radius:4px"
-                  src="../assets/img/sample-poster.png"
+                  :src="flim.info.poster"
                 />
               </div>
               <div
                 style="margin-left:10px;width:100%;height: 210px;background-color:#F3F3F3;border-radius:4px"
               >
                 <h4 style="margin-top:30px">
-                  <strong>THE CONJURING</strong>
+                  <strong>{{ flim.info.name.toUpperCase() }}</strong>
                 </h4>
                 <h6>
                   <span
                     style="border: 1px solid #CCCFD1;border-radius:3px;padding-top:2px;padding-left:2px;padding-right:2px;"
-                    >R+</span
+                    >{{ flim.info.rating }}</span
                   >
-                  2013, Horror/Mystery & thriller, 1h 51m
+                  {{ this.flim.createdAt.split("-")[0] }},
+                  {{ this.flim.info.genres.join("/") }},
+                  {{ flim.info.runtime }}
                 </h6>
                 <div
                   style="display:flex;justify-content:center;margin-top:20px;height:100%"
@@ -150,19 +152,19 @@
                     >
                       <img
                         style="width:45px;height:45px"
-                        src="../icons/certified_fresh_lc.svg"
+                        :src="flim.lemonIcon"
                       />
                       <span
                         class="rating"
                         style="font-size:30px;margin-left:5px"
                       >
-                        <strong>86%</strong>
+                        <strong>{{ flim.lemonScore }}</strong>
                       </span>
                     </b-link>
                     <span><strong>LEMONCATER</strong></span
                     ><br />
                     <span style="color:#4f86d9;font-size:12px;align-self:right"
-                      >223 Reviews</span
+                      >{{ flim.lemonReviewCount }} Reviews</span
                     >
                   </div>
                   <div>
@@ -172,19 +174,19 @@
                     >
                       <img
                         style="width:45px;height:45px"
-                        src="../icons/fresh-score-user.png"
+                        :src="flim.userIcon"
                       />
                       <span
                         class="rating"
                         style="font-size:30px;margin-left:5px"
                       >
-                        <strong>35%</strong>
+                        <strong>{{ flim.userScore }}</strong>
                       </span>
                     </b-link>
                     <span><strong>AUDIENCE SCORE</strong></span
                     ><br />
                     <span style="color:#4f86d9;font-size:12px;align-self:right"
-                      >100,000+ Ratings</span
+                      >{{ flim.userReviewCount }} Ratings</span
                     >
                   </div>
                   <b-modal
@@ -229,10 +231,10 @@
                           <div style="display: flex;align-items: center;">
                             <img
                               style="margin-top:20px;width:45px;height:45px"
-                              src="../icons/certified_fresh_lc.svg"
+                              :src="flim.lemonIcon"
                             />
                             <h1 style="margin-top:20px;margin-right:30px">
-                              86%
+                              {{ flim.lemonScore }}
                             </h1>
                           </div>
                           <span style="color:#707176">223 Reviews</span
@@ -298,13 +300,14 @@
                         <div style="display: flex;align-items: center;">
                           <img
                             style="margin-top:20px;width:45px;height:45px"
-                            src="../icons/fresh-score-user.png"
+                            :src="flim.userIcon"
                           />
                           <h1 style="margin-top:20px;margin-right:30px">
-                            86%
+                            {{ flim.userScore }}
                           </h1>
                         </div>
-                        <span style="color:#707176">100,000+ Ratings</span
+                        <span style="color:#707176"
+                          >{{ flim.userReviewCount }} Ratings</span
                         ><br /><br />
                         <div style="dislay:flex;align-items: center;">
                           <b-form-rating
@@ -341,18 +344,14 @@
               <div
                 style="padding-left:5px;padding-right:5px;display:flex;flex-direction: column;text-align: left;"
               >
-                <h5><strong>CRITICS CONSENSUS</strong></h5>
-                <p>
-                  Well-crafted and gleefully creepy, The Conjuring ratchets up
-                  dread through a series of effective old-school scares. Read
-                  critic reviews
-                </p>
-                <h5><strong>AUDIENCE SAYS</strong></h5>
-                <p>
-                  Almost as scary and intense as the original, A Quiet Place
-                  Part II will leave audiences on the edge of their seats -- and
-                  waiting for Part III. Read audience reviews
-                </p>
+                <span v-for="item in flim.whatToKnows" :key="item.title">
+                  <h5>
+                    <strong>{{ item.title.toUpperCase() }}</strong>
+                  </h5>
+                  <p>
+                    {{ item.content }}
+                  </p>
+                </span>
               </div>
             </div></b-row
           >
@@ -382,20 +381,14 @@
             </div></b-row
           >
           <b-row
-            style="padding-top:20px;padding-bottom:20px;padding-left:10px;padding-right:10px;width:100%;"
+            style="padding-top:20px;padding-bottom:20px;padding-left:10px;padding-right:10px;width:100%;display:flex;flex-wrap: wrap;justify-content:space-around"
           >
-            <div
-              style="display:flex;justify-content:space-between;margin-bottom:15px"
-            >
-              <streaming-card></streaming-card>
-              <streaming-card></streaming-card>
-              <streaming-card></streaming-card>
-            </div>
-            <div style="display:flex;justify-content:space-between">
-              <streaming-card></streaming-card>
-              <streaming-card></streaming-card>
-              <streaming-card></streaming-card>
-            </div>
+            <streaming-card
+              v-for="item in flim.streamings"
+              :key="item"
+              :name="item"
+              style="margin-bottom:15px"
+            ></streaming-card>
           </b-row>
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
@@ -433,14 +426,23 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">THE CONJURING PHOTOS</span>
+                <span slot="header"
+                  >{{ flim.info.name.toUpperCase() }} PHOTOS</span
+                >
               </header-bar>
             </div></b-row
           >
           <b-row
             style="padding-top:20px;padding-left:10px;padding-right:10px;width:100%;"
           >
-            <slider-image></slider-image>
+            <slider-image
+              :images="
+                flim.photos.map(item => ({
+                  index: flim.photos.indexOf(item),
+                  src: item
+                }))
+              "
+            ></slider-image>
           </b-row>
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
@@ -455,15 +457,7 @@
                 style="padding-left:5px;padding-right:5px;display:flex;flex-direction: column;text-align: left;"
               >
                 <p style="text-align: justify">
-                  In 1970, paranormal investigators and demonologists Lorraine
-                  (Vera Farmiga) and Ed (Patrick Wilson) Warren are summoned to
-                  the home of Carolyn (Lili Taylor) and Roger (Ron Livingston)
-                  Perron. The Perrons and their five daughters have recently
-                  moved into a secluded farmhouse, where a supernatural presence
-                  has made itself known. Though the manifestations are
-                  relatively benign at first, events soon escalate in horrifying
-                  fashion, especially after the Warrens discover the house's
-                  macabre history.
+                  {{ flim.info.summary }}
                 </p>
                 <div style="font-size:15px">
                   <b-row>
@@ -473,7 +467,7 @@
                     >
                       Rating:
                     </b-col>
-                    <b-col cols="8"> R (Disturbing Violence and Terror) </b-col>
+                    <b-col cols="8"> {{ flim.info.rating }} </b-col>
                   </b-row>
                   <b-row>
                     <b-col
@@ -482,7 +476,7 @@
                     >
                       Genre:
                     </b-col>
-                    <b-col cols="8"> Horror, Mystery & Thriller </b-col>
+                    <b-col cols="8"> {{ flim.info.genres.join(", ") }} </b-col>
                   </b-row>
                   <b-row>
                     <b-col
@@ -491,7 +485,7 @@
                     >
                       Original Language:
                     </b-col>
-                    <b-col cols="8"> English </b-col>
+                    <b-col cols="8"> {{ flim.info.originalLanguage }} </b-col>
                   </b-row>
                   <b-row>
                     <b-col
@@ -501,7 +495,23 @@
                       Director:
                     </b-col>
                     <b-col cols="8">
-                      <b-link style="text-decoration:none;">James Wan</b-link>
+                      <span
+                        v-for="item in flim.directors"
+                        :key="item.person.id"
+                      >
+                        <b-link
+                          :href="'/person/' + item.person.slug"
+                          style="text-decoration:none;"
+                          >{{ item.person.name.trim() }}</b-link
+                        >
+                        <span
+                          v-if="
+                            flim.directors.indexOf(item) !==
+                              flim.directors.length - 1
+                          "
+                          >,
+                        </span>
+                      </span>
                     </b-col>
                   </b-row>
                   <b-row>
@@ -512,12 +522,23 @@
                       Producer:
                     </b-col>
                     <b-col cols="8">
-                      <b-link style="text-decoration:none;">
-                        Tony DeRosa-Grund</b-link
-                      >,
-                      <b-link style="text-decoration:none;">Peter Safran</b-link
-                      >,
-                      <b-link style="text-decoration:none;">Rob Cowan</b-link>
+                      <span
+                        v-for="item in flim.producers"
+                        :key="item.person.id"
+                      >
+                        <b-link
+                          :href="'/person/' + item.person.slug"
+                          style="text-decoration:none;"
+                          >{{ item.person.name.trim() }}</b-link
+                        >
+                        <span
+                          v-if="
+                            flim.producers.indexOf(item) !==
+                              flim.producers.length - 1
+                          "
+                          >,
+                        </span>
+                      </span>
                     </b-col>
                   </b-row>
                   <b-row>
@@ -528,10 +549,20 @@
                       Writer:
                     </b-col>
                     <b-col cols="8">
-                      <b-link style="text-decoration:none;">Chad Hayes</b-link>,
-                      <b-link style="text-decoration:none;"
-                        >Carey W. Hayes</b-link
-                      >
+                      <span v-for="item in flim.writers" :key="item.person.id">
+                        <b-link
+                          :href="'/person/' + item.person.slug"
+                          style="text-decoration:none;"
+                          >{{ item.person.name.trim() }}</b-link
+                        >
+                        <span
+                          v-if="
+                            flim.writers.indexOf(item) !==
+                              flim.producers.length - 1
+                          "
+                          >,
+                        </span>
+                      </span>
                     </b-col>
                   </b-row>
                   <b-row>
@@ -541,7 +572,7 @@
                     >
                       Release Date (Theaters):
                     </b-col>
-                    <b-col cols="8"> Jul 19, 2013 </b-col>
+                    <b-col cols="8"> {{ flim.info.theatersDate }} </b-col>
                   </b-row>
                   <b-row>
                     <b-col
@@ -550,9 +581,9 @@
                     >
                       Release Date (Streaming):
                     </b-col>
-                    <b-col cols="8"> Jul 9, 2015 </b-col>
+                    <b-col cols="8"> {{ flim.info.streamingDate }} </b-col>
                   </b-row>
-                  <b-row>
+                  <!-- <b-row>
                     <b-col
                       cols="4"
                       style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
@@ -560,7 +591,7 @@
                       Box Office (Gross USA):
                     </b-col>
                     <b-col cols="8"> $137.4M </b-col>
-                  </b-row>
+                  </b-row> -->
                   <b-row>
                     <b-col
                       cols="4"
@@ -568,7 +599,7 @@
                     >
                       Runtime:
                     </b-col>
-                    <b-col cols="8"> 1h 51m </b-col>
+                    <b-col cols="8"> {{ flim.info.runtime }} </b-col>
                   </b-row>
                   <b-row>
                     <b-col
@@ -578,7 +609,7 @@
                       Production Co:
                     </b-col>
                     <b-col cols="8">
-                      Safran Company, Evergreen Media Group
+                      {{ flim.info.productions.join(", ") }}
                     </b-col>
                   </b-row>
                   <b-row>
@@ -588,7 +619,9 @@
                     >
                       Sound Mix:
                     </b-col>
-                    <b-col cols="8"> SDDS, Dolby Digital, Datasat </b-col>
+                    <b-col cols="8">
+                      {{ flim.info.soundMixs.join(", ") }}
+                    </b-col>
                   </b-row>
                   <b-row>
                     <b-col
@@ -597,9 +630,9 @@
                     >
                       Aspect Ratio:
                     </b-col>
-                    <b-col cols="8"> Scope (2.35:1) </b-col>
+                    <b-col cols="8"> {{ flim.info.aspectRatio }} </b-col>
                   </b-row>
-                  <b-row>
+                  <!-- <b-row>
                     <b-col
                       cols="4"
                       style="text-align:right;padding-right:20px;font-weight:bold;color:#757A84"
@@ -611,7 +644,7 @@
                         >The Conjuring Universe</b-link
                       >
                     </b-col>
-                  </b-row>
+                  </b-row> -->
                 </div>
               </div>
             </div>
@@ -820,7 +853,9 @@
 </template>
 
 <script>
-// import getAllUsers from "@/apollo/queries/getAllUsers.gql";
+import getFlimBySlug from "@/apollo/queries/getFlimBySlug.gql";
+
+import moment from "moment";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import TopHeadline from "@/components/TopHeadline";
@@ -857,6 +892,8 @@ export default {
   },
   data() {
     return {
+      flim: {},
+      slug: "",
       popoverCriticSelected: "all",
       audienceRating: 3.55,
       showAllCrew: false,
@@ -888,19 +925,71 @@ export default {
           text: "You can't shoot a ghost"
         }
       ]
-
-      // msg: "Welcome to Your Vue.js App"
     };
-  }
+  },
+  created() {
+    this.slug = this.$route.params.slug;
+  },
+  methods: {},
 
-  // apollo: {
-  //   users: {
-  //     query: getAllUsers,
-  //     result(res) {
-  //       this.msg = res;
-  //     }
-  //   }
-  // }
+  apollo: {
+    flimBySlug: {
+      query: getFlimBySlug,
+      variables() {
+        return {
+          slug: this.slug
+        };
+      },
+      result(result) {
+        this.flim = result.data.flimBySlug;
+        this.flim.info.name = this.flim.info.name.toUpperCase();
+        this.flim.info.genres = this.flim.info.genres.map(
+          item => item.charAt(0).toUpperCase() + item.slice(1)
+        );
+        if (this.flim.lemonScore >= 80)
+          this.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+        else if (this.flim.lemonScore >= 60 && this.flim.lemonScore < 80)
+          this.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+        else if (this.flim.lemonScore < 60 && this.flim.lemonScore >= 0)
+          this.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+        else
+          this.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+
+        if (this.flim.userScore >= 60)
+          this.flim.userIcon =
+            "https://live.staticflickr.com/65535/51277934536_26d8b990e5_o.png";
+        else if (this.flim.userScore < 60 && this.flim.userScore >= 0)
+          this.flim.userIcon =
+            "https://live.staticflickr.com/65535/51278953920_e842d17506_o.png";
+        else
+          this.flim.userIcon =
+            "https://live.staticflickr.com/65535/51277185452_0092492af4_o.png";
+        this.flim.lemonScore =
+          this.flim.lemonScore === -1 ? "_ _ _" : this.flim.lemonScore + "%";
+        this.flim.userScore =
+          this.flim.userScore === -1 ? "_ _ _" : this.flim.userScore + "%";
+        this.flim.directors = this.flim.crews.filter(item =>
+          item.role.toLowerCase().includes("director")
+        );
+        this.flim.writers = this.flim.crews.filter(item =>
+          item.role.toLowerCase().includes("writer")
+        );
+        this.flim.producers = this.flim.crews.filter(item =>
+          item.role.toLowerCase().includes("producer")
+        );
+        this.flim.info.theatersDate = moment(
+          this.flim.info.theatersDate
+        ).format("ll");
+        this.flim.info.streamingDate = moment(
+          this.flim.info.streamingDate
+        ).format("ll");
+      }
+    }
+  }
 };
 </script>
 <style scoped>

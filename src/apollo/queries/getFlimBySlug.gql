@@ -1,0 +1,74 @@
+query getFlimBySlug($slug: String) {
+  flimBySlug(slug: $slug) {
+    id
+    type
+    userScore
+    lemonScore
+    userReviewCount
+    lemonReviewCount
+    info {
+      name
+      tags
+      genres
+      poster
+      rating
+      runtime
+      summary
+      trailer
+      collection
+      soundMixs
+      productions
+      aspectRatio
+      theatersDate
+      streamingDate
+      originalLanguage
+    }
+    whatToKnows {
+      title
+      content
+    }
+    streamings
+    photos
+    crews {
+      role
+      person {
+        id
+        name
+        slug
+      }
+    }
+    quotes {
+      name
+      content
+    }
+    data {
+      # news {
+      #   id
+      #   user {
+      #     id
+      #     name
+      #     image
+      #   }
+      #   title
+      #   content
+      #   data {
+      #     section
+      #     previewPoster
+      #     score
+      #     flim {
+      #       id
+      #       slug
+      #     }
+      #   }
+      #   slug
+      # }
+      trailerPhoto
+      rottenTomatoes {
+        audienceScore
+        tomatometerScore
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}

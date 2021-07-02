@@ -9,13 +9,16 @@
         :paginationSize="15"
         :centerMode="true"
         :minSwipeDistance="4"
+        :loop="true"
+        :autoplay="true"
       >
         <slide
-          v-for="item in previewList"
+          v-for="item in thisImages"
           :key="item.index"
           @slideclick="handleShowPreview(item.index)"
         >
           <img
+            v-if="item.src.length"
             :src="item.src"
             style="width:180px;height:180px;margin-right:10px"
           />
@@ -29,7 +32,7 @@
         <b-link
           style="text-align: left;margin-left:auto;font-size:13px;color:#398BEB;text-decoration: none;"
         >
-          <strong>View All Photos (35)</strong>
+          <strong>View All Photos ({{ thisImages.length }})</strong>
         </b-link>
       </div>
     </div>
@@ -42,66 +45,29 @@ import MoviePickCard from "@/components/MoviePickCard";
 import ImageViewer from "@/components/ImageViewer";
 
 export default {
+  props: {
+    images: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
   components: {
     Carousel,
     Slide,
     MoviePickCard,
     ImageViewer
   },
-  data() {
-    return {
-      previewList: [
-        {
-          index: 1,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 2,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 3,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 4,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 5,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 6,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 7,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 8,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 9,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 10,
-          src: require("../../../assets/img/sample-news.jpg")
-        },
-        {
-          index: 0,
-          src: require("../../../assets/img/sample-news.jpg")
-        }
-      ]
-    };
+  computed: {
+    thisImages() {
+      return this.images;
+    }
   },
   methods: {
     handleShowPreview(index) {
       this.$refs.viewer.show(
-        this.previewList.map(item => item.src),
+        this.thisImages.map(item => item.src),
         index
       );
     }
