@@ -21,7 +21,10 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
-        document.title = to.meta.title || "the-conjuring-the-devil-made-me-do-it";
+        document.title = to.meta.title || "Home";
+        console.log('🚀 --------------------')
+        console.log('🚀 ~ handler ~ to', to)
+        console.log('🚀 --------------------')
       }
     }
   }

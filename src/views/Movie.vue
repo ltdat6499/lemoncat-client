@@ -853,6 +853,12 @@ import QuoteCard from "@/components/Movie/QuoteCard";
 
 export default {
   name: "Home",
+  metaInfo: {
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    title: "Default Title",
+    // all titles will be injected into this template
+    titleTemplate: "%s | My Awesome Webapp"
+  },
   components: {
     Navbar,
     PageFooter,
@@ -878,31 +884,7 @@ export default {
       showAllCrew: false,
       showReview: false,
       ratingValue: 5,
-      content: "<p><strong>gsdfgdfgsdfgsdfgsdfgdfgfdgsdfgfdgsdfg</strong></p>",
-      quotes: [
-        {
-          name: "Ed Warren",
-          text:
-            "It was big mistake, acknowledging this doll. Though it. The inhuman spirit tricked you.."
-        },
-        {
-          name: "Roger Perron",
-          text:
-            "I don't know what you are! But you leave my wife alone damn you!"
-        },
-        {
-          name: "Bathsheba",
-          text: "She's already gone.. And now your all gonna die"
-        },
-        {
-          name: "Ed Warren",
-          text: "Sometimes it's better to keep the genie in the bottle."
-        },
-        {
-          name: "Drew",
-          text: "You can't shoot a ghost"
-        }
-      ]
+      content: "<p><strong>gsdfgdfgsdfgsdfgsdfgdfgfdgsdfgfdgsdfg</strong></p>"
     };
   },
   created() {
@@ -977,6 +959,9 @@ export default {
           this.flim.info.streamingDate
         ).format("ll");
         this.showAllCrew = this.flim.crews.length > 6 ? false : true;
+        document.title = this.flim.info.name;
+        if (this.flim.info.name.length > 35)
+          this.flim.info.name = this.flim.info.name.substring(0, 32) + "...";
       }
     }
   }
