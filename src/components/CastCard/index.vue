@@ -3,37 +3,49 @@
     <b-link
       style="text-decoration:none;max-width:135px;display:flex;justify-content:center;
 align-items: center;flex-direction: column"
-      :href="thisUrl"
+      :href="'/person/' + thisSlug"
     >
-      <img
-        src="../../assets/img/sample-cast.jpg"
-        style="height:120px;width:100px"
-      />
+      <img :src="thisImage" style="height:120px;width:100px" />
       <div style="margin-top:5px">
-        <span class="name">Vera Farmiga</span>
+        <span class="name">{{ thisName }}</span>
       </div>
-      <span style="color:#989898">Lorraine Warren</span>
+      <span style="color:#989898">{{ thisRole }}</span>
     </b-link>
   </div>
 </template>
 <script>
 export default {
   props: {
-    url: {
+    slug: {
       type: String,
       default: "#"
     },
+    image: {
+      type: String,
+      default:
+        "https://cdn.icon-icons.com/icons2/1674/PNG/512/person_110935.png"
+    },
     name: {
       type: String,
-      default: "Harry Potter and The Sorcerer's Stone"
+      default: "Ly Thanh Dat"
+    },
+    role: {
+      type: String,
+      default: "Harry Potter"
     }
   },
   computed: {
-    thisUrl() {
-      return this.url;
+    thisSlug() {
+      return this.slug;
     },
     thisName() {
       return this.name;
+    },
+    thisRole() {
+      return this.role;
+    },
+    thisImage() {
+      return this.image;
     }
   }
 };

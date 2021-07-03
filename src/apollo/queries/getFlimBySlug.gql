@@ -35,6 +35,7 @@ query getFlimBySlug($slug: String) {
         id
         name
         slug
+        images
       }
     }
     quotes {

@@ -237,11 +237,13 @@
                               {{ flim.lemonScore }}
                             </h1>
                           </div>
-                          <span style="color:#707176">223 Reviews</span
+                          <span style="color:#707176"
+                            >{{ flim.lemonReviewCount }} Reviews</span
                           ><br /><br />
                           <span style="color: #707176"
                             ><strong style="color: #707176"
-                              >7.20 out of 10</strong
+                              >{{ flim.lemonScore.replace("%", "") }} out of
+                              100</strong
                             >
                             average rating</span
                           >
@@ -320,7 +322,8 @@
                           ></b-form-rating>
                           <span style="color: #707176"
                             ><strong style="color: #707176"
-                              >3.55 out of 5</strong
+                              >{{ flim.userScore.replace("%", "") }} out of
+                              100</strong
                             >
                             average rating</span
                           >
@@ -558,7 +561,7 @@
                         <span
                           v-if="
                             flim.writers.indexOf(item) !==
-                              flim.producers.length - 1
+                              flim.writers.length - 1
                           "
                           >,
                         </span>
@@ -658,61 +661,30 @@
           >
           <b-row style="padding-top: 20px;padding-bottom:10px">
             <div style="padding-left:10px;padding-right:10px;">
-              <div style="display:flex;margin-bottom:15px">
-                <cast-card style="margin-right:11px"></cast-card>
-                <cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card>
-              </div>
               <div
-                v-if="overCrew && showAllCrew"
-                style="display:flex;margin-bottom:15px"
+                style="display:flex;flex-wrap: wrap;justify-content:space-around;width:100%"
               >
-                <cast-card style="margin-right:11px"></cast-card>
-                <cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card>
+                <cast-card
+                  v-for="item in crews"
+                  :key="item.id"
+                  :slug="item.person.slug"
+                  :image="item.person.images[0]"
+                  :name="item.person.name"
+                  :role="item.role"
+                  style="margin-right:11px;margin-bottom:15px;max-width:120px"
+                ></cast-card>
               </div>
-              <div
-                v-if="overCrew && showAllCrew"
-                style="display:flex;margin-bottom:15px"
-              >
-                <cast-card style="margin-right:11px"></cast-card>
-                <cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card>
-              </div>
-              <div
-                v-if="overCrew && showAllCrew"
-                style="display:flex;margin-bottom:15px"
-              >
-                <cast-card style="margin-right:11px"></cast-card>
-                <cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card
-                ><cast-card style="margin-right:11px"></cast-card>
-              </div>
+
               <div style="width:100%;text-align:right;">
                 <b-link
-                  v-if="overCrew && showAllCrew"
+                  v-if="showAllCrew"
                   style="text-decoration:none;"
                   @click="showAllCrew = false"
                   ><strong>Hide Cast & Crew</strong>
                   <v-icon color="#4993DB" small>mdi-arrow-up-bold</v-icon>
                 </b-link>
                 <b-link
-                  v-if="overCrew && !showAllCrew"
+                  v-if="!showAllCrew"
                   style="text-decoration:none;"
                   @click="showAllCrew = true"
                   ><strong>Show all Cast & Crew</strong>
@@ -724,7 +696,9 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">NEWS & INTERVIEWS FOR THE CONJURING </span>
+                <span slot="header"
+                  >NEWS & INTERVIEWS FOR {{ flim.info.name.toUpperCase() }}
+                </span>
               </header-bar>
             </div></b-row
           >
@@ -744,7 +718,9 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">CRITIC REVIEWS FOR THE CONJURING</span>
+                <span slot="header"
+                  >CRITIC REVIEWS FOR {{ flim.info.name.toUpperCase() }}</span
+                >
               </header-bar>
             </div></b-row
           >
@@ -785,7 +761,9 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">AUDIENCE REVIEWS FOR THE CONJURING</span>
+                <span slot="header"
+                  >AUDIENCE REVIEWS FOR {{ flim.info.name.toUpperCase() }}</span
+                >
               </header-bar>
             </div></b-row
           >
@@ -812,7 +790,9 @@
           <b-row>
             <div style="padding-left:10px;padding-right:10px;width:100%">
               <header-bar>
-                <span slot="header">THE CONJURING QUOTES</span>
+                <span slot="header"
+                  >{{ flim.info.name.toUpperCase() }} QUOTES</span
+                >
               </header-bar>
             </div></b-row
           ><b-row style="padding-top: 20px;padding-bottom:10px;width:60%">
@@ -821,13 +801,12 @@
                 style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
   flex-wrap: wrap;justify-content:space-around"
               >
-                <quote-card></quote-card>
-                <quote-card></quote-card>
-                <quote-card></quote-card>
-                <quote-card></quote-card>
-                <quote-card></quote-card>
-                <quote-card></quote-card>
-                <quote-card></quote-card>
+                <quote-card
+                  v-for="item in flim.quotes"
+                  :key="item.content"
+                  :content="item.content"
+                  :name="item.name"
+                ></quote-card>
 
                 <b-link
                   style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;padding-bottom:50px"
@@ -897,7 +876,6 @@ export default {
       popoverCriticSelected: "all",
       audienceRating: 3.55,
       showAllCrew: false,
-      overCrew: true,
       showReview: false,
       ratingValue: 5,
       content: "<p><strong>gsdfgdfgsdfgsdfgsdfgdfgfdgsdfgfdgsdfg</strong></p>",
@@ -929,6 +907,17 @@ export default {
   },
   created() {
     this.slug = this.$route.params.slug;
+  },
+  computed: {
+    crews() {
+      let max = 6;
+      if (this.showAllCrew) max = this.flim.crews.length;
+      const results = [];
+      for (let i = 0; i < max; i++) {
+        results.push(this.flim.crews[i]);
+      }
+      return results;
+    }
   },
   methods: {},
 
@@ -987,6 +976,7 @@ export default {
         this.flim.info.streamingDate = moment(
           this.flim.info.streamingDate
         ).format("ll");
+        this.showAllCrew = this.flim.crews.length > 6 ? false : true;
       }
     }
   }
