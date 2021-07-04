@@ -12,6 +12,7 @@ import Post from "@/views/Post";
 import Posts from "@/views/Posts";
 import Tops from "@/views/Tops";
 import DetailTop from "@/views/DetailTop";
+import Person from "@/views/Person";
 import User from "@/views/User";
 
 Vue.use(Router);
@@ -42,6 +43,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Movie
+    },
+    {
+      path: "/person/:slug",
+      name: "Person",
+      meta: {
+        requiresAuth: false
+      },
+      component: Person
     },
     {
       path: "/m",

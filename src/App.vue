@@ -22,9 +22,6 @@ export default {
       immediate: true,
       handler(to, from) {
         document.title = to.meta.title || "Home";
-        console.log('🚀 --------------------')
-        console.log('🚀 ~ handler ~ to', to)
-        console.log('🚀 --------------------')
       }
     }
   }

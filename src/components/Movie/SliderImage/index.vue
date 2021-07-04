@@ -3,7 +3,6 @@
     <div>
       <carousel
         :per-page="4"
-        :navigate-to="someLocalProperty"
         :paginationActiveColor="'#24BA3A'"
         :paginationColor="'#CCCCCC'"
         :paginationSize="15"
@@ -17,11 +16,13 @@
           :key="item.index"
           @slideclick="handleShowPreview(item.index)"
         >
-          <img
-            v-if="item.src.length"
-            :src="item.src"
-            style="width:180px;height:180px;margin-right:10px"
-          />
+          <div class="zoom-within-container">
+            <img
+              v-if="item.src.length"
+              :src="item.src"
+              style="width:180px;height:180px;margin-right:10px"
+            />
+          </div>
         </slide>
       </carousel>
     </div>
@@ -74,3 +75,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.zoom-within-container {
+  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+}
+.zoom-within-container img {
+  transition: transform 0.2s ease;
+}
+.zoom-within-container:hover img {
+  transform: scale(1.5);
+}
+</style>

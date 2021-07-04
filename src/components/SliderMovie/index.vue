@@ -19,11 +19,7 @@
       </div>
     </div>
     <div style="margin:0px 20px">
-      <carousel
-        :paginationEnabled="false"
-        :per-page="6"
-        :navigate-to="someLocalProperty"
-      >
+      <carousel :paginationEnabled="false" :per-page="thisPageSize">
         <slide v-for="item in flims" :key="item.id">
           <movie-pick-card
             :url="'/m/' + item.slug"
@@ -48,6 +44,10 @@ export default {
     MoviePickCard
   },
   props: {
+    pageSize: {
+      type: Number,
+      default: 6
+    },
     sortKey: {
       type: String,
       default: "DATE"
@@ -61,6 +61,9 @@ export default {
   computed: {
     thisSortKey() {
       return this.sortKey;
+    },
+    thisPageSize() {
+      return this.pageSize;
     }
   },
   apollo: {

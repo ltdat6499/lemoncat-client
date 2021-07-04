@@ -852,13 +852,6 @@ import CriticCard from "@/components/Movie/CriticCard";
 import QuoteCard from "@/components/Movie/QuoteCard";
 
 export default {
-  name: "Home",
-  metaInfo: {
-    // if no subcomponents specify a metaInfo.title, this title will be used
-    title: "Default Title",
-    // all titles will be injected into this template
-    titleTemplate: "%s | My Awesome Webapp"
-  },
   components: {
     Navbar,
     PageFooter,
@@ -959,7 +952,7 @@ export default {
           this.flim.info.streamingDate
         ).format("ll");
         this.showAllCrew = this.flim.crews.length > 6 ? false : true;
-        document.title = this.flim.info.name;
+        document.title = this.flim.info.name + " - LEMONCAT";
         if (this.flim.info.name.length > 35)
           this.flim.info.name = this.flim.info.name.substring(0, 32) + "...";
       }

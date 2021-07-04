@@ -1,0 +1,31 @@
+query getPersonBySlug($slug: String) {
+  personBySlug(slug: $slug) {
+    id
+    name
+    birth
+    bornIn
+    summary
+    images
+    slug
+    flims {
+      id
+      info {
+        name
+        poster
+      }
+      lemonScore
+      userScore
+      slug
+      crews {
+        role
+        person {
+          id
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
