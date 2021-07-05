@@ -7,7 +7,7 @@
   >
     <img
       style="max-width: 17%; margin-right:20px"
-      src="../../icons/home-logo-white.png"
+      src="../../icons/home-logo.png"
     />
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -31,7 +31,10 @@
           style="margin-left:418px;background-color:white;width:120%;position: absolute;z-index:9999;margin-top:40px;border-radius:7px;padding: 25px;display:flex;flex-direction: column;"
         >
           <div style="display: flex;justify-content: space-around;">
-            <div style="display:flex;flex-direction: column;">
+            <div
+              v-if="!searchLoading"
+              style="display:flex;flex-direction: column;"
+            >
               <div
                 style="display:flex;align-items: center;font-size:17px;color:black;font-weight: bold;margin-top:10px;margin-bottom:10px"
               >
@@ -43,16 +46,25 @@
                   >MOVIES / TV
                 </span>
               </div>
-              <search-result-card-movie style="margin-bottom:10px" />
-              <search-result-card-movie style="margin-bottom:10px" />
-              <search-result-card-movie style="margin-bottom:10px" />
-              <search-result-card-movie style="margin-bottom:10px" />
-              <search-result-card-movie style="margin-bottom:10px" />
+              <span v-for="item of searchResult.flims" :key="item._id">
+                <search-result-card-movie
+                  :slug="item._source.slug"
+                  :src="item._source.poster"
+                  :name="item._source.name"
+                  :summary="item._source.summary"
+                  :score="item._source.lemonScore"
+                  :year="item._source.theatersDate"
+                  style="margin-bottom:10px"
+                />
+              </span>
             </div>
 
             <div style="border-left: 1px solid gray;height: auto;"></div>
 
-            <div style="display:flex;flex-direction: column;">
+            <div
+              v-if="!searchLoading"
+              style="display:flex;flex-direction: column;"
+            >
               <div
                 style="display:flex;align-items: center;font-size:17px;color:black;font-weight: bold;margin-top:10px;margin-bottom:10px"
               >
@@ -61,19 +73,26 @@
                   >|</span
                 >
                 <span style="align-self:flex-start;display:flex;margin-top:4px"
-                  >ACTORS...
+                  >PERSONS
                 </span>
               </div>
-              <search-result-card-person style="margin-bottom:10px" />
-              <search-result-card-person style="margin-bottom:10px" />
-              <search-result-card-person style="margin-bottom:10px" />
-              <search-result-card-person style="margin-bottom:10px" />
-              <search-result-card-person style="margin-bottom:10px" />
+              <span v-for="item of searchResult.persons" :key="item._id">
+                <search-result-card-person
+                  :slug="item._source.slug"
+                  :src="item._source.images"
+                  :name="item._source.name"
+                  :summary="item._source.summary"
+                  style="margin-bottom:10px"
+                />
+              </span>
             </div>
 
             <div style="border-left: 1px solid gray;height: auto;"></div>
 
-            <div style="display:flex;flex-direction: column;">
+            <div
+              v-if="!searchLoading"
+              style="display:flex;flex-direction: column;"
+            >
               <div
                 style="display:flex;align-items: center;font-size:17px;color:black;font-weight: bold;margin-top:10px;margin-bottom:10px"
               >
@@ -85,17 +104,21 @@
                   >NEWS
                 </span>
               </div>
-              <search-result-card-news style="margin-bottom:10px" />
-              <search-result-card-news style="margin-bottom:10px" />
-              <search-result-card-news style="margin-bottom:10px" />
-              <search-result-card-news style="margin-bottom:10px" />
-              <search-result-card-news style="margin-bottom:10px" />
+              <span v-for="item of searchResult.news" :key="item._id">
+                <search-result-card-news
+                  :slug="item._source.slug"
+                  :title="item._source.title"
+                  :content="item._source.content"
+                  :poster="item._source.poster"
+                  style="margin-bottom:10px"
+                />
+              </span>
             </div>
           </div>
           <b-button
             style="display: block;width: 100%;margin-top:10px"
             variant="success"
-            >VIEW ALL 1000+ RESULTS</b-button
+            >VIEW ALL RESULTS</b-button
           >
         </div>
       </b-navbar-nav>
@@ -113,6 +136,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import AvataLogin from "../AvataLogin";
 import MenuMovies from "../MegaMenu/Movies";
 import MenuTVShows from "../MegaMenu/TVShows";
@@ -136,9 +160,32 @@ export default {
   },
   data() {
     return {
+      searchResult: {},
+      searchLoading: false,
       searchString: "",
       isLogin: !!this.$cookies.get("token")
     };
+  },
+  watch: {
+    async searchString(value) {
+      this.searchLoading = true;
+      let data = await axios({
+        method: "post",
+        url: "http://127.0.0.1:3843/all/search",
+        data: {
+          keywords: value,
+          size: 5
+        }
+      });
+      data = data.data || {};
+      console.log(data.person);
+      this.searchResult = {
+        flims: data.flim || [],
+        persons: data.person || [],
+        news: data.post || []
+      };
+      this.searchLoading = false;
+    }
   }
 };
 </script>

@@ -1,22 +1,23 @@
 <template>
-  <div>
+  <div style="max-width:500px">
     <b-link
       style="text-decoration:none;display:flex;align-items:center;"
       :href="thisUrl"
     >
       <img
-        src="../../assets/img/sample-news.jpg"
+        :src="thisPoster"
         style="height:100px;width:200px;margin-right:10px"
       />
-      <div style="display: flex;flex-direction: column;align-items: flex-start;">
+      <div
+        style="display: flex;flex-direction: column;align-items: flex-start;"
+      >
         <span style="margin-top:5px;color:black;font-weight:bold"
-          >{{ thisName }}
+          >{{ thisTitle }}
         </span>
-        <span style="margin-top:5px;color:gray;font-weight:bold"
-          >February 20, 2019
-        </span>
-        <span style="margin-top:5px;color:gray;max-width:300px;text-align: justify;text-justify: inter-word;"
-          > thamet, consectetur adipiscing elit, sed do eiusmod tempor incididunt incididunt labordad...
+        <span
+          style="margin-top:5px;color:gray;max-width:300px;text-align: justify;text-justify: inter-word;"
+        >
+          {{ thisContent }}
         </span>
       </div>
     </b-link>
@@ -25,28 +26,35 @@
 <script>
 export default {
   props: {
-    url: {
+    slug: {
       type: String,
       default: "#"
     },
-    src: {
+    poster: {
       type: String,
-      default: "../../assets/img/sample-person.jpg"
+      default: require("../../assets/img/sample-person.jpg")
     },
-    name: {
+    title: {
+      type: String,
+      default: "Everything We Know About Marvel’s Eternals"
+    },
+    content: {
       type: String,
       default: "Everything We Know About Marvel’s Eternals"
     }
   },
   computed: {
     thisUrl() {
-      return this.url;
+      return "/post/" + this.slug;
     },
-    thisSrc() {
-      return this.src;
+    thisTitle() {
+      return this.title;
     },
-    thisName() {
-      return this.name;
+    thisContent() {
+      return this.content.substring(1000, 1100);
+    },
+    thisPoster() {
+      return this.poster;
     }
   }
 };

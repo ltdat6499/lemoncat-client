@@ -4,12 +4,14 @@
       style="text-decoration:none;display:flex;align-items:center;"
       :href="thisUrl"
     >
-      <img
-        src="../../assets/img/sample-person.jpg"
-        style="height:100px;width:67px;margin-right:10px"
-      />
-      <span style="margin-top:5px;color:black;font-weight:bold"
+      <img :src="thisSrc" style="height:100px;width:80px;margin-right:10px" />
+      <span style="margin-top:5px;color:black;font-weight:bold;text-align:left"
         >{{ thisName }}
+        <p
+          style="font-weight:500;margin-top:5px;color:gray;max-width:200px;text-align:justify"
+        >
+          {{ thisSummary }}
+        </p>
       </span>
     </b-link>
   </div>
@@ -17,28 +19,37 @@
 <script>
 export default {
   props: {
-    url: {
+    slug: {
       type: String,
       default: "#"
     },
     src: {
       type: String,
-      default: "../../assets/img/sample-person.jpg"
+      default: require("../../assets/img/sample-person.jpg")
     },
     name: {
+      type: String,
+      default: "Emma Watson"
+    },
+    summary: {
       type: String,
       default: "Emma Watson"
     }
   },
   computed: {
     thisUrl() {
-      return this.url;
+      return "/person/" + this.slug;
     },
     thisSrc() {
       return this.src;
     },
     thisName() {
       return this.name;
+    },
+    thisSummary() {
+      if (this.summary && this.summary.length > 100)
+        return (this.summary.substring(0, 100) || "") + "...";
+      return this.summary;
     }
   }
 };
