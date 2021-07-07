@@ -1,0 +1,29 @@
+query getFlimsByParams(
+  $page: Int
+  $size: Int
+  $type: String
+  $sortKey: String
+  $params: JSON
+) {
+  flimsByParams(
+    page: $page
+    size: $size
+    type: $type
+    sortKey: $sortKey
+    params: $params
+  ) {
+    info {
+      name
+      poster
+      rating
+      runtime
+    }
+    data {
+      rottenTomatoes {
+        tomatometerScore
+      }
+    }
+    slug
+    createdAt
+  }
+}
