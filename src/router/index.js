@@ -53,7 +53,7 @@ export default new Router({
       component: Person
     },
     {
-      path: "/m",
+      path: "/m/list/:slug",
       name: "Movies",
       meta: {
         requiresAuth: false

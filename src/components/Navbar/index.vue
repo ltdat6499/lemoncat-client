@@ -5,10 +5,9 @@
     variant="#48CF73"
     style="display: flex;align-items: center;background-color:rgb(37 186 57)"
   >
-    <img
-      style="max-width: 17%; margin-right:20px"
-      src="../../icons/home-logo.png"
-    />
+    <b-link href="/" style="width:192px;height:34px;margin-right:20px">
+      <img style="width:100%" src="../../icons/home-logo.png" />
+    </b-link>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

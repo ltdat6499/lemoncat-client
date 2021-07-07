@@ -30,31 +30,36 @@
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                 class="block text-black-800 flex items-center"
                 >MOVIES IN THEATERS</span
-              ><span
-                class="block font-weight-normal text-black-800  flex items-center"
+              ><b-link
+                href="/m/list/opening_this_week"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Opening This Week
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/top_box_office"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Top Box Office
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/coming_soon"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Coming Soon to Theaters
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/weekend_earnings"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Weekend Earnings
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/certified_fresh"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Certified Fresh Movies
-              </span>
+              </b-link>
             </li>
           </ul>
           <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
@@ -63,36 +68,36 @@
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                 class="block text-black-800 flex items-center"
                 >ON DVD & STREAMING</span
-              ><span
-                class="block font-weight-normal text-black-800  flex items-center"
+              ><b-link
+                href="/m/list/netflix"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
-                Netfix
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+                Netflix
+              </b-link>
+              <b-link
+                href="/m/list/amazon_prime_video_us"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Amazon Prime
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/disney"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Disney+
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/hbo_max"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 HBO Max
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/all_streaming"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Certified Fresh Movies
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Browse All
-              </span>
+              </b-link>
             </li>
           </ul>
           <ul style="margin-left:-50px" class="w-full lg:w-1/4 ">
@@ -101,16 +106,18 @@
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                 class="block text-black-800 flex items-center"
                 >MORE</span
-              ><span
-                class="block font-weight-normal text-black-800  flex items-center"
+              ><b-link
+                href="/m/list/top"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Top Movies
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
+              </b-link>
+              <b-link
+                href="/m/list/opening_soon"
+                class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 New Trailers
-              </span>
+              </b-link>
             </li>
           </ul>
           <ul style="margin-left:-90px" class="w-full lg:w-1/4 ">
@@ -216,5 +223,8 @@ export default {
 
   border: none;
   border-radius: 10px;
+}
+.my-b-link:hover {
+  color: #3a8beb;
 }
 </style>
