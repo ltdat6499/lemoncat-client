@@ -12,18 +12,22 @@ query getFlimsByParams(
     sortKey: $sortKey
     params: $params
   ) {
-    info {
-      name
-      poster
-      rating
-      runtime
-    }
-    data {
-      rottenTomatoes {
-        tomatometerScore
+    results {
+      info {
+        name
+        poster
+        rating
+        runtime
+        summary
       }
+      data {
+        rottenTomatoes {
+          tomatometerScore
+        }
+      }
+      slug
+      createdAt
     }
-    slug
-    createdAt
+    count
   }
 }
