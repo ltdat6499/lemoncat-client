@@ -60,38 +60,38 @@ export default new Router({
       },
       component: Movies
     },
-    {
-      path: "/tv/:slug",
-      name: "TVShow",
-      meta: {
-        requiresAuth: false
-      },
-      component: TvShow
-    },
-    {
-      path: "/tv/:slug/:season",
-      name: "TVShow",
-      meta: {
-        requiresAuth: false
-      },
-      component: TvShowSeason
-    },
-    {
-      path: "/tv/:slug/:season/:episode",
-      name: "TVShow",
-      meta: {
-        requiresAuth: false
-      },
-      component: TvShowEpisode
-    },
-    {
-      path: "/tv/:slug/:season/:episode/reviews",
-      name: "TVReviews",
-      meta: {
-        requiresAuth: false
-      },
-      component: Reviews
-    },
+    // {
+    //   path: "/tv/:slug",
+    //   name: "TVShow",
+    //   meta: {
+    //     requiresAuth: false
+    //   },
+    //   component: TvShow
+    // },
+    // {
+    //   path: "/tv/:slug/:season",
+    //   name: "TVShow",
+    //   meta: {
+    //     requiresAuth: false
+    //   },
+    //   component: TvShowSeason
+    // },
+    // {
+    //   path: "/tv/:slug/:season/:episode",
+    //   name: "TVShow",
+    //   meta: {
+    //     requiresAuth: false
+    //   },
+    //   component: TvShowEpisode
+    // },
+    // {
+    //   path: "/tv/:slug/:season/:episode/reviews",
+    //   name: "TVReviews",
+    //   meta: {
+    //     requiresAuth: false
+    //   },
+    //   component: Reviews
+    // },
     {
       path: "/post/:slug",
       name: "Post",
