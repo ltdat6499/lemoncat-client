@@ -12,7 +12,7 @@
       @keydown.up.exact.prevent="startArrowKeys"
       @keydown.down.exact.prevent="startArrowKeys"
     >
-      TV SHOWS
+      SUGGESTS
     </a>
 
     <transition
@@ -25,216 +25,14 @@
       >
         <div class="flex flex-col lg:flex-row px-8 py-6 border-b -mx-4">
           <ul style="margin-left:25px" class="w-full lg:w-1/4 ">
-            <li class="mb-8">
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >NEW TV TONIGHT</span
-              >
-              <div>
-                <div>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                </div>
-                <b-link
-                  style="display: flex;margin-top:20px;color:#007BFF"
-                  href="#"
-                  >View all</b-link
-                >
-              </div>
-            </li>
+            <suggest-item>
+              <span slot="header">NEW MOVIES</span>
+            </suggest-item>
           </ul>
           <ul style="margin-left:-25px" class="w-full lg:w-1/4 ">
-            <li class="mb-8">
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >MOST POPULAR TV ON LC</span
-              >
-              <div>
-                <div>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <img
-                      src="../../icons/certified-fresh.svg"
-                      style="height:20px;width:20px;margin-right:5px"
-                    />
-                    <span style="margin-right:20px">92%</span>
-                    <span>Sample name ...</span>
-                  </p>
-                </div>
-                <b-link
-                  style="display: flex;margin-top:20px;color:#007BFF"
-                  href="#"
-                  >View all</b-link
-                >
-              </div>
-            </li>
+            <suggest-item :sortKey="'RANDOMFRESH'">
+              <span slot="header">MOST FRESH MOVIES ON LC</span>
+            </suggest-item>
           </ul>
           <ul style="margin-left:-10px" class="w-full lg:w-1/4 ">
             <li class="mb-8">
@@ -245,57 +43,18 @@
               ><span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Top TV Shows
+                Top Movies
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                Certified Fresh TVs
+                Certified Fresh Movies
               </span>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
                 &nbsp;
               </span>
-              <span
-                style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
-                class="block text-black-800 flex items-center"
-                >EPISODIC REVIEWS</span
-              >
-              <div>
-                <div>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                  <p style="display: flex;margin-bottom:5px">
-                    <span>WandaVision: Season 5</span>
-                  </p>
-                </div>
-              </div>
             </li>
           </ul>
           <ul style="margin-left:-25px" class="w-full lg:w-1/4 ">
@@ -306,8 +65,17 @@
                 >CERTIFIED FRESH PICK</span
               >
               <div style="display:flex;">
-                <fresh-pick-card style="margin-right:40px"></fresh-pick-card>
-                <fresh-pick-card style="margin-right:40px"></fresh-pick-card>
+                <fresh-pick-card
+                  v-for="item of flims"
+                  :key="item.id"
+                  :slug="item.slug"
+                  :src="item.info.poster"
+                  :name="item.info.name"
+                  :score="
+                    parseInt(item.data.rottenTomatoes.tomatometerScore) || -1
+                  "
+                  style="margin-right:40px"
+                ></fresh-pick-card>
               </div>
             </li>
           </ul>
@@ -318,16 +86,20 @@
 </template>
 
 <script>
+import getFlims from "@/apollo/queries/getFlims.gql";
 import FreshPickCard from "@/components/FreshPickCard";
+import SuggestItem from "@/components/SuggestItem";
 export default {
   components: {
-    FreshPickCard
+    FreshPickCard,
+    SuggestItem
   },
   mounted() {
     this.menuItems = document.querySelectorAll(".mega-menu a");
   },
   data() {
     return {
+      flims: [],
       isVisible: false,
       menuItems: null,
       focusedIndex: 0
@@ -358,6 +130,22 @@ export default {
     },
     focusItem() {
       this.menuItems[this.focusedIndex].focus();
+    }
+  },
+  apollo: {
+    flims: {
+      query: getFlims,
+      variables() {
+        return {
+          page: 1,
+          size: 2,
+          type: "movie",
+          sortKey: "RANDOMFRESH"
+        };
+      },
+      result(result) {
+        this.flims = result.data.flims;
+      }
     }
   }
 };

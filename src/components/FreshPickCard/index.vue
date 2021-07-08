@@ -5,16 +5,10 @@
 align-items: center;flex-direction: column"
       :href="thisUrl"
     >
-      <img
-        src="../../assets/img/sample-poster.png"
-        style="height:200px;width:135px"
-      />
+      <img :src="thisSrc" style="height:200px;width:135px" />
       <div style="margin-top:5px">
-        <img
-          src="../../icons/certified-fresh.svg"
-          style="height:20px;width:20px"
-        />
-        <span style="color:black">{{ thisScore }}%</span>
+        <img :src="thisIcon" style="height:20px;width:20px" />
+        <span style="color:black">{{ thisScore }}</span>
       </div>
       <span style="margin-top:5px;color:black">{{ thisName }}</span>
     </b-link>
@@ -23,17 +17,13 @@ align-items: center;flex-direction: column"
 <script>
 export default {
   props: {
-    url: {
+    slug: {
       type: String,
       default: "#"
     },
-    icon: {
-      type: String,
-      default: "../../icons/certified-fresh.svg"
-    },
     src: {
       type: String,
-      default: "../../assets/img/sample-poster.png"
+      default: require("../../assets/img/sample-poster.png")
     },
     name: {
       type: String,
@@ -41,24 +31,31 @@ export default {
     },
     score: {
       type: Number,
-      default: 92
+      default: -1
     }
   },
   computed: {
     thisUrl() {
-      return this.url;
-    },
-    thisIcon() {
-      return this.icon;
+      return "/m/" + this.slug;
     },
     thisSrc() {
       return this.src;
     },
-    thisScore() {
-      return this.score;
-    },
     thisName() {
       return this.name;
+    },
+    thisIcon() {
+      if (this.score >= 80)
+        return "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+      else if (this.score >= 60 && this.score < 80)
+        return "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+      else if (this.score < 60 && this.score >= 0)
+        return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+      else
+        return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+    },
+    thisScore() {
+      return this.score === -1 ? "_ _ _" : this.score + "%";
     }
   }
 };

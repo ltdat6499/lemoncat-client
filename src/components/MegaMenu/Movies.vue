@@ -128,9 +128,17 @@
                 >CERTIFIED FRESH PICK</span
               >
               <div style="display:flex;">
-                <fresh-pick-card style="margin-right:20px"></fresh-pick-card>
-                <fresh-pick-card style="margin-right:20px"></fresh-pick-card
-                ><fresh-pick-card style="margin-right:20px"></fresh-pick-card>
+                <fresh-pick-card
+                  v-for="item of flims"
+                  :key="item.id"
+                  :slug="item.slug"
+                  :src="item.info.poster"
+                  :name="item.info.name"
+                  :score="
+                    parseInt(item.data.rottenTomatoes.tomatometerScore) || -1
+                  "
+                  style="margin-right:20px"
+                ></fresh-pick-card>
               </div>
             </li>
           </ul>
@@ -141,6 +149,7 @@
 </template>
 
 <script>
+import getFlims from "@/apollo/queries/getFlims.gql";
 import FreshPickCard from "@/components/FreshPickCard";
 export default {
   components: {
@@ -151,6 +160,7 @@ export default {
   },
   data() {
     return {
+      flims: [],
       isVisible: false,
       menuItems: null,
       focusedIndex: 0
@@ -181,6 +191,22 @@ export default {
     },
     focusItem() {
       this.menuItems[this.focusedIndex].focus();
+    }
+  },
+  apollo: {
+    flims: {
+      query: getFlims,
+      variables() {
+        return {
+          page: 1,
+          size: 3,
+          type: "movie",
+          sortKey: "RANDOMFRESH"
+        };
+      },
+      result(result) {
+        this.flims = result.data.flims;
+      }
     }
   }
 };
