@@ -1,7 +1,6 @@
 <template>
   <div>
-    <loading v-if="isLoading"></loading>
-    <div v-else>
+    <div v-if="!isLoading">
       <!-- HEADER -->
       <navbar
         style="z-index: 9999"
@@ -233,209 +232,24 @@
               <b-col cols="4" style="padding: 20px">
                 <div style="display: flex; flex-direction: column; width: 100%">
                   <h3><strong>TOP 100 BY GENRE</strong></h3>
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Action & Adventure Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Animation Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Art House & International Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Classics Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Comedy Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Documentary Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Drama Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Horror Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Kids & Family Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Musical & Performing Arts Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Mystery & Suspense Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Romance Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Science Fiction & Fantasy Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Special Interest Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Sports & Fitness Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Television Movies</b-link
-                    >
-                  </div>
-                  <hr />
-                  <div style="width: 100%">
-                    <b-link
-                      style="
-                      text-decoration: none;
-                      color: black;
-                      float: left;
-                      margin-right: auto;
-                    "
-                      >Top 100 Western Movies</b-link
-                    >
-                  </div>
+                  <span v-for="item of genres" :key="item">
+                    <div style="width: 100%">
+                      <b-link
+                        :href="
+                          '/top/all/' + item.toLowerCase().replace(' & ', '&')
+                        "
+                        style="
+                          text-decoration: none;
+                          color: black;
+                          float: left;
+                          margin-right: auto;
+                        "
+                        >Top 100 {{ item }} Movies</b-link
+                      >
+                    </div>
+                    <br />
+                    <hr />
+                  </span>
                 </div>
                 <br />
                 <!-- YEAR -->
@@ -1451,6 +1265,7 @@
         <page-footer />
       </v-card>
     </div>
+    <loading v-else></loading>
   </div>
 </template>
 
@@ -1474,19 +1289,45 @@ export default {
   data() {
     return {
       flims: {},
-      isLoadding: true
+      isLoading: true,
+      genres: [
+        "Sci-fi",
+        "Mystery & Thriller",
+        "Comedy",
+        "Drama",
+        "Horror",
+        "Adventure",
+        "Fantasy",
+        "Action",
+        "Documentary",
+        "Kids & Family",
+        "Biography",
+        "Animation",
+        "Crime",
+        "War",
+        "Romance",
+        "Western",
+        "Music",
+        "Anime",
+        "Unknown",
+        "Musical",
+        "History",
+        "Sports & fitness",
+        "Stand-up",
+        "Other"
+      ]
     };
   },
   created() {
+    this.isLoading = true;
     document.title = "TOP MOVIES - LEMONCAT";
   },
-
   apollo: {
     flimByTopPreview: {
       query: getFlimsTop,
       result(result) {
         this.flims = result.data.flimByTopPreview;
-        this.isLoadding = false;
+        this.isLoading = false;
       }
     }
   }

@@ -125,7 +125,7 @@ export default new Router({
       component: Tops
     },
     {
-      path: "/top/detail",
+      path: "/top/:year/:genre",
       name: "DetailTop",
       meta: {
         requiresAuth: false

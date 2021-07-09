@@ -1,0 +1,26 @@
+query getFlimsTop($year: String, $genre: String) {
+  flimByTop(year: $year, genre: $genre) {
+    flims {
+      lemonReviewCount
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    topToday {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    topStreaming {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+  }
+}
