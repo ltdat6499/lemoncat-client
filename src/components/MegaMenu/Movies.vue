@@ -107,7 +107,7 @@
                 class="block text-black-800 flex items-center"
                 >MORE</span
               ><b-link
-                href="/m/list/top"
+                href="/top"
                 class="block font-weight-normal text-black-800  flex items-center my-b-link"
               >
                 Top Movies

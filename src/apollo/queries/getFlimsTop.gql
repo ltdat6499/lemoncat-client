@@ -1,0 +1,69 @@
+query getFlimsTop {
+  flimByTopPreview {
+    year1 {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    year2 {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    year3 {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    year4 {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    year5 {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    topToday {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    topStreaming {
+      info {
+        name
+      }
+      lemonScore
+      slug
+    }
+    topByYear {
+      info {
+        name
+      }
+      lemonScore
+      slug
+      createdAt
+    }
+    topForever {
+      info {
+        name
+      }
+      lemonScore
+      slug
+      createdAt
+    }
+  }
+}
