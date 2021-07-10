@@ -1,0 +1,15 @@
+query getFlimsRelative($id: String) {
+  alsoLikeFlims(id: $id) {
+    info {
+      name
+      poster
+    }
+    data {
+      rottenTomatoes {
+        tomatometerScore
+        audienceScore
+      }
+    }
+    slug
+  }
+}

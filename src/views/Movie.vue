@@ -370,13 +370,9 @@
             >
             <b-row>
               <div
-                style="padding-top:20px;padding-bottom:20px;padding-left:10px;padding-right:10px;width:100%;display:flex;justify-content:space-between"
+                style="padding-top:20px;padding-bottom:20px;padding-left:10px;padding-right:10px;width:100%;display:flex;justify-content:space-between;"
               >
-                <movie-card></movie-card>
-                <movie-card></movie-card>
-                <movie-card></movie-card>
-                <movie-card></movie-card>
-                <movie-card></movie-card>
+                <slider-movie :id="flim.id" :pageSize="4"></slider-movie>
               </div>
             </b-row>
             <b-row>
@@ -857,7 +853,7 @@ import Tinymce from "@/components/Tinymce";
 
 import LeftTabBar from "@/components/Movie/TabBar";
 import HeaderBar from "@/components/Movie/HeaderBar";
-import MovieCard from "@/components/Movie/MovieCard";
+import SliderMovie from "@/components/SliderMovieById";
 import StreamingCard from "@/components/Movie/StreamingCard";
 import SliderImage from "@/components/Movie/SliderImage";
 import CastCard from "@/components/CastCard";
@@ -873,7 +869,6 @@ export default {
     TopHeadline,
     LeftTabBar,
     HeaderBar,
-    MovieCard,
     StreamingCard,
     SliderImage,
     CastCard,
@@ -882,7 +877,8 @@ export default {
     CriticCard,
     QuoteCard,
     Tinymce,
-    Loading
+    Loading,
+    SliderMovie
   },
   data() {
     return {
