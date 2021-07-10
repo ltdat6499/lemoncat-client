@@ -433,7 +433,7 @@
               </div>
               <!-- List View -->
               <div
-                v-if="viewMode === 'Detail' && flims && flims.length"
+                v-else-if="viewMode === 'Detail' && flims && flims.length"
                 style="display:flex;padding:10px;flex-wrap: wrap;justify-content: space-between;margin-bottom:15px"
               >
                 <list-card
@@ -452,10 +452,14 @@
                   style="margin-bottom:15px"
                 ></list-card>
               </div>
+              <div v-else>
+                <h2><strong>No movies for this section</strong></h2>
+              </div>
             </div>
           </div>
 
           <b-pagination
+            v-if="flims && flims.length"
             v-model="currentPage"
             align="center"
             :total-rows="rows"

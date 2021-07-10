@@ -1,0 +1,36 @@
+query getFlimsSideMenu {
+  sideMenuFlims {
+    byDate {
+      info {
+        name
+      }
+      lemonScore
+      slug
+      createdAt
+    }
+    byFresh {
+      info {
+        name
+      }
+      lemonScore
+      slug
+      createdAt
+    }
+    byFuture {
+      info {
+        name
+      }
+      lemonScore
+      slug
+      createdAt
+    }
+    byPopular {
+      info {
+        name
+      }
+      lemonScore
+      slug
+      createdAt
+    }
+  }
+}

@@ -40,16 +40,18 @@
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                 class="block text-black-800 flex items-center"
                 >MORE</span
-              ><span
+              ><b-link
+                href="/top"
                 class="block font-weight-normal text-black-800  flex items-center"
               >
                 Top Movies
-              </span>
-              <span
+              </b-link>
+              <b-link
+                href="/m/list/certified_fresh"
                 class="block font-weight-normal text-black-800  flex items-center"
               >
                 Certified Fresh Movies
-              </span>
+              </b-link>
               <span
                 class="block font-weight-normal text-black-800  flex items-center"
               >
