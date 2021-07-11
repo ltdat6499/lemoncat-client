@@ -135,7 +135,7 @@
                 <b-link
                   v-if="summaryShowMore"
                   style="text-decoration:none;"
-                  @click="summaryShowMore =false "
+                  @click="summaryShowMore = false"
                   ><strong>Read more</strong>
                 </b-link>
               </div>
@@ -278,7 +278,7 @@ export default {
               "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
           else
             item.lemonIcon =
-              "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+              "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
 
           if (item.userScore >= 60)
             item.userIcon =

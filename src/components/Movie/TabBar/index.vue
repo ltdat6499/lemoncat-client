@@ -217,7 +217,7 @@ export default {
               else if (item.lemonScore < 60 && item.lemonScore >= 0)
                 return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
               else
-                return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+                return "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
             })();
             item.lemonScoreDisplay =
               item.lemonScore === -1 ? "_ _" : `${item.lemonScore + "%"}`;
@@ -238,7 +238,7 @@ export default {
               else if (item.lemonScore < 60 && item.lemonScore >= 0)
                 return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
               else
-                return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+                return "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
             })();
             item.lemonScoreDisplay =
               item.lemonScore === -1 ? "_ _" : `${item.lemonScore + "%"}`;
@@ -259,7 +259,7 @@ export default {
               else if (item.lemonScore < 60 && item.lemonScore >= 0)
                 return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
               else
-                return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+                return "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
             })();
             item.lemonScoreDisplay =
               item.lemonScore === -1 ? "_ _" : `${item.lemonScore + "%"}`;
@@ -280,7 +280,7 @@ export default {
               else if (item.lemonScore < 60 && item.lemonScore >= 0)
                 return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
               else
-                return "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+                return "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
             })();
             item.lemonScoreDisplay =
               item.lemonScore === -1 ? "_ _" : `${item.lemonScore + "%"}`;

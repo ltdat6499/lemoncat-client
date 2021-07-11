@@ -20,7 +20,8 @@
     </div>
     <div style="margin:0px 20px">
       <div v-for="item in flims" :key="item.id">
-        <b-link :href="'/m/' + item.slug"
+        <b-link
+          :href="'/m/' + item.slug"
           style="width:100%;text-decoration:none;color:black;display:flex;justify-content:flex-start;align-items: center"
         >
           <span>{{ item.info.name }}</span>
@@ -84,7 +85,7 @@ export default {
               "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
           else
             item.icon =
-              "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+              "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
           return item;
         });
       }

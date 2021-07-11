@@ -30,90 +30,13 @@
                 style="font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-3px"
                 class="block text-black-800 flex items-center"
                 >COLUMNS</span
-              ><span
-                class="block font-weight-normal text-black-800  flex items-center"
               >
-                24 Frames
-              </span>
               <span
+                v-for="item of sections"
+                :key="item"
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                All-Time Lists
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Binge Guide
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Countdown
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Critics Consensus
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Five Favorite Films
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Now Streaming
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Parental Guidance
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Red Carpet Roundup
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Scorecards
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Sub-Cult
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Total Recall
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Video Interviews
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Weekend Box Office
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                Weekly Ketchup
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                What to Watch
-              </span>
-              <span
-                class="block font-weight-normal text-black-800  flex items-center"
-              >
-                The Zeros
+                {{ item }}
               </span>
             </li>
           </ul>
@@ -188,6 +111,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import NewsMenuCard from "@/components/NewsMenuCard";
 export default {
   components: {
@@ -200,7 +124,27 @@ export default {
     return {
       isVisible: false,
       menuItems: null,
-      focusedIndex: 0
+      focusedIndex: 0,
+      sections: _.sortBy([
+        "24 Frames",
+        "All-Time Lists",
+        "Binge Guide",
+        "Countdown",
+        "Comics on TV",
+        "Critics Consensus",
+        "Five Favorite Films",
+        "The Zeros",
+        "Parental Guidance",
+        "Red Carpet Roundup",
+        "Video Interviews",
+        "Weekly Ketchup",
+        "Sub-Cult",
+        "Weekend Box Office",
+        "Scorecards",
+        "Total Recall",
+        "Now Streaming",
+        "What to Watch"
+      ])
     };
   },
   methods: {

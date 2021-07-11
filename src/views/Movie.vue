@@ -935,7 +935,7 @@ export default {
             "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
         else
           this.flim.lemonIcon =
-            "https://live.staticflickr.com/65535/51278655199_4ec122dafd_o.png";
+            "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
 
         if (this.flim.userScore >= 60)
           this.flim.userIcon =
