@@ -1,207 +1,349 @@
 <template>
   <div>
-    <!-- HEADER -->
-    <navbar
-      style="z-index:9999"
-      id="myHeader"
-      class="navbar container"
-    ></navbar>
-    <v-card
-      tile
-      outlined
-      elevation="0"
-      class="container body-container row-style"
-      style="display:block;"
-    >
-      <div
-        style="padding-top:4px;display:flex;align-items:center;z-index:1000;max-height:20px;position:absolute;height:20px;width:100%;background-color:black;opacity:0.6;color:white"
+    <div v-if="!isLoading">
+      <!-- HEADER -->
+      <navbar
+        style="z-index:9999"
+        id="myHeader"
+        class="navbar container"
+      ></navbar>
+      <v-card
+        tile
+        outlined
+        elevation="0"
+        class="container body-container row-style"
+        style="display:block;"
       >
-        <span style="color: #F6DC24;margin-left:10px"
-          ><strong>TRENDING ON LC</strong></span
+        <div
+          style="padding-top:4px;display:flex;align-items:center;z-index:1000;max-height:20px;position:absolute;height:20px;width:100%;background-color:black;opacity:0.6;color:white"
         >
-        <b-link class="trending-link" style="margin-left:10px"
-          >Eternals Trailer
-        </b-link>
-        <b-link class="trending-link" style="margin-left:10px"
-          >Disney Animation Showdown
-        </b-link>
-
-        <b-link class="trending-link" style="margin-left:10px"
-          >TV Premiere Dates
-        </b-link>
-        <b-link class="trending-link" style="margin-left:10px"
-          >The Lemoncat Channel
-        </b-link>
-        <b-link
-          style="text-decoration:none;margin-left: auto;margin-right:10px"
-        >
-          <v-icon dense small style="color:white;">
-            mdi-facebook
-          </v-icon>
-        </b-link>
-        <b-link
-          style="text-decoration:none;margin-left: 10px;margin-right:10px"
-        >
-          <v-icon dense small style="color:white;">
-            mdi-snapchat
-          </v-icon>
-        </b-link>
-        <b-link
-          style="text-decoration:none;margin-left: 10px;margin-right:10px"
-        >
-          <v-icon dense small style="color:white;">
-            mdi-instagram
-          </v-icon>
-        </b-link>
-        <b-link
-          style="text-decoration:none;margin-left: 10px;margin-right:10px"
-        >
-          <v-icon dense small style="color:white;">
-            mdi-twitter
-          </v-icon>
-        </b-link>
-        <b-link
-          style="text-decoration:none;margin-left: 10px;margin-right:10px"
-        >
-          <v-icon dense small style="color:white;">
-            mdi-youtube
-          </v-icon>
-        </b-link>
-      </div>
-    </v-card>
-    <!-- BODY -->
-    <v-card
-      tile
-      outlined
-      elevation="0"
-      class="container body-container row-style"
-    >
-      <b-row style="padding-top:50px">
-        <b-col cols="9" style="padding-right:10px">
-          <header-bar>
-            <span slot="header">NEWS & INTERVIEWS</span>
-          </header-bar>
-          <br />
-          <div style="display:flex;flex-wrap: wrap;margin:10px">
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-            <news-card class="card"></news-card>
-          </div>
-          <hr style="width: 95%;margin-left: auto;margin-right: auto;" />
-          <div
-            style="display: flex;align-items: center;justify-content: space-between;padding:0 20px"
+          <span style="color: #F6DC24;margin-left:10px"
+            ><strong>TRENDING ON LC</strong></span
           >
-            <b-link style="text-decoration:none;">Previous</b-link>
-            <div
-              style="display: flex;align-items: center;justify-content: center"
-            >
-              <span style="margin-right:5px">Showing page: </span>
-              <v-select
-                single-line
-                style="max-width:18%"
-                :items="[1, 2, 3, 4]"
-              ></v-select>
-              <span style="margin-left:5px"> of 4</span>
+          <b-link class="trending-link" style="margin-left:10px"
+            >Eternals Trailer
+          </b-link>
+          <b-link class="trending-link" style="margin-left:10px"
+            >Disney Animation Showdown
+          </b-link>
+
+          <b-link class="trending-link" style="margin-left:10px"
+            >TV Premiere Dates
+          </b-link>
+          <b-link class="trending-link" style="margin-left:10px"
+            >The Lemoncat Channel
+          </b-link>
+          <b-link
+            style="text-decoration:none;margin-left: auto;margin-right:10px"
+          >
+            <v-icon dense small style="color:white;">
+              mdi-facebook
+            </v-icon>
+          </b-link>
+          <b-link
+            style="text-decoration:none;margin-left: 10px;margin-right:10px"
+          >
+            <v-icon dense small style="color:white;">
+              mdi-snapchat
+            </v-icon>
+          </b-link>
+          <b-link
+            style="text-decoration:none;margin-left: 10px;margin-right:10px"
+          >
+            <v-icon dense small style="color:white;">
+              mdi-instagram
+            </v-icon>
+          </b-link>
+          <b-link
+            style="text-decoration:none;margin-left: 10px;margin-right:10px"
+          >
+            <v-icon dense small style="color:white;">
+              mdi-twitter
+            </v-icon>
+          </b-link>
+          <b-link
+            style="text-decoration:none;margin-left: 10px;margin-right:10px"
+          >
+            <v-icon dense small style="color:white;">
+              mdi-youtube
+            </v-icon>
+          </b-link>
+        </div>
+      </v-card>
+      <!-- BODY -->
+      <v-card
+        tile
+        outlined
+        elevation="0"
+        class="container body-container row-style"
+      >
+        <b-row style="padding-top:50px">
+          <b-col cols="9" style="padding-right:10px">
+            <header-bar>
+              <span slot="header">{{ section.toUpperCase() }} NEWS LIST</span>
+            </header-bar>
+            <br />
+            <div style="display:flex;flex-wrap: wrap;margin:10px">
+              <news-card
+                v-for="item of posts"
+                :key="item.slug"
+                :slug="item.slug"
+                :src="item.data.previewPoster"
+                :date="item.createdAt"
+                :name="item.title"
+                class="card"
+              ></news-card>
             </div>
-            <b-link style="text-decoration:none;">Next</b-link>
-          </div>
-        </b-col>
-        <b-col cols="3">
-          <div>
-            <header-bar>
-              <span slot="header">MOVIE & TV NEWS</span>
-            </header-bar>
-            <news-card></news-card> <news-card></news-card
-            ><news-card></news-card> <news-card></news-card>
-            <news-card></news-card> <news-card></news-card
-            ><news-card></news-card> <news-card></news-card>
-            <b-link style="text-decoration:none;float:right;margin-right:20px"
-              >More on LC</b-link
-            >
-          </div>
-          <div>
-            <header-bar>
-              <span slot="header">TAG CLOUD</span>
-            </header-bar>
+            <hr style="width: 95%;margin-left: auto;margin-right: auto;" />
             <div
-              style="border: 0.3px solid gray;margin:3px;display:flex;flex-wrap:wrap"
+              style="display: flex;align-items: center;justify-content: space-between;padding:0 20px"
             >
-              <b-link
-                v-for="item of tags"
-                :key="item"
-                style="margin-right:5px;padding:5px"
-                ><strong>{{ item }}</strong></b-link
+              <b-link @click="previous()" style="text-decoration:none;"
+                ><strong>Previous</strong></b-link
+              >
+              <div
+                style="display: flex;align-items: center;justify-content: center"
+              >
+                <span style="margin-right:5px">Showing page: </span>
+                <v-select
+                  v-model="currentPage"
+                  single-line
+                  style="max-width:18%"
+                  :items="pages"
+                  @change="change()"
+                ></v-select>
+                <span style="margin-left:5px"> of {{ pages.length }}</span>
+              </div>
+              <b-link @click="next()" style="text-decoration:none;"
+                ><strong>Next</strong></b-link
               >
             </div>
-          </div>
-        </b-col>
-      </b-row>
-    </v-card>
-    <!-- FOOTER -->
-    <v-card
-      tile
-      outlined
-      elevation="0"
-      class="container body-container row-style"
-      style="display:block;"
-    >
-      <page-footer />
-    </v-card>
+          </b-col>
+          <b-col cols="3">
+            <div>
+              <header-bar>
+                <span slot="header">FRESH NEWS IN WEEK</span>
+              </header-bar>
+              <side-best-news-week></side-best-news-week>
+            </div>
+          </b-col>
+        </b-row>
+      </v-card>
+      <!-- FOOTER -->
+      <v-card
+        tile
+        outlined
+        elevation="0"
+        class="container body-container row-style"
+        style="display:block;"
+      >
+        <page-footer />
+      </v-card>
+    </div>
+    <loading v-else></loading>
   </div>
 </template>
 
 <script>
-// import getAllUsers from "@/apollo/queries/getAllUsers.gql";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import HeaderBar from "@/components/Movie/HeaderBar";
 import NewsCard from "@/components/NewsCard";
+import Loading from "@/components/Loading";
+import getPreviewPosts from "@/apollo/queries/getPreviewPosts.gql";
+import SideBestNewsWeek from "@/components/SideBestNewsWeek";
 export default {
-  name: "Home",
   components: {
     Navbar,
     PageFooter,
     HeaderBar,
-    NewsCard
-  },
-  computed: {
-    tags() {
-      return this.tagsString.split(" ");
-    }
+    NewsCard,
+    Loading,
+    SideBestNewsWeek
   },
   data() {
     return {
-      tagsString:
-        "gameofthrones FirstLook werewolf Spectrum Originals DC Comics GLAAD CBS All Access laika anthology adaptation GIFs TNT hist Tarantino 007 TCM ghosts justice league 2016 El Rey zombie TCA Winter 2020 Super Bowl Amazon Studios series MCU Disney The Academy festival Endgame Film Festival Best and Worst NBC IFC Films parents Emmy Nominations stop motion jurassic park TV renewals Teen Turner Classic Movies criterion Toys BBC One finale Food Network popular documentary A24 IFC Trivia kids Pop stand-up comedy science fiction cats Holidays cancelled television book adaptation richard e. Grant child's play 2021 Disney Channel The CW Dark Horse Comics Crunchyroll directors superman Legendary Tumblr comiccon Television Critics Association binge worst movies facebook Paramount Network Action boxoffice mission: impossible Mary Poppins Returns Reality disaster NYCC cancelled APB Creative Arts Emmys spain social media Universal Calendar BAFTA E3 Premiere Dates Exclusive Video australia period drama composers The Arrangement hispanic SundanceTV children's TV medical drama 72 Emmy Awards Classic Film Fall TV San Diego Comic-Con indie singing competition cults unscripted FX rotten movies we love know your critic festivals worst christmas movies travel PlayStation award winner reviews DGA Comic Book video on demand WGN boxing Writers Guild of America Sneak Peek Set visit FOX strong female leads Box Office Avengers hollywood canceled TV shows MSNBC ITV The Walking Dead 20th Century Fox universal monsters a nightmare on elm street asian-american Awards Tour Discovery Channel women Fox News Logo Fantasy Watching Series E! YA toronto Baby Yoda Tubi 93rd Oscars Ghostbusters dramedy cancelled TV shows Tomatazos sequels Warner Bros. high school Oscars marvel cinematic universe Opinion diversity Rock japanese nfl Amazon Prime Video Spring TV kaiju The Witch war Countdown TV One Family zombies joker news tv talk aapi LGBT crime Lifetime Christmas movies Winners emmy awards live action revenge DC streaming service cancelled TV series 2019 Masterpiece dceu godzilla TBS mockumentary Academy Awards teaser Anna Paquin Hulu dogs Apple TV Red Carpet docudrama twilight police drama game show Valentine's Day Reality Competition Amazon Prime Animation blaxploitation pirates of the caribbean spy thriller talk show comedies TruTV Black History Month elevated horror Acorn TV movie historical drama vampires casting Television Academy video new star wars movies TCA Esquire Sci-Fi Crackle stoner serial killer 78th Annual Golden Globe Awards SXSW doctor who VICE Superheroes Cannes foreign 21st Century Fox YouTube adventure king kong golden globes Nickelodeon Schedule scary movies Photos Starz Certified Fresh based on movie heist movie comic thriller spanish language chucky Emmys Black Mirror Martial Arts new york Music crime drama james bond Heroines Columbia Pictures supernatural what to watch YouTube Red Disney Plus psychological thriller Trailer 4/20 Elton John GoT Cosplay See It Skip It ratings ESPN First Reviews Netflix Christmas movies TLC all-time Comedy obituary AMC Musical Ovation USA Network Comedy Central nbcuniversal sitcom Brie Larson Apple TV Plus critics renewed TV shows RT History VH1 PBS Biopics Nominations 2015 Funimation 2020 green book Adult Swim X-Men psycho Summer crime thriller MTV black politics latino robots rt archives Quiz Star Wars lord of the rings Character Guide Western mutant ABC Family President Star Trek Disney+ Disney Plus natural history french ViacomCBS Travel Channel Freeform Britbox BBC America Spike RT21 theme song indiana jones CNN OWN south america Holiday fresh superhero nature anime Women's History Month transformers Lucasfilm Nat Geo hidden camera Chernobyl classics versus blockbuster sequel Lifetime kong Peacock Marvel spanish discovery franchise cars Polls and Games Binge Guide streaming Hear Us Out dark Pacific Islander Podcast History Unbreakable Kimmy Schmidt Marathons documentaries cooking PaleyFest Rocketman spider-man Hallmark Christmas movies razzies die hard comics cartoon animated Pop TV Shudder FXX football canceled Mudbound Video Games Syfy true crime Apple TV+ witnail screen actors guild jamie lee curtis TIFF Pixar Sundance TV name the review sports Pride Month slashers Year in Review ABC Signature Drama 99% New York Comic Con YouTube Premium reboot American Society of Cinematographers spinoff DC Universe Fox Searchlight dc TCA 2017 Amazon OneApp italian golden globe awards Showtime DirecTV biography HBO docuseries Chilling Adventures of Sabrina Sundance Paramount Thanksgiving television concert best Walt Disney Pictures BET fast and furious Netflix 71st Emmy Awards remakes Winter TV CMT The Purge Pirates monster movies Extras movies venice TCA Awards scene in color deadpool National Geographic Mary Tyler Moore Pet Sematary 2017 HBO Max cops ID 2018 Disney streaming service Christmas sag awards scorecard political drama WarnerMedia Broadway Country 45 Election prank Captain marvel breaking bad dragons Grammys Marvel Television Shondaland miniseries Paramount Plus Sony Pictures blockbusters Sundance Now 24 frames romance Mindy Kaling FX on Hulu target Arrowverse BET Awards HBO Go Comics on TV quibi Lionsgate free movies Vudu Ellie Kemper Alien Stephen King Horror international USA VOD batman Superheroe Hallmark films technology screenings zero dark thirty ABC archives LGBTQ rotten satire halloween tv independent trailers Trophy Talk harry potter Epix rom-coms comic books saw Rocky cinemax The Walt Disney Company Song of Ice and Fire Infographic Marvel Studios halloween Mary poppins crossover A&E Cartoon Network BBC aliens Interview toy story Kids & Family CW Seed SDCC book Bravo Mystery Film Turner telelvision space Awards CBS TV Land romantic comedy Musicals Rom-Com"
+      posts: [],
+      count: 0,
+      isLoading: true,
+      currentPage: 1,
+      maxPage: 10,
+      perPage: 21,
+      section: "24 Frames",
+      slug: "24-frames"
     };
+  },
+  created() {
+    this.slug = this.$route.params.slug;
+    switch (this.slug) {
+      case "24-frames":
+        this.section = "24 Frames";
+        break;
+      case "all-time-lists":
+        this.section = "All-Time Lists";
+        break;
+      case "countdown":
+        this.section = "Countdown";
+        break;
+      case "binge-guide":
+        this.section = "Binge Guide";
+        break;
+      case "comics-on-tv":
+        this.section = "Comics on TV";
+        break;
+      case "critics-consensus":
+        this.section = "Critics Consensus";
+        break;
+      case "five-favorite-films":
+        this.section = "Five Favorite Films";
+        break;
+      case "the-zeros":
+        this.section = "The Zeros";
+        break;
+      case "parental-guidance":
+        this.section = "Parental Guidance";
+        break;
+      case "red-carpet-roundup":
+        this.section = "Red Carpet Roundup";
+        break;
+      case "video-interviews":
+        this.section = "Video Interviews";
+        break;
+      case "weekly-ketchup":
+        this.section = "Weekly Ketchup";
+        break;
+      case "sub-cult":
+        this.section = "Sub-Cult";
+        break;
+      case "weekend-box-office":
+        this.section = "Weekend Box Office";
+        break;
+      case "scorecards":
+        this.section = "Scorecards";
+        break;
+      case "total-recall":
+        this.section = "Total Recall";
+        break;
+      case "now-streaming":
+        this.section = "Now Streaming";
+        break;
+      case "what-to-watch":
+        this.section = "What to Watch";
+        break;
+      default:
+        break;
+    }
+    document.title = this.section.toUpperCase() + " NEWS - LEMONCAT";
+  },
+  computed: {
+    pages() {
+      const results = [];
+      for (let i = 1; i * this.perPage < this.count; i++) {
+        results.push(i);
+        this.maxPage = i;
+      }
+      return results;
+    }
+  },
+  methods: {
+    next() {
+      if (this.currentPage < this.maxPage) {
+        this.currentPage++;
+        this.isLoading = true;
+        this.$apollo
+          .query({
+            query: getPreviewPosts,
+            variables: {
+              page: this.currentPage || 1,
+              size: this.perPage || 21,
+              type: "news",
+              section: this.section || "24 Frames"
+            }
+          })
+          .then(result => {
+            this.isLoading = true;
+            this.posts = result.data.posts.results || [];
+            this.count = result.data.posts.count || 0;
+            this.isLoading = false;
+          })
+          .catch(() => {})
+          .finally(() => {
+            this.isLoading = false;
+          });
+        this.isLoading = false;
+      }
+    },
+    previous() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.isLoading = true;
+        this.$apollo
+          .query({
+            query: getPreviewPosts,
+            variables: {
+              page: this.currentPage || 1,
+              size: this.perPage || 21,
+              type: "news",
+              section: this.section || "24 Frames"
+            }
+          })
+          .then(result => {
+            this.isLoading = true;
+            this.posts = result.data.posts.results || [];
+            this.count = result.data.posts.count || 0;
+            this.isLoading = false;
+          })
+          .catch(() => {})
+          .finally(() => {
+            this.isLoading = false;
+          });
+        this.isLoading = false;
+      }
+    },
+    change() {
+      this.isLoading = true;
+      this.$apollo
+        .query({
+          query: getPreviewPosts,
+          variables: {
+            page: this.currentPage || 1,
+            size: this.perPage || 21,
+            type: "news",
+            section: this.section || "24 Frames"
+          }
+        })
+        .then(result => {
+          this.isLoading = true;
+          this.posts = result.data.posts.results || [];
+          this.count = result.data.posts.count || 0;
+          this.isLoading = false;
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.isLoading = false;
+        });
+      this.isLoading = false;
+    }
+  },
+  apollo: {
+    posts: {
+      query: getPreviewPosts,
+      variables() {
+        return {
+          page: this.currentPage || 1,
+          size: this.perPage || 21,
+          type: "news",
+          section: this.section || "24 Frames"
+        };
+      },
+      result(result) {
+        this.isLoading = true;
+        this.posts = result.data.posts.results || [];
+        this.count = result.data.posts.count || 0;
+        this.isLoading = false;
+      }
+    }
   }
-
-  // apollo: {
-  //   users: {
-  //     query: getAllUsers,
-  //     result(res) {
-  //       this.msg = res;
-  //     }
-  //   }
-  // }
 };
 </script>
 <style scoped>

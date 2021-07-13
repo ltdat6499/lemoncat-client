@@ -174,7 +174,7 @@ export default {
     slugSections() {
       return this.sections.map(section => ({
         display: section,
-        slug: "/posts/" + section.toLowerCase().replace(" ", "-")
+        slug: "/posts/" + section.toLowerCase().replaceAll(" ", "-")
       }));
     }
   },

@@ -1,0 +1,10 @@
+query getFreshNewsInWeek {
+  freshNewsInWeek {
+    title
+    slug
+    data {
+      previewPoster
+    }
+    createdAt
+  }
+}
