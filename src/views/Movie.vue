@@ -710,9 +710,14 @@
               <div
                 style="padding-left:10px;padding-right:10px;display:flex;justify-content:space-around"
               >
-                <news-card></news-card>
-                <news-card></news-card>
-                <news-card></news-card>
+                <news-card
+                  v-for="item of flim.data.news"
+                  :key="item.slug"
+                  :slug="item.slug"
+                  :src="item.data.previewPoster"
+                  :date="item.createdAt"
+                  :name="item.title"
+                ></news-card>
               </div>
               <b-link
                 style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"

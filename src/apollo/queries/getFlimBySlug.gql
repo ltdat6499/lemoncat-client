@@ -43,26 +43,15 @@ query getFlimBySlug($slug: String) {
       content
     }
     data {
-      # news {
-      #   id
-      #   user {
-      #     id
-      #     name
-      #     image
-      #   }
-      #   title
-      #   content
-      #   data {
-      #     section
-      #     previewPoster
-      #     score
-      #     flim {
-      #       id
-      #       slug
-      #     }
-      #   }
-      #   slug
-      # }
+      news {
+        title
+        content
+        data {
+          section
+          previewPoster
+        }
+        slug
+      }
       trailerPhoto
       rottenTomatoes {
         audienceScore
