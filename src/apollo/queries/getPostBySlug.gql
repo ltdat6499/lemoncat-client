@@ -8,5 +8,43 @@ query getPostBySlug($slug: String) {
     sideTitle
     content
     updatedAt
+    comments {
+      id
+      user {
+        name
+        slug
+        image
+      }
+      content
+      score
+      childComments {
+        id
+        user {
+          name
+          slug
+          image
+        }
+        score
+        content
+      }
+      interacts {
+        user {
+          name
+          slug
+          image
+        }
+        emoji
+        score
+      }
+    }
+    interacts {
+      user {
+        name
+        slug
+        image
+      }
+      emoji
+      score
+    }
   }
 }

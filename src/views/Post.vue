@@ -94,7 +94,7 @@
                 >{{ post.user.name }}</b-link
               >
               <span style="color:gray"> | {{ post.updatedAt }}</span>
-              <b-link style="text-decoration:none;">
+              <b-link href="#comment" style="text-decoration:none;">
                 | <v-icon small>mdi-message</v-icon> Comments</b-link
               >
             </div>
@@ -102,6 +102,7 @@
             <p style="padding:20px"><span v-html="post.content"></span></p>
             <hr style="width: 90%;margin-left: auto;margin-right: auto;" />
             <div
+              id="comment"
               style="width: 90%;margin-left: auto;margin-right: auto;padding-bottom:20px"
             >
               <div style="float:left">
@@ -381,7 +382,7 @@
           <b-col cols="3">
             <div>
               <header-bar>
-                <span slot="header">MOVIE & TV NEWS</span>
+                <span slot="header">FRESH NEWS IN WEEK</span>
               </header-bar>
               <news-card></news-card>
             </div>
@@ -441,6 +442,7 @@ export default {
       result(result) {
         this.post = result.data.postBySlug;
         this.post.updatedAt = moment(this.post.updatedAt).format("LL");
+        document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
       }
     }
