@@ -127,7 +127,7 @@
         <span slot="header">NEWLY CERTIFIED FRESH CLASSICS </span>
       </slider-movie>
       <news-preview>
-        <span slot="header">TRAILERS & VIDEOS </span>
+        <span slot="header">LATEST NEWS </span>
       </news-preview>
       <movie-guide>
         <span slot="header">MOVIE & TV GUIDES </span>

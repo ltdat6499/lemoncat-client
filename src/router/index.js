@@ -101,7 +101,7 @@ export default new Router({
       component: Post
     },
     {
-      path: "/post",
+      path: "/posts/:slug",
       name: "Posts",
       meta: {
         requiresAuth: false

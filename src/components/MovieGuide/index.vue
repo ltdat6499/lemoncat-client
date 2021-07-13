@@ -19,58 +19,16 @@
       </div>
     </div>
     <div style="margin:0px 20px">
-      <b-row>
-        <b-col>
-          <b-link style="text-decoration: none;">
+      <b-row cols="4">
+        <b-col v-for="item of posts" :key="item.slug">
+          <b-link style="text-decoration: none;" :href="'/post/' + item.slug">
             <div
               style="display:flex;flex-direction: column;align-items: center;width:100%"
             >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
+              <img :src="item.data.previewPoster" alt="Rounded image" />
               <h5 class="b-text ">
                 <strong>
-                  Barry Jenkins on Finally Bringing
-                </strong>
-              </h5>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:100%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing
-                </strong>
-              </h5>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:100%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing
-                </strong>
-              </h5>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:100%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing
+                  {{ item.title }}
                 </strong>
               </h5>
             </div>
@@ -80,6 +38,25 @@
     </div>
   </div>
 </template>
+<script>
+import getLatestGuides from "@/apollo/queries/getLatestGuides.gql";
+
+export default {
+  data() {
+    return {
+      posts: []
+    };
+  },
+  apollo: {
+    latestGuides: {
+      query: getLatestGuides,
+      result(result) {
+        this.posts = result.data.latestGuides;
+      }
+    }
+  }
+};
+</script>
 <style scoped>
 .b-text {
   color: #2a2c3e;

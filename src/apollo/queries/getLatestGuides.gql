@@ -1,0 +1,9 @@
+query getLatestGuides {
+  latestGuides {
+    title
+    slug
+    data {
+      previewPoster
+    }
+  }
+}

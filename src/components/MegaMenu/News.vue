@@ -31,13 +31,14 @@
                 class="block text-black-800 flex items-center"
                 >COLUMNS</span
               >
-              <span
-                v-for="item of sections"
+              <b-link
+                v-for="item of slugSections"
                 :key="item"
+                :href="item.slug"
                 class="block font-weight-normal text-black-800  flex items-center"
               >
-                {{ item }}
-              </span>
+                {{ item.display }}
+              </b-link>
             </li>
           </ul>
           <ul style="margin-left:-100px" class="w-full lg:w-1/4 ">
@@ -47,7 +48,7 @@
                   style="display: flex;justify-content: flex-start;font-weight: bold;font-size:17px;margin-bottom:7px;margin-top:-10px"
                   class="block text-black-800 flex items-center"
                 >
-                  BEST AND WORST
+                  24 FRAMES
                 </span>
                 <b-link
                   style="justify-content: flex-end;display: flex;color: rgb(0, 123, 255);"
@@ -57,8 +58,13 @@
               </div>
 
               <div style="margin-left:-20px">
-                <news-menu-card />
-                <news-menu-card />
+                <news-menu-card
+                  v-for="item of result.frames"
+                  :key="item.slug"
+                  :slug="item.slug"
+                  :src="item.data.previewPoster"
+                  :name="item.title"
+                />
               </div>
             </li>
           </ul>
@@ -78,8 +84,13 @@
                 >
               </div>
               <div style="margin-left:-20px">
-                <news-menu-card />
-                <news-menu-card />
+                <news-menu-card
+                  v-for="item of result.guides"
+                  :key="item.slug"
+                  :slug="item.slug"
+                  :src="item.data.previewPoster"
+                  :name="item.title"
+                />
               </div>
             </li>
           </ul>
@@ -99,8 +110,13 @@
                 >
               </div>
               <div style="margin-left:-20px">
-                <news-menu-card />
-                <news-menu-card />
+                <news-menu-card
+                  v-for="item of result.latest"
+                  :key="item.slug"
+                  :slug="item.slug"
+                  :src="item.data.previewPoster"
+                  :name="item.title"
+                />
               </div>
             </li>
           </ul>
@@ -112,7 +128,9 @@
 
 <script>
 import _ from "lodash";
+import getMenuPosts from "@/apollo/queries/getMenuPosts.gql";
 import NewsMenuCard from "@/components/NewsMenuCard";
+
 export default {
   components: {
     NewsMenuCard
@@ -122,6 +140,11 @@ export default {
   },
   data() {
     return {
+      result: {
+        frames: [],
+        guides: [],
+        latest: []
+      },
       isVisible: false,
       menuItems: null,
       focusedIndex: 0,
@@ -146,6 +169,14 @@ export default {
         "What to Watch"
       ])
     };
+  },
+  computed: {
+    slugSections() {
+      return this.sections.map(section => ({
+        display: section,
+        slug: "/posts/" + section.toLowerCase().replace(" ", "-")
+      }));
+    }
   },
   methods: {
     showMenu() {
@@ -172,6 +203,14 @@ export default {
     },
     focusItem() {
       this.menuItems[this.focusedIndex].focus();
+    }
+  },
+  apollo: {
+    menuPosts: {
+      query: getMenuPosts,
+      result(result) {
+        this.result = result.data.menuPosts;
+      }
     }
   }
 };

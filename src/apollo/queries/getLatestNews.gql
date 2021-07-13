@@ -1,0 +1,10 @@
+query getLatestNews {
+  latestNews {
+    sideTitle
+    title
+    slug
+    data {
+      previewPoster
+    }
+  }
+}

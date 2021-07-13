@@ -127,7 +127,7 @@
         <no-menu :name="'LC PODCAST'" />
         <news />
         <no-menu :name="'SHOWTIMES'" />
-        <no-menu v-if="!isLogin" :name="'LOGIN'" />
+        <no-menu v-if="!isLogin" :name="'LOGIN'" :href="'/login'" />
         <avata-login v-else />
       </b-navbar-nav>
     </b-collapse>

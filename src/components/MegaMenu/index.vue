@@ -1,7 +1,7 @@
 <template>
   <div @mouseover="showMenu" @mouseleave="hideMenu">
     <a
-      href="#"
+      :href="href"
       :class="{
         'title-text-hover': isVisible,
         'title-text': !isVisible
@@ -18,6 +18,10 @@ export default {
     name: {
       type: String,
       default: "Sample"
+    },
+    href: {
+      type: String,
+      default: "#"
     }
   },
   mounted() {

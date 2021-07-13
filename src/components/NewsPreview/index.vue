@@ -19,120 +19,20 @@
       </div>
     </div>
     <div style="margin:0px 20px">
-      <b-row>
-        <b-col>
-          <b-link style="text-decoration: none;">
+      <b-row cols="3">
+        <b-col v-for="item of posts" :key="item.slug">
+          <b-link style="text-decoration: none;" :href="'/post/' + item.slug">
             <div
               style="display:flex;flex-direction: column;align-items: center;width:85%"
             >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
+              <img :src="item.data.previewPoster" alt="Rounded image" />
               <h5 class="b-text ">
                 <strong>
-                  Barry Jenkins on Finally Bringing The Underground Railroad to
-                  Screen
+                  {{ item.title }}
                 </strong>
               </h5>
               <span class="b-text ">
-                The Oscar-winning director and star Thuso Mbedu talk adapting
-                the Pulitzer Prize-winning novel
-              </span>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:85%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing The Underground Railroad to
-                  Screen
-                </strong>
-              </h5>
-              <span class="b-text ">
-                The Oscar-winning director and star Thuso Mbedu talk adapting
-                the Pulitzer Prize-winning novel
-              </span>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:85%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing The Underground Railroad to
-                  Screen
-                </strong>
-              </h5>
-              <span class="b-text ">
-                The Oscar-winning director and star Thuso Mbedu talk adapting
-                the Pulitzer Prize-winning novel
-              </span>
-            </div>
-          </b-link>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:85%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing The Underground Railroad to
-                  Screen
-                </strong>
-              </h5>
-              <span class="b-text ">
-                The Oscar-winning director and star Thuso Mbedu talk adapting
-                the Pulitzer Prize-winning novel
-              </span>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:85%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing The Underground Railroad to
-                  Screen
-                </strong>
-              </h5>
-              <span class="b-text ">
-                The Oscar-winning director and star Thuso Mbedu talk adapting
-                the Pulitzer Prize-winning novel
-              </span>
-            </div>
-          </b-link>
-        </b-col>
-        <b-col>
-          <b-link style="text-decoration: none;">
-            <div
-              style="display:flex;flex-direction: column;align-items: center;width:85%"
-            >
-              <img src="../../assets/img/sample-news.jpg" alt="Rounded image" />
-              <h5 class="b-text ">
-                <strong>
-                  Barry Jenkins on Finally Bringing The Underground Railroad to
-                  Screen
-                </strong>
-              </h5>
-              <span class="b-text ">
-                The Oscar-winning director and star Thuso Mbedu talk adapting
-                the Pulitzer Prize-winning novel
+                {{ item.sideTitle }}
               </span>
             </div>
           </b-link>
@@ -141,6 +41,25 @@
     </div>
   </div>
 </template>
+<script>
+import getLatestNews from "@/apollo/queries/getLatestNews.gql";
+
+export default {
+  data() {
+    return {
+      posts: []
+    };
+  },
+  apollo: {
+    latestNews: {
+      query: getLatestNews,
+      result(result) {
+        this.posts = result.data.latestNews;
+      }
+    }
+  }
+};
+</script>
 <style scoped>
 .b-text {
   color: #2a2c3e;

@@ -1,0 +1,25 @@
+query getMenuPosts {
+  menuPosts {
+    frames {
+      data {
+        previewPoster
+      }
+      title
+      slug
+    }
+    guides {
+      data {
+        previewPoster
+      }
+      title
+      slug
+    }
+    latest {
+      data {
+        previewPoster
+      }
+      title
+      slug
+    }
+  }
+}
