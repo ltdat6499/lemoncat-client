@@ -26,6 +26,7 @@ query getPostBySlug($slug: String) {
         }
         score
         content
+        updatedAt
       }
       interacts {
         user {
@@ -36,6 +37,7 @@ query getPostBySlug($slug: String) {
         emoji
         score
       }
+      updatedAt
     }
     interacts {
       user {
