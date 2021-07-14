@@ -61,12 +61,11 @@ export default {
           page: 1,
           size: 1,
           type: "news",
-          collection: this.thisCollection,
-          sortKey: "DATE"
+          section: this.thisCollection
         };
       },
       result(result) {
-        this.post = result.data.posts[0];
+        this.post = result.data.posts.results[0];
       }
     }
   }

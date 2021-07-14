@@ -59,14 +59,11 @@ export default {
           page: 1,
           size: 5,
           type: "news",
-          collection: "Weekly Ketchup",
-          sortKey: "DATE"
+          section: "Weekly Ketchup"
         };
       },
       result(result) {
-        if (result && result.length) {
-          this.posts = result.data.posts;
-        }
+        this.posts = result.data.posts.results;
       }
     }
   }

@@ -1,10 +1,14 @@
 query getNews($page: Int, $size: Int, $type: String, $section: String) {
   posts(page: $page, size: $size, type: $type, section: $section) {
-    title
-    data {
-      previewPoster
+    results {
+      title
+      sideTitle
+      data {
+        previewPoster
+      }
+      slug
+      createdAt
     }
-    slug
-    createdAt
+    count
   }
 }
