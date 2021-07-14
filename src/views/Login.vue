@@ -164,6 +164,9 @@ export default {
       ]
     };
   },
+  created() {
+    if (this.$cookies.get("token") !== null) this.$router.push("/");
+  },
   mounted() {
     const data = this.$route.query.token;
     if (data) {
@@ -189,7 +192,7 @@ export default {
             return;
           }
           this.$cookies.set("token", data);
-          alert(JSON.stringify(this.$cookies.get("token")));
+          // alert(JSON.stringify(this.$cookies.get("token")));
           this.$router.push("/");
         } catch (error) {
           alert(error);

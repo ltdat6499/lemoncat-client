@@ -107,31 +107,25 @@
             >
               <div style="float:left">
                 <div style="display: flex;">
-                  <div style="margin-right:45px">
+                  <div style="margin-right:10px">
                     <img
-                      src="../icons/emoji/love.svg"
+                      v-for="item of post.topInteracts"
+                      :key="item"
+                      :src="item"
                       style="height:20px;width:20px"
-                    />
-                    <img
-                      src="../icons/emoji/care.svg"
-                      style="height:20px;width:20px;position:absolute;left:61px"
-                    />
-                    <img
-                      src="../icons/emoji/haha.svg"
-                      style="height:20px;width:20px;position:absolute;left:78px"
                     />
                   </div>
                   <div>
-                    <b-link style="text-decoration:none;color:gray"
-                      >4,2k</b-link
-                    >
+                    <b-link style="text-decoration:none;color:gray">{{
+                      post.interacts.length
+                    }}</b-link>
                   </div>
                 </div>
               </div>
 
               <div style="float:right">
                 <b-link style="text-decoration:none;color:gray"
-                  >2 Comments</b-link
+                  >{{ post.totalComments }} Comments</b-link
                 >
               </div>
             </div>
@@ -154,9 +148,9 @@
                   >
                     <img class="react-icon" src="../icons/emoji/love.svg" />
                     <img src="../icons/emoji/care.svg" class="react-icon" />
-                    <img src="../icons/emoji/haha.svg" class="react-icon" />
                     <img src="../icons/emoji/wow.svg" class="react-icon" />
                     <img src="../icons/emoji/like.svg" class="react-icon" />
+                    <img src="../icons/emoji/dislike.png" class="react-icon" />
                     <img
                       src="../icons/emoji/angry.svg"
                       class="react-icon"
@@ -256,11 +250,14 @@
                         placement="top"
                         delay="100"
                       >
-                        <img class="react-icon" src="../icons/emoji/love.svg" />
+                        <img src="../icons/emoji/love.svg" class="react-icon" />
                         <img src="../icons/emoji/care.svg" class="react-icon" />
-                        <img src="../icons/emoji/haha.svg" class="react-icon" />
                         <img src="../icons/emoji/wow.svg" class="react-icon" />
                         <img src="../icons/emoji/like.svg" class="react-icon" />
+                        <img
+                          src="../icons/emoji/dislike.png"
+                          class="react-icon"
+                        />
                         <img
                           src="../icons/emoji/angry.svg"
                           class="react-icon"
@@ -325,15 +322,15 @@
                                   class="react-icon"
                                 />
                                 <img
-                                  src="../icons/emoji/haha.svg"
-                                  class="react-icon"
-                                />
-                                <img
                                   src="../icons/emoji/wow.svg"
                                   class="react-icon"
                                 />
                                 <img
                                   src="../icons/emoji/like.svg"
+                                  class="react-icon"
+                                />
+                                <img
+                                  src="../icons/emoji/dislike.png"
                                   class="react-icon"
                                 />
                                 <img
@@ -404,6 +401,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import moment from "moment";
 import getPostBySlug from "@/apollo/queries/getPostBySlug.gql";
 import Navbar from "@/components/Navbar";
@@ -442,6 +440,53 @@ export default {
       result(result) {
         this.post = result.data.postBySlug;
         this.post.updatedAt = moment(this.post.updatedAt).format("LL");
+        const topEmoji = interacts => {
+          const allEmoji = _.uniqBy(interacts.map(item => item.emoji)).map(
+            item => {
+              let count = interacts.filter(item => item.emoji === item).length;
+              return {
+                data: item,
+                count
+              };
+            }
+          );
+          const topEmoji = _.sortBy(allEmoji, ["count"])
+            .reverse()
+            .splice(0, 3);
+          const results = [];
+          for (const { data } of topEmoji) {
+            switch (data) {
+              case "love":
+                results.push(require("../icons/emoji/love.svg"));
+                break;
+              case "care":
+                results.push(require("../icons/emoji/care.svg"));
+                break;
+              case "wow":
+                results.push(require("../icons/emoji/wow.svg"));
+                break;
+              case "like":
+                results.push(require("../icons/emoji/like.svg"));
+                break;
+              case "dislike":
+                results.push(require("../icons/emoji/dislike.png"));
+                break;
+              case "angry":
+                results.push(require("../icons/emoji/angry.svg"));
+                break;
+            }
+          }
+          return results;
+        };
+        const totalComments = comments => {
+          let results = comments.length;
+          for (const item of comments) {
+            if (item.childComments) results += item.childComments.length || 0;
+          }
+          return results;
+        };
+        this.post.topInteracts = topEmoji(this.post.interacts);
+        this.post.totalComments = totalComments(this.post.comments);
         document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
       }

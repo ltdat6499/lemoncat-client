@@ -31,7 +31,12 @@
             </span>
           </b-button>
           <v-divider></v-divider>
-          <b-button tile class="block" variant="outline-danger">
+          <b-button
+            tile
+            class="block"
+            variant="outline-danger"
+            @click="logout()"
+          >
             <span class="title-container">
               <span
                 ><v-icon class="icon">
@@ -49,12 +54,12 @@
 
 <script>
 export default {
-  data: () => ({
-    user: {
-      fullName: "Ly Thanh Dat",
-      email: "ltdat6499@gmail.com"
+  methods: {
+    logout() {
+      this.$cookies.remove("token", "/", "localhost");
+      this.$router.go("/");
     }
-  })
+  }
 };
 </script>
 
