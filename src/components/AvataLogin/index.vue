@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on }">
       <v-btn icon x-large v-on="on">
         <v-avatar>
-          <img src="../../icons/logo.png" />
+          <img :src="image" />
         </v-avatar>
       </v-btn>
     </template>
@@ -53,7 +53,27 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  data() {
+    return {
+      image: require("../../icons/logo.png"),
+      slug: ""
+    };
+  },
+  async created() {
+    if (this.$cookies.get("token") != null) {
+      let data = await axios({
+        method: "post",
+        url: "http://127.0.0.1:3841/profile",
+        data: {
+          token: this.$cookies.get("token")
+        }
+      });
+      this.image = data.data.data.image;
+      this.slug = data.data.data.slug;
+    }
+  },
   methods: {
     logout() {
       this.$cookies.remove("token", "/", "localhost");
