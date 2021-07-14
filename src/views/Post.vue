@@ -517,14 +517,10 @@ export default {
         const mapComments = comments => {
           return comments.map(item => {
             item.fromNow = moment(item.updatedAt).fromNow();
-            item.content = item.content
-              .replaceAll(".", " ")
-              .replaceAll("/", " ")
-              .replaceAll("_", " ")
-              .replaceAll("(", " ")
-              .replaceAll(")", " ")
-              .replaceAll("%", " ")
-              .replaceAll(":", " ");
+            item.content = item.content.replace(
+              /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
+              " "
+            );
             return item;
           });
         };
