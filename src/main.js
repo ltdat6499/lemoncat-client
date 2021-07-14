@@ -22,6 +22,7 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "viewerjs/dist/viewer.css";
 
 import App from "./App";
+import store from "./store"
 import router from "./router";
 
 Vue.use(VueCookies);
@@ -79,6 +80,7 @@ router.beforeEach((to, from, next) => {
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
+  store,
   router,
   apolloProvider,
   components: { App },

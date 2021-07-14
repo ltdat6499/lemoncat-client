@@ -1,14 +1,14 @@
 <template>
-  <v-menu open-on-hover bottom right min-width="110px" rounded offset-y>
+  <v-menu v-if="user.id !== ''" open-on-hover bottom right min-width="110px" rounded offset-y>
     <template v-slot:activator="{ on }">
       <v-btn icon x-large v-on="on">
         <v-avatar>
-          <img :src="image" />
+          <img :src="user.image" />
         </v-avatar>
       </v-btn>
     </template>
     <v-card>
-      <v-list-item-content>
+      <div>
         <div class="mx-auto">
           <b-button tile class="block" variant="outline-success">
             <span class="title-container">
@@ -47,36 +47,31 @@
             </span>
           </b-button>
         </div>
-      </v-list-item-content>
+      </div>
     </v-card>
   </v-menu>
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  data() {
-    return {
-      image: require("../../icons/logo.png"),
-      slug: ""
-    };
-  },
-  async created() {
-    if (this.$cookies.get("token") != null) {
-      let data = await axios({
-        method: "post",
-        url: "http://127.0.0.1:3841/profile",
-        data: {
-          token: this.$cookies.get("token")
-        }
-      });
-      this.image = data.data.data.image;
-      this.slug = data.data.data.slug;
+  // created() {
+  //   console.log(this.$store.state.user);
+  // },
+  computed: {
+    user() {
+      return this.$store.state.user;
     }
   },
   methods: {
     logout() {
       this.$cookies.remove("token", "/", "localhost");
+      this.$store.dispatch("handleUpdateUser", {
+        id: "",
+        image: "",
+        name: "",
+        email: "",
+        slug: ""
+      });
       this.$router.go("/");
     }
   }

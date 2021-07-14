@@ -30,16 +30,16 @@
           <v-card class="px-4">
             <v-card-text>
               <v-form ref="loginForm" v-model="valid" lazy-validation>
-                <v-row>
-                  <v-col cols="12">
+                <b-row>
+                  <b-col cols="12">
                     <v-text-field
                       v-model="loginEmail"
                       :rules="loginEmailRules"
                       label="E-mail"
                       required
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
+                  </b-col>
+                  <b-col cols="12">
                     <v-text-field
                       v-model="loginPassword"
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -50,10 +50,10 @@
                       counter
                       @click:append="show1 = !show1"
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="12"> </v-col>
+                  </b-col>
+                  <b-col cols="12"> </b-col>
                   <v-spacer></v-spacer>
-                  <v-col cols="12" align-end>
+                  <b-col cols="12" align-end>
                     <v-btn
                       x-large
                       block
@@ -63,8 +63,8 @@
                     >
                       Login
                     </v-btn>
-                  </v-col>
-                </v-row>
+                  </b-col>
+                </b-row>
               </v-form>
               <v-spacer></v-spacer>
               <span>Or Login with</span>
@@ -78,8 +78,8 @@
           <v-card class="px-4">
             <v-card-text>
               <v-form ref="registerForm" v-model="valid" lazy-validation>
-                <v-row>
-                  <v-col cols="12">
+                <b-row>
+                  <b-col cols="12">
                     <v-text-field
                       v-model="name"
                       :rules="[rules.required]"
@@ -87,16 +87,16 @@
                       maxlength="20"
                       required
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
+                  </b-col>
+                  <b-col cols="12">
                     <v-text-field
                       v-model="email"
                       :rules="emailRules"
                       label="E-mail"
                       required
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
+                  </b-col>
+                  <b-col cols="12">
                     <v-text-field
                       v-model="password"
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -107,8 +107,8 @@
                       counter
                       @click:append="show1 = !show1"
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
+                  </b-col>
+                  <b-col cols="12">
                     <v-text-field
                       block
                       v-model="verify"
@@ -119,9 +119,9 @@
                       counter
                       @click:append="show1 = !show1"
                     ></v-text-field>
-                  </v-col>
+                  </b-col>
                   <v-spacer></v-spacer>
-                  <v-col cols="12">
+                  <b-col cols="12">
                     <v-btn
                       x-large
                       block
@@ -130,8 +130,8 @@
                       @click="validate"
                       >Register</v-btn
                     >
-                  </v-col>
-                </v-row>
+                  </b-col>
+                </b-row>
               </v-form>
             </v-card-text>
           </v-card>
@@ -191,7 +191,22 @@ export default {
             this.snackbar = true;
             return;
           }
+          let res = await axios({
+            method: "post",
+            url: "http://127.0.0.1:3841/profile",
+            data: {
+              token: this.$cookies.get("token")
+            }
+          });
           this.$cookies.set("token", data);
+          const user = {
+            id: res.data.data.id,
+            image: res.data.data.image,
+            name: res.data.data.name,
+            email: res.data.data.email,
+            slug: res.data.data.slug
+          };
+          this.$store.dispatch("handleUpdateUser", user);
           // alert(JSON.stringify(this.$cookies.get("token")));
           this.$router.push("/");
         } catch (error) {

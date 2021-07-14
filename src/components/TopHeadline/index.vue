@@ -23,147 +23,147 @@
         <b-col>
           <v-list>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/m/list/netflix"
                     >The 100 Best Movies on Netflix Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/m/list/amazon_prime_video_us"
                     >The 100 Best Movies on Amazon Prime Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/m/list/disney"
                     >The 100 Best Movies on Disney+ Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
           </v-list>
         </b-col>
         <b-col>
           <v-list>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/m/list/hulu"
                     >The 100 Best Movies on Hulu Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/m/list/hbo_max"
                     >The 100 Best Movies on HBO MAX Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/m/list/itunes"
                     >The 100 Best Movies on Paramount Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
           </v-list>
         </b-col>
         <b-col>
           <v-list>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/top/all/sci-fi"
                     >The 100 Best Sci-fi Movies Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/top/all/horror"
                     >The 100 Best Horror Movies Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
             <div style="display:flex">
-              <v-list-item-action>
+              <div>
                 <v-icon>mdi-circle-small</v-icon>
-              </v-list-item-action>
+              </div>
 
-              <v-list-item-content>
-                <v-list-item-title
+              <div>
+                <div
                   ><b-link
                     style="text-decoration:none;color:#000000"
                     href="/top/all/anime"
                     >The 100 Best Anime Movies Right Now</b-link
-                  ></v-list-item-title
+                  ></div
                 >
-              </v-list-item-content>
+              </div>
             </div>
           </v-list>
         </b-col>

@@ -1,5 +1,5 @@
 <template>
-  <div @mouseover="showMenu" @mouseleave="hideMenu">
+  <div v-if="!isLoading" @mouseover="showMenu" @mouseleave="hideMenu">
     <a
       href="#"
       :class="{
@@ -33,7 +33,7 @@
               >
               <b-link
                 v-for="item of slugSections"
-                :key="item"
+                :key="'slugSections' + item.slug"
                 :href="item.slug"
                 class="block font-weight-normal text-black-800  flex items-center"
               >
@@ -60,7 +60,7 @@
               <div style="margin-left:-20px">
                 <news-menu-card
                   v-for="item of result.frames"
-                  :key="item.slug"
+                  :key="'result.frames' + item.slug"
                   :slug="item.slug"
                   :src="item.data.previewPoster"
                   :name="item.title"
@@ -86,7 +86,7 @@
               <div style="margin-left:-20px">
                 <news-menu-card
                   v-for="item of result.guides"
-                  :key="item.slug"
+                  :key="'result.guides' + item.slug"
                   :slug="item.slug"
                   :src="item.data.previewPoster"
                   :name="item.title"
@@ -112,7 +112,7 @@
               <div style="margin-left:-20px">
                 <news-menu-card
                   v-for="item of result.latest"
-                  :key="item.slug"
+                  :key="'result.latest' + item.slug"
                   :slug="item.slug"
                   :src="item.data.previewPoster"
                   :name="item.title"
@@ -140,6 +140,7 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       result: {
         frames: [],
         guides: [],
@@ -210,6 +211,7 @@ export default {
       query: getMenuPosts,
       result(result) {
         this.result = result.data.menuPosts;
+        this.isLoading = false;
       }
     }
   }

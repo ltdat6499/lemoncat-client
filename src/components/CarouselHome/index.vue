@@ -13,12 +13,12 @@
           height="100%"
           tile
         >
-          <v-row
+          <b-row
             style="z-index:999;position: absolute;display:flex;align-items: flex-end;width:100%"
             class="fill-height"
           >
             <div
-              style="overflow: hidden;display:block;border-left: 5px solid #24BA3A;margin-bottom:45px;background-color:black;width:100%;height:30%;margin-left:10%;margin-right:10%;background-color: rgba(0,0,0,.5);color:white;padding:10px"
+              style="overflow: hidden;display:block;border-left: 5px solid #24BA3A;margin-bottom:45px;background-color:black;width:100%;height:30%;margin-left:5%;margin-right:5%;background-color: rgba(0,0,0,.5);color:white;padding:10px;max-width:90%"
             >
               <div
                 style="display: flex;justify-content:flex-start;align-items: flex-start;flex-direction:column;"
@@ -31,7 +31,7 @@
                 </p>
               </div>
             </div>
-          </v-row>
+          </b-row>
           <v-img
             :src="item.data.previewPoster"
             height="100%"

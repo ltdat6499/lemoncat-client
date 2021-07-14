@@ -177,7 +177,7 @@ export default {
         }
       });
       data = data.data || {};
-      console.log(data.person);
+      // console.log(data.person);
       this.searchResult = {
         flims: data.flim || [],
         persons: data.person || [],
