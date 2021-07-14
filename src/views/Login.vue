@@ -191,6 +191,7 @@ export default {
             this.snackbar = true;
             return;
           }
+          this.$cookies.set("token", data);
           let res = await axios({
             method: "post",
             url: "http://127.0.0.1:3841/profile",
@@ -198,7 +199,7 @@ export default {
               token: this.$cookies.get("token")
             }
           });
-          this.$cookies.set("token", data);
+          
           const user = {
             id: res.data.data.id,
             image: res.data.data.image,
