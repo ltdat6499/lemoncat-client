@@ -107,7 +107,7 @@
                 style="width: 90%;margin-left: auto;margin-right: auto;padding-bottom:20px"
               >
                 <div style="float:left">
-                  <div style="display: flex;">
+                  <div style="display: flex;" v-b-modal="'modal'">
                     <div style="margin-right:10px">
                       <img
                         v-for="item of post.topInteracts"
@@ -262,6 +262,7 @@
                         >
                         <b-link
                           v-if="item.interacts.length"
+                          v-b-modal="'modal-comment-' + item.id"
                           style="float:right;text-decoration:none;color:gray;"
                           ><img
                             v-for="interactItem of item.topInteracts"
@@ -305,12 +306,74 @@
                       </div>
                       <!-- Child comments -->
                       <div>
-                        <!-- Comment -->
                         <div style="margin-top:7px">
                           <b-row
                             v-for="child of item.childComments"
                             :key="child.id"
                           >
+                            <!-- Child modal -->
+                            <b-modal
+                              size="md"
+                              hide-footer
+                              hide-header
+                              :id="'modal-comment-child-' + child.id"
+                              centered
+                            >
+                              <v-tabs>
+                                <v-tabs-slider color="green"></v-tabs-slider>
+
+                                <v-tab
+                                  v-for="detailInteract in child.detailInteracts"
+                                  :key="detailInteract.emoji"
+                                >
+                                  <div
+                                    style="display:flex;justify-content:center; align-items: center;"
+                                  >
+                                    <img
+                                      :src="detailInteract.image"
+                                      style="height:25px;width:25px;margin-right:8px"
+                                    />
+                                    <strong
+                                      :style="
+                                        'font-size: 18px;color:' +
+                                          detailInteract.color
+                                      "
+                                    >
+                                      {{ detailInteract.data.length }}
+                                    </strong>
+                                  </div>
+                                </v-tab>
+                                <v-tab-item
+                                  style="margin-top: 10px"
+                                  v-for="detailInteract in child.detailInteracts"
+                                  :key="detailInteract.emoji"
+                                >
+                                  <b-link
+                                    v-for="user in detailInteract.data"
+                                    :key="user.id"
+                                    :href="'/user/' + user.slug"
+                                    style="display:flex;align-items: center;text-decoration: none;margin-bottom: 5px"
+                                  >
+                                    <img
+                                      :src="user.image"
+                                      style="width:40px;height:40px;border-radius:50%;margin-right:10px"
+                                    />
+                                    <strong style="font-size: 17px;"
+                                      >{{ user.name }}
+                                      <span v-if="user.role === 's-user'">
+                                        <v-icon style="color:red"
+                                          >mdi-star</v-icon
+                                        >
+                                        <i style="color:red"
+                                          >Working for
+                                          {{ user.data.working }}</i
+                                        >
+                                      </span></strong
+                                    >
+                                  </b-link>
+                                </v-tab-item>
+                              </v-tabs>
+                            </b-modal>
                             <b-col
                               v-if="child.show === true"
                               style="margin-left:0px!important"
@@ -358,6 +421,7 @@
                                   ><strong>{{ child.fromNow }}</strong></b-link
                                 >
                                 <b-link
+                                  v-b-modal="'modal-comment-child-' + child.id"
                                   v-if="child.interacts.length"
                                   style="float:right;text-decoration:none;color:gray;"
                                   ><img
@@ -433,6 +497,66 @@
                             ></b-link
                           >
                         </div>
+                        <!-- Comment Modal -->
+                        <b-modal
+                          size="md"
+                          hide-footer
+                          hide-header
+                          :id="'modal-comment-' + item.id"
+                          centered
+                        >
+                          <v-tabs>
+                            <v-tabs-slider color="green"></v-tabs-slider>
+
+                            <v-tab
+                              v-for="detailInteract in item.detailInteracts"
+                              :key="detailInteract.emoji"
+                            >
+                              <div
+                                style="display:flex;justify-content:center; align-items: center;"
+                              >
+                                <img
+                                  :src="detailInteract.image"
+                                  style="height:25px;width:25px;margin-right:8px"
+                                />
+                                <strong
+                                  :style="
+                                    'font-size: 18px;color:' +
+                                      detailInteract.color
+                                  "
+                                >
+                                  {{ detailInteract.data.length }}
+                                </strong>
+                              </div>
+                            </v-tab>
+                            <v-tab-item
+                              style="margin-top: 10px"
+                              v-for="detailInteract in item.detailInteracts"
+                              :key="detailInteract.emoji"
+                            >
+                              <b-link
+                                v-for="user in detailInteract.data"
+                                :key="user.id"
+                                :href="'/user/' + user.slug"
+                                style="display:flex;align-items: center;text-decoration: none;margin-bottom: 5px"
+                              >
+                                <img
+                                  :src="user.image"
+                                  style="width:40px;height:40px;border-radius:50%;margin-right:10px"
+                                />
+                                <strong style="font-size: 17px;"
+                                  >{{ user.name }}
+                                  <span v-if="user.role === 's-user'">
+                                    <v-icon style="color:red">mdi-star</v-icon>
+                                    <i style="color:red"
+                                      >Working for {{ user.data.working }}</i
+                                    >
+                                  </span></strong
+                                >
+                              </b-link>
+                            </v-tab-item>
+                          </v-tabs>
+                        </b-modal>
                       </div>
                     </b-col>
                   </b-row>
@@ -450,6 +574,63 @@
                       ></b-link
                     >
                   </div>
+                  <!-- Post Modal -->
+                  <b-modal
+                    size="md"
+                    hide-footer
+                    hide-header
+                    id="modal"
+                    centered
+                  >
+                    <v-tabs>
+                      <v-tabs-slider color="green"></v-tabs-slider>
+
+                      <v-tab
+                        v-for="item in post.detailInteracts"
+                        :key="item.emoji"
+                      >
+                        <div
+                          style="display:flex;justify-content:center; align-items: center;"
+                        >
+                          <img
+                            :src="item.image"
+                            style="height:25px;width:25px;margin-right:8px"
+                          />
+                          <strong
+                            :style="'font-size: 18px;color:' + item.color"
+                          >
+                            {{ item.data.length }}
+                          </strong>
+                        </div>
+                      </v-tab>
+                      <v-tab-item
+                        style="margin-top: 10px"
+                        v-for="item in post.detailInteracts"
+                        :key="item.emoji"
+                      >
+                        <b-link
+                          v-for="user in item.data"
+                          :key="user.id"
+                          :href="'/user/' + user.slug"
+                          style="display:flex;align-items: center;text-decoration: none;"
+                        >
+                          <img
+                            :src="user.image"
+                            style="width:40px;height:40px;border-radius:50%;margin-right:10px"
+                          />
+                          <strong style="font-size: 17px;"
+                            >{{ user.name }}
+                            <span v-if="user.role === 's-user'">
+                              <v-icon style="color:red">mdi-star</v-icon>
+                              <i style="color:red"
+                                >Working for {{ user.data.working }}</i
+                              >
+                            </span></strong
+                          >
+                        </b-link>
+                      </v-tab-item>
+                    </v-tabs>
+                  </b-modal>
                 </div>
               </div>
               <div
@@ -596,6 +777,81 @@ export default {
           }
           return results;
         };
+        const interactsDetail = [
+          {
+            emoji: "love",
+            color: "#ED2E4E",
+            image: require("../icons/emoji/love.svg"),
+            data: []
+          },
+          {
+            emoji: "care",
+            color: "#F7B126",
+            image: require("../icons/emoji/care.svg"),
+            data: []
+          },
+          {
+            emoji: "wow",
+            color: "#F7B126",
+            image: require("../icons/emoji/wow.svg"),
+            data: []
+          },
+          {
+            emoji: "like",
+            color: "#1D69F8",
+            image: require("../icons/emoji/like.svg"),
+            data: []
+          },
+          {
+            emoji: "dislike",
+            color: "red",
+            image: require("../icons/emoji/dislike.png"),
+            data: []
+          },
+          {
+            emoji: "angry",
+            color: "#E85E07",
+            image: require("../icons/emoji/angry.svg"),
+            data: []
+          }
+        ];
+        const createDetailInteracts = interacts => {
+          const results = JSON.parse(JSON.stringify(interactsDetail));
+          for (const item of interacts) {
+            switch (item.emoji) {
+              case "love":
+                results[0].data.push(item.user);
+                break;
+              case "care":
+                results[1].data.push(item.user);
+                break;
+              case "wow":
+                results[2].data.push(item.user);
+                break;
+              case "like":
+                results[3].data.push(item.user);
+                break;
+              case "dislike":
+                results[4].data.push(item.user);
+                break;
+              case "angry":
+                results[5].data.push(item.user);
+                break;
+              default:
+                break;
+            }
+          }
+          const final = [];
+          for (const item of results) {
+            if (item.data.length) final.push(item);
+          }
+          for (const item of final) {
+            if (item.data.length) {
+              item.data = _.sortBy(item.data, ["role"]);
+            }
+          }
+          return final;
+        };
         const mapComments = (comments, isChild = false) => {
           return comments.map(item => {
             if (!isChild) {
@@ -608,6 +864,7 @@ export default {
             item.reply = false;
             item.replyContent = "";
             item.score = parseFloat(item.score);
+            item.detailInteracts = createDetailInteracts(item.interacts);
             item.fromNow = moment(item.updatedAt).fromNow();
             item.content = item.content.replace(
               /[`~!#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
@@ -626,9 +883,12 @@ export default {
         if (this.post.comments.length > 3) this.post.showAllChilds = false;
         this.post.comments = mapComments(this.post.comments);
         this.post.comments = sortComments(this.post.comments);
+        this.post.detailInteracts = createDetailInteracts(this.post.interacts);
+        this.post.interactsTab = this.post.detailInteracts[0];
         for (const comment of this.post.comments) {
           comment.childComments = mapComments(comment.childComments, true);
           comment.childComments = sortComments(comment.childComments);
+          comment.interactsTab = comment.detailInteracts[0];
         }
         document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
