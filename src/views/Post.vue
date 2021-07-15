@@ -860,7 +860,8 @@ export default {
       isLoading: true,
       slug: "",
       selected: "Top",
-      basePost: {}
+      basePost: {},
+      rawPost: {}
     };
   },
   created() {
@@ -903,9 +904,201 @@ export default {
       this.post = data;
     },
     createAction(type, parentType, parent, data) {
+      const topEmoji = interacts => {
+        const allEmoji = _.uniqBy(interacts.map(item => item.emoji)).map(
+          item => {
+            let count = interacts.filter(item => item.emoji === item).length;
+            return {
+              data: item,
+              count
+            };
+          }
+        );
+        const topEmoji = _.sortBy(allEmoji, ["count"])
+          .reverse()
+          .splice(0, 3);
+        const results = [];
+        for (const { data } of topEmoji) {
+          switch (data) {
+            case "love":
+              results.push(require("../icons/emoji/love.svg"));
+              break;
+            case "care":
+              results.push(require("../icons/emoji/care.svg"));
+              break;
+            case "wow":
+              results.push(require("../icons/emoji/wow.svg"));
+              break;
+            case "like":
+              results.push(require("../icons/emoji/like.svg"));
+              break;
+            case "dislike":
+              results.push(require("../icons/emoji/dislike.png"));
+              break;
+            case "angry":
+              results.push(require("../icons/emoji/angry.svg"));
+              break;
+          }
+        }
+        return results;
+      };
+      const totalComments = comments => {
+        let results = comments.length;
+        for (const item of comments) {
+          if (item.childComments) results += item.childComments.length || 0;
+        }
+        return results;
+      };
+      const interactsDetail = [
+        {
+          emoji: "love",
+          color: "#ED2E4E",
+          image: require("../icons/emoji/love.svg"),
+          data: []
+        },
+        {
+          emoji: "care",
+          color: "#F7B126",
+          image: require("../icons/emoji/care.svg"),
+          data: []
+        },
+        {
+          emoji: "wow",
+          color: "#F7B126",
+          image: require("../icons/emoji/wow.svg"),
+          data: []
+        },
+        {
+          emoji: "like",
+          color: "#1D69F8",
+          image: require("../icons/emoji/like.svg"),
+          data: []
+        },
+        {
+          emoji: "dislike",
+          color: "red",
+          image: require("../icons/emoji/dislike.png"),
+          data: []
+        },
+        {
+          emoji: "angry",
+          color: "#E85E07",
+          image: require("../icons/emoji/angry.svg"),
+          data: []
+        }
+      ];
+      const createDetailInteracts = interacts => {
+        const results = JSON.parse(JSON.stringify(interactsDetail));
+        for (const item of interacts) {
+          switch (item.emoji) {
+            case "love":
+              results[0].data.push(item.user);
+              break;
+            case "care":
+              results[1].data.push(item.user);
+              break;
+            case "wow":
+              results[2].data.push(item.user);
+              break;
+            case "like":
+              results[3].data.push(item.user);
+              break;
+            case "dislike":
+              results[4].data.push(item.user);
+              break;
+            case "angry":
+              results[5].data.push(item.user);
+              break;
+            default:
+              break;
+          }
+        }
+        const final = [];
+        for (const item of results) {
+          if (item.data.length) final.push(item);
+        }
+        for (const item of final) {
+          if (item.data.length) {
+            item.data = _.sortBy(item.data, ["role"]);
+          }
+        }
+        return final;
+      };
+      const mapComments = (comments, isChild = false) => {
+        return comments.map(item => {
+          if (!isChild) {
+            item.showAllChilds = true;
+            if (item.childComments.length > 3) item.showAllChilds = false;
+          }
+          item.show = true;
+          const index = _.findIndex(comments, ["id", item.id]);
+          if (index > 2) item.show = false;
+          item.reply = false;
+          item.replyContent = "";
+          item.score = parseFloat(item.score);
+          item.detailInteracts = createDetailInteracts(item.interacts);
+          item.fromNow = moment(item.updatedAt).fromNow();
+          item.content = item.content.replace(
+            /[`~!#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
+            " "
+          );
+          item.topInteracts = topEmoji(item.interacts);
+          const ownerInteract = _.find(item.interacts, [
+            "user.id",
+            this.user.id
+          ]);
+          if (ownerInteract) {
+            let userInteract = {};
+            switch (ownerInteract.emoji) {
+              case "love":
+                userInteract = {
+                  color: "#ED2E4E",
+                  emoji: "Love"
+                };
+                break;
+              case "care":
+                userInteract = {
+                  color: "#F7B126",
+                  emoji: "Care"
+                };
+                break;
+              case "wow":
+                userInteract = {
+                  color: "#F7B126",
+                  emoji: "Wow"
+                };
+                break;
+              case "like":
+                userInteract = {
+                  color: "#1D69F8",
+                  emoji: "Like"
+                };
+                break;
+              case "dislike":
+                userInteract = {
+                  color: "red",
+                  emoji: "Dislike"
+                };
+                break;
+              case "angry":
+                userInteract = {
+                  color: "#E85E07",
+                  emoji: "Angry"
+                };
+                break;
+            }
+            item.ownerInteract = userInteract;
+          }
+          return item;
+        });
+      };
+      const sortComments = comments => {
+        return _.sortBy(comments, ["score"]).reverse();
+      };
       if (type === "interact") {
         const interact = {
           user: {
+            id: this.user.id,
             name: this.user.name,
             slug: this.user.slug,
             image: this.user.image,
@@ -915,9 +1108,96 @@ export default {
           emoji: data,
           score: this.user.role === "s-user" ? 100 : 1
         };
-        console.log("🚀 -------------------------------------");
-        console.log("🚀 ~ createAction ~ interact", interact);
-        console.log("🚀 -------------------------------------");
+        if (parentType === "post") {
+          const interactIndex = _.findIndex(this.rawPost.interacts, [
+            "user.id",
+            this.user.id
+          ]);
+          console.log('🚀 -----------------------------------------------')
+          console.log('🚀 ~ createAction ~ interactIndex', interactIndex)
+          console.log('🚀 -----------------------------------------------')
+          if (interactIndex != -1) {
+            this.rawPost.interacts[interactIndex].emoji = data;
+          } else {
+            this.rawPost.interacts.push(interact);
+          }
+          this.isLoading = true;
+
+          this.post = JSON.parse(JSON.stringify(this.rawPost));
+          this.post.updatedAt = moment(this.post.updatedAt).format("LL");
+          const ownerInteract = _.find(this.post.interacts, [
+            "user.id",
+            this.user.id
+          ]);
+          if (ownerInteract) {
+            let userInteract = {};
+            switch (ownerInteract.emoji) {
+              case "love":
+                userInteract = {
+                  color: "#ED2E4E",
+                  emoji: "Love",
+                  image: require("../icons/emoji/love.svg")
+                };
+                break;
+              case "care":
+                userInteract = {
+                  color: "#F7B126",
+                  emoji: "Care",
+                  image: require("../icons/emoji/care.svg")
+                };
+                break;
+              case "wow":
+                userInteract = {
+                  color: "#F7B126",
+                  emoji: "Wow",
+                  image: require("../icons/emoji/wow.svg")
+                };
+                break;
+              case "like":
+                userInteract = {
+                  color: "#1D69F8",
+                  emoji: "Like",
+                  image: require("../icons/emoji/like.svg")
+                };
+                break;
+              case "dislike":
+                userInteract = {
+                  color: "red",
+                  emoji: "Dislike",
+                  image: require("../icons/emoji/dislike.png")
+                };
+                break;
+              case "angry":
+                userInteract = {
+                  color: "#E85E07",
+                  emoji: "Angry",
+                  image: require("../icons/emoji/angry.svg")
+                };
+                break;
+            }
+            this.post.ownerInteract = userInteract;
+          }
+          this.post.replyContent = "";
+          this.post.topInteracts = topEmoji(this.post.interacts);
+          this.post.totalComments = totalComments(this.post.comments);
+          this.post.showAllChilds = true;
+          if (this.post.comments.length > 3) this.post.showAllChilds = false;
+          this.post.comments = mapComments(this.post.comments);
+          this.post.detailInteracts = createDetailInteracts(
+            this.post.interacts
+          );
+          for (const comment of this.post.comments) {
+            comment.childComments = mapComments(comment.childComments, true);
+          }
+          this.basePost = JSON.parse(JSON.stringify(this.post));
+
+          this.post.comments = sortComments(this.post.comments);
+          for (const comment of this.post.comments) {
+            comment.childComments = sortComments(comment.childComments);
+          }
+          this.post = JSON.parse(JSON.stringify(this.post));
+          this.isLoading = false;
+        }
       }
       console.log(type, parentType, parent, data);
     }
@@ -932,6 +1212,8 @@ export default {
       },
       result(result) {
         this.post = result.data.postBySlug;
+        this.rawPost = JSON.parse(JSON.stringify(result.data.postBySlug));
+
         this.post.updatedAt = moment(this.post.updatedAt).format("LL");
         const topEmoji = interacts => {
           const allEmoji = _.uniqBy(interacts.map(item => item.emoji)).map(
@@ -1192,7 +1474,6 @@ export default {
         for (const comment of this.post.comments) {
           comment.childComments = sortComments(comment.childComments);
         }
-        this.basePost = JSON.parse(JSON.stringify(this.post));
         document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
       }
