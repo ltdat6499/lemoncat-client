@@ -24,6 +24,15 @@ query getPostBySlug($slug: String) {
           slug
           image
         }
+        interacts {
+          id
+          user {
+            name
+            slug
+            image
+          }
+          emoji
+        }
         score
         content
         updatedAt

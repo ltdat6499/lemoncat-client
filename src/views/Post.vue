@@ -206,6 +206,7 @@
                   <!-- Comments -->
                   <b-row v-for="item of post.comments" :key="item.id">
                     <b-col
+                      v-if="item.show === true"
                       style="margin-left:0px!important"
                       class="no-gutters"
                       cols="1"
@@ -214,6 +215,7 @@
                         style="height:35px;width:35px;float:left;border-radius: 50%"
                     /></b-col>
                     <b-col
+                      v-if="item.show === true"
                       class="no-gutters"
                       cols="11"
                       style="display:flex;flex-direction:column"
@@ -248,6 +250,17 @@
                           style="text-decoration:none;color:gray;float:left;font-size:12px"
                           ><strong>{{ item.fromNow }}</strong></b-link
                         >
+                        <b-link
+                          v-if="item.interacts.length"
+                          style="float:right;text-decoration:none;color:gray;"
+                          ><img
+                            v-for="interactItem of item.topInteracts"
+                            :key="interactItem"
+                            :src="interactItem"
+                            style="height:15px;width:14px"
+                          />
+                          <span>{{ item.interacts.length }}</span>
+                        </b-link>
                         <b-popover
                           :target="'popover-id-' + item.id"
                           triggers="hover"
@@ -283,12 +296,13 @@
                       <!-- Child comments -->
                       <div>
                         <!-- Comment -->
-                        <div>
+                        <div style="margin-top:7px">
                           <b-row
                             v-for="child of item.childComments"
                             :key="child.id"
                           >
                             <b-col
+                              v-if="child.show === true"
                               style="margin-left:0px!important"
                               class="no-gutters"
                               cols="1"
@@ -296,9 +310,13 @@
                                 :src="child.user.image"
                                 style="height:25px;width:25px;float:left;border-radius: 50%"
                             /></b-col>
-                            <b-col class="no-gutters" cols="11">
+                            <b-col
+                              v-if="child.show === true"
+                              class="no-gutters"
+                              cols="11"
+                            >
                               <div
-                                style="margin-bottom:5px;border-radius: 10px !important;float:left;background-color: #F0F2F5;display:flex;flex-direction: column;padding:10px;max-width: 513px;min-width: 200px"
+                                style="margin-bottom:5px;border-radius: 10px !important;float:left;background-color: #F0F2F5;display:flex;flex-direction: column;padding:10px;max-width: 513px;min-width: 250px"
                               >
                                 <b-link
                                   style="float:left;margin-right:auto;text-decoration:none;"
@@ -328,6 +346,17 @@
                                   style="text-decoration:none;color:gray;float:left;font-size:12px"
                                   ><strong>{{ child.fromNow }}</strong></b-link
                                 >
+                                <b-link
+                                  v-if="child.interacts.length"
+                                  style="float:right;text-decoration:none;color:gray;"
+                                  ><img
+                                    v-for="interactItem of child.topInteracts"
+                                    :key="interactItem"
+                                    :src="interactItem"
+                                    style="height:15px;width:14px"
+                                  />
+                                  <span>{{ child.interacts.length }}</span>
+                                </b-link>
                                 <b-popover
                                   :target="'popover-id-' + child.id"
                                   triggers="hover"
@@ -365,7 +394,7 @@
                         </div>
                         <!-- Reply -->
                         <div
-                          style="width:100%;display:flex;align-items: center;"
+                          style="width:100%;display:flex;align-items: center;margin-bottom: 10px"
                         >
                           <img
                             :src="user.image"
@@ -377,20 +406,37 @@
                           />
                         </div>
                         <!-- Show more -->
-                        <div style="margin:10px;float:left">
+                        <div
+                          v-if="item.showAllChilds === false"
+                          style="margin:10px;float:left"
+                          @click="showAllChilds(item.id)"
+                        >
                           <v-icon small>mdi-subdirectory-arrow-right</v-icon>
                           <b-link style="text-decoration:none;color:gray"
-                            ><strong> Show more comments</strong></b-link
+                            ><strong>
+                              Show more
+                              {{
+                                item.childComments.length - 3
+                              }}
+                              comments</strong
+                            ></b-link
                           >
                         </div>
                       </div>
                     </b-col>
                   </b-row>
                   <!-- Parent show more -->
-                  <div style="margin:10px;float:left">
+                  <div
+                    v-if="post.showAllChilds === false"
+                    style="margin:10px;float:left"
+                    @click="showAllChilds('post')"
+                  >
                     <v-icon small>mdi-subdirectory-arrow-right</v-icon>
                     <b-link style="text-decoration:none;color:gray"
-                      ><strong> Show more comments</strong></b-link
+                      ><strong>
+                        Show more
+                        {{ post.comments.length - 3 }} comments</strong
+                      ></b-link
                     >
                   </div>
                 </div>
@@ -447,7 +493,7 @@ export default {
       post: {},
       isLoading: true,
       slug: "",
-      selected: "Time"
+      selected: "Top"
     };
   },
   created() {
@@ -456,6 +502,24 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    }
+  },
+  methods: {
+    showAllChilds(parent) {
+      const data = JSON.parse(JSON.stringify(this.post));
+      if (parent === "post") {
+        data.showAllChilds = true;
+        for (const item of data.comments) {
+          item.show = true;
+        }
+      } else {
+        const index = _.findIndex(data.comments, ["id", parent]);
+        data.comments[index].showAllChilds = true;
+        for (const item of data.comments[index].childComments) {
+          item.show = true;
+        }
+      }
+      this.post = data;
     }
   },
   apollo: {
@@ -514,21 +578,32 @@ export default {
           }
           return results;
         };
-        const mapComments = comments => {
+        const mapComments = (comments, isChild = false) => {
           return comments.map(item => {
+            if (!isChild) {
+              item.showAllChilds = true;
+              if (item.childComments.length > 3) item.showAllChilds = false;
+            }
+            item.show = true;
+            const index = _.findIndex(comments, ["id", item.id]);
+            if (index > 2) item.show = false;
+            item.reply = false;
             item.fromNow = moment(item.updatedAt).fromNow();
             item.content = item.content.replace(
               /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
               " "
             );
+            item.topInteracts = topEmoji(item.interacts);
             return item;
           });
         };
         this.post.topInteracts = topEmoji(this.post.interacts);
         this.post.totalComments = totalComments(this.post.comments);
+        this.post.showAllChilds = true;
+        if (this.post.comments.length > 3) this.post.showAllChilds = false;
         this.post.comments = mapComments(this.post.comments);
         for (const comment of this.post.comments) {
-          comment.childComments = mapComments(comment.childComments);
+          comment.childComments = mapComments(comment.childComments, true);
         }
         document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
@@ -600,7 +675,7 @@ export default {
 .react-icon:hover {
   height: 41px;
   width: 41px;
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 .no-gutters {
   width: auto;
