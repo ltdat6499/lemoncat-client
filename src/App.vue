@@ -23,8 +23,8 @@ export default {
         name: data.data.data.name,
         email: data.data.data.email,
         slug: data.data.data.slug,
-        role: res.data.data.role,
-        data: res.data.data.data
+        role: data.data.data.role,
+        data: data.data.data.data
       };
       this.$store.dispatch("handleUpdateUser", user);
     }

@@ -903,6 +903,22 @@ export default {
       this.post = data;
     },
     createAction(type, parentType, parent, data) {
+      if (type === "interact") {
+        const interact = {
+          user: {
+            name: this.user.name,
+            slug: this.user.slug,
+            image: this.user.image,
+            role: this.user.role,
+            data: this.user.data
+          },
+          emoji: data,
+          score: this.user.role === "s-user" ? 100 : 1
+        };
+        console.log("🚀 -------------------------------------");
+        console.log("🚀 ~ createAction ~ interact", interact);
+        console.log("🚀 -------------------------------------");
+      }
       console.log(type, parentType, parent, data);
     }
   },
