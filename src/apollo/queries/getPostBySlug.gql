@@ -1,5 +1,6 @@
 query getPostBySlug($slug: String) {
   postBySlug(slug: $slug) {
+    id
     user {
       name
       slug

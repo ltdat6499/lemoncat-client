@@ -1,0 +1,5 @@
+mutation createAction($input: ActionInput) {
+  createAction(input: $input) {
+    id
+  }
+}

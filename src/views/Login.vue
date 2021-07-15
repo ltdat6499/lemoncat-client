@@ -205,7 +205,9 @@ export default {
             image: res.data.data.image,
             name: res.data.data.name,
             email: res.data.data.email,
-            slug: res.data.data.slug
+            slug: res.data.data.slug,
+            role: res.data.data.role,
+            data: res.data.data.data
           };
           this.$store.dispatch("handleUpdateUser", user);
           // alert(JSON.stringify(this.$cookies.get("token")));

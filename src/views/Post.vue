@@ -162,17 +162,47 @@
                       placement="top"
                       delay="100"
                     >
-                      <img class="react-icon" src="../icons/emoji/love.svg" />
-                      <img src="../icons/emoji/care.svg" class="react-icon" />
-                      <img src="../icons/emoji/wow.svg" class="react-icon" />
-                      <img src="../icons/emoji/like.svg" class="react-icon" />
+                      <img
+                        class="react-icon"
+                        src="../icons/emoji/love.svg"
+                        @click="
+                          createAction('interact', 'post', post.id, 'love')
+                        "
+                      />
+                      <img
+                        src="../icons/emoji/care.svg"
+                        class="react-icon"
+                        @click="
+                          createAction('interact', 'post', post.id, 'care')
+                        "
+                      />
+                      <img
+                        src="../icons/emoji/wow.svg"
+                        class="react-icon"
+                        @click="
+                          createAction('interact', 'post', post.id, 'wow')
+                        "
+                      />
+                      <img
+                        src="../icons/emoji/like.svg"
+                        class="react-icon"
+                        @click="
+                          createAction('interact', 'post', post.id, 'like')
+                        "
+                      />
                       <img
                         src="../icons/emoji/dislike.png"
                         class="react-icon"
+                        @click="
+                          createAction('interact', 'post', post.id, 'dislike')
+                        "
                       />
                       <img
                         src="../icons/emoji/angry.svg"
                         class="react-icon"
+                        @click="
+                          createAction('interact', 'post', post.id, 'angry')
+                        "
                       /> </b-popover
                   ></b-col>
                   <b-col
@@ -207,8 +237,18 @@
                     style="height:35px;width:35px;float:left;margin-right:10px;border-radius: 50%"
                   />
                   <b-form-input
+                    v-model="post.replyContent"
                     style="border-radius: 30px !important;float:left;max-width:70%;margin-right:36px;background-color: #F0F2F5"
                     placeholder="Write your comment"
+                    @keyup.enter="
+                      if (post.replyContent.length)
+                        createAction(
+                          'comment',
+                          'post',
+                          post.id,
+                          post.replyContent
+                        );
+                    "
                   />
                   <v-select
                     style="max-width:20%;float:right"
@@ -302,26 +342,74 @@
                           <img
                             src="../icons/emoji/love.svg"
                             class="react-icon"
+                            @click="
+                              createAction(
+                                'interact',
+                                'comment',
+                                item.id,
+                                'love'
+                              )
+                            "
                           />
                           <img
                             src="../icons/emoji/care.svg"
                             class="react-icon"
+                            @click="
+                              createAction(
+                                'interact',
+                                'comment',
+                                item.id,
+                                'care'
+                              )
+                            "
                           />
                           <img
                             src="../icons/emoji/wow.svg"
                             class="react-icon"
+                            @click="
+                              createAction(
+                                'interact',
+                                'comment',
+                                item.id,
+                                'wow'
+                              )
+                            "
                           />
                           <img
                             src="../icons/emoji/like.svg"
                             class="react-icon"
+                            @click="
+                              createAction(
+                                'interact',
+                                'comment',
+                                item.id,
+                                'like'
+                              )
+                            "
                           />
                           <img
                             src="../icons/emoji/dislike.png"
                             class="react-icon"
+                            @click="
+                              createAction(
+                                'interact',
+                                'comment',
+                                item.id,
+                                'dislike'
+                              )
+                            "
                           />
                           <img
                             src="../icons/emoji/angry.svg"
                             class="react-icon"
+                            @click="
+                              createAction(
+                                'interact',
+                                'comment',
+                                item.id,
+                                'angry'
+                              )
+                            "
                           />
                         </b-popover>
                       </div>
@@ -470,26 +558,74 @@
                                   <img
                                     class="react-icon"
                                     src="../icons/emoji/love.svg"
+                                    @click="
+                                      createAction(
+                                        'interact',
+                                        'comment',
+                                        child.id,
+                                        'love'
+                                      )
+                                    "
                                   />
                                   <img
                                     src="../icons/emoji/care.svg"
                                     class="react-icon"
+                                    @click="
+                                      createAction(
+                                        'interact',
+                                        'comment',
+                                        child.id,
+                                        'care'
+                                      )
+                                    "
                                   />
                                   <img
                                     src="../icons/emoji/wow.svg"
                                     class="react-icon"
+                                    @click="
+                                      createAction(
+                                        'interact',
+                                        'comment',
+                                        child.id,
+                                        'wow'
+                                      )
+                                    "
                                   />
                                   <img
                                     src="../icons/emoji/like.svg"
                                     class="react-icon"
+                                    @click="
+                                      createAction(
+                                        'interact',
+                                        'comment',
+                                        child.id,
+                                        'like'
+                                      )
+                                    "
                                   />
                                   <img
                                     src="../icons/emoji/dislike.png"
                                     class="react-icon"
+                                    @click="
+                                      createAction(
+                                        'interact',
+                                        'comment',
+                                        child.id,
+                                        'dislike'
+                                      )
+                                    "
                                   />
                                   <img
                                     src="../icons/emoji/angry.svg"
                                     class="react-icon"
+                                    @click="
+                                      createAction(
+                                        'interact',
+                                        'comment',
+                                        child.id,
+                                        'angry'
+                                      )
+                                    "
                                   />
                                 </b-popover>
                               </div>
@@ -509,6 +645,15 @@
                             v-model="item.replyContent"
                             style="border-radius: 30px !important;float:left;background-color: #F0F2F5"
                             placeholder="Write your comment"
+                            @keyup.enter="
+                              if (item.replyContent.length)
+                                createAction(
+                                  'comment',
+                                  'comment',
+                                  item.id,
+                                  item.replyContent
+                                );
+                            "
                           />
                         </div>
                         <!-- Show more -->
@@ -695,6 +840,7 @@
 import _ from "lodash";
 import moment from "moment";
 import getPostBySlug from "@/apollo/queries/getPostBySlug.gql";
+import createAction from "@/apollo/mutations/createAction.gql";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import HeaderBar from "@/components/Movie/HeaderBar";
@@ -756,7 +902,9 @@ export default {
       }
       this.post = data;
     },
-    pushActions(type, parent_type, parent, data) {}
+    createAction(type, parentType, parent, data) {
+      console.log(type, parentType, parent, data);
+    }
   },
   apollo: {
     postBySlug: {
@@ -1012,6 +1160,7 @@ export default {
           }
           this.post.ownerInteract = userInteract;
         }
+        this.post.replyContent = "";
         this.post.topInteracts = topEmoji(this.post.interacts);
         this.post.totalComments = totalComments(this.post.comments);
         this.post.showAllChilds = true;

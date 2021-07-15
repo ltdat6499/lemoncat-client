@@ -10,7 +10,9 @@ export default new Vuex.Store({
       image: "",
       name: "",
       email: "",
-      slug: ""
+      slug: "",
+      role: "",
+      data: {}
     }
   },
   getters: {

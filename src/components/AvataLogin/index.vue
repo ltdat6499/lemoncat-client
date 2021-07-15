@@ -70,7 +70,9 @@ export default {
         image: "",
         name: "",
         email: "",
-        slug: ""
+        slug: "",
+        role: "",
+        data: {}
       });
       this.$router.go("/");
     }
