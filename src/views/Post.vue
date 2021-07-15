@@ -136,11 +136,26 @@
                   <b-col
                     ><b-button class="block" id="popover-react"
                       ><span style="display:flex;justify-content: center">
-                        <v-icon style="margin-right:5px"
-                          >mdi-thumb-up-outline</v-icon
+                        <span
+                          v-if="post.ownerInteract"
+                          :style="
+                            'display:flex;align-items: center;justify-content: center;color:' +
+                              post.ownerInteract.color
+                          "
                         >
-                        <strong>React</strong></span
-                      ></b-button
+                          <img
+                            :src="post.ownerInteract.image"
+                            style="width:25px;height:25px;margin-right:5px"
+                          />
+                          <strong>{{ post.ownerInteract.emoji }}</strong>
+                        </span>
+                        <span v-else>
+                          <v-icon style="margin-right:5px"
+                            >mdi-thumb-up-outline</v-icon
+                          >
+                          <strong>React</strong>
+                        </span>
+                      </span></b-button
                     ><b-popover
                       target="popover-react"
                       triggers="hover"
@@ -198,7 +213,7 @@
                   <v-select
                     style="max-width:20%;float:right"
                     v-model="selected"
-                    :items="['Time', 'Top', 'Most Relative']"
+                    :items="['Top', 'Time']"
                     label="View Mode"
                   ></v-select>
                 </div>
@@ -246,8 +261,14 @@
                         <b-link
                           style="text-decoration:none;color:gray;float:left;font-size:12px"
                           :id="'popover-id-' + item.id"
-                          ><strong>React</strong></b-link
                         >
+                          <strong
+                            v-if="item.ownerInteract"
+                            :style="'color:' + item.ownerInteract.color"
+                            >{{ item.ownerInteract.emoji }}</strong
+                          >
+                          <strong v-else>React</strong>
+                        </b-link>
                         <strong style="float:left; color:gray"
                           >&nbsp;·&nbsp;</strong
                         ><b-link
@@ -404,8 +425,16 @@
                                 <b-link
                                   style="text-decoration:none;color:gray;float:left;font-size:12px"
                                   :id="'popover-id-' + child.id"
-                                  ><strong>React</strong></b-link
                                 >
+                                  <strong
+                                    v-if="child.ownerInteract"
+                                    :style="
+                                      'color:' + child.ownerInteract.color
+                                    "
+                                    >{{ child.ownerInteract.emoji }}</strong
+                                  >
+                                  <strong v-else>React</strong>
+                                </b-link>
                                 <strong style="float:left; color:gray"
                                   >&nbsp;·&nbsp;</strong
                                 ><b-link
@@ -672,7 +701,6 @@ import HeaderBar from "@/components/Movie/HeaderBar";
 import NewsCard from "@/components/SideBestNewsWeek";
 import Loading from "@/components/Loading";
 export default {
-  name: "Home",
   components: {
     Navbar,
     PageFooter,
@@ -685,7 +713,8 @@ export default {
       post: {},
       isLoading: true,
       slug: "",
-      selected: "Top"
+      selected: "Top",
+      basePost: {}
     };
   },
   created() {
@@ -694,6 +723,13 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    }
+  },
+  watch: {
+    selected(val, old) {
+      const temp = JSON.parse(JSON.stringify(this.post));
+      this.post = JSON.parse(JSON.stringify(this.basePost));
+      this.basePost = temp;
     }
   },
   methods: {
@@ -719,7 +755,8 @@ export default {
         }
       }
       this.post = data;
-    }
+    },
+    pushActions(type, parent_type, parent, data) {}
   },
   apollo: {
     postBySlug: {
@@ -871,25 +908,126 @@ export default {
               " "
             );
             item.topInteracts = topEmoji(item.interacts);
+            const ownerInteract = _.find(item.interacts, [
+              "user.id",
+              this.user.id
+            ]);
+            if (ownerInteract) {
+              let userInteract = {};
+              switch (ownerInteract.emoji) {
+                case "love":
+                  userInteract = {
+                    color: "#ED2E4E",
+                    emoji: "Love"
+                  };
+                  break;
+                case "care":
+                  userInteract = {
+                    color: "#F7B126",
+                    emoji: "Care"
+                  };
+                  break;
+                case "wow":
+                  userInteract = {
+                    color: "#F7B126",
+                    emoji: "Wow"
+                  };
+                  break;
+                case "like":
+                  userInteract = {
+                    color: "#1D69F8",
+                    emoji: "Like"
+                  };
+                  break;
+                case "dislike":
+                  userInteract = {
+                    color: "red",
+                    emoji: "Dislike"
+                  };
+                  break;
+                case "angry":
+                  userInteract = {
+                    color: "#E85E07",
+                    emoji: "Angry"
+                  };
+                  break;
+              }
+              item.ownerInteract = userInteract;
+            }
             return item;
           });
         };
         const sortComments = comments => {
           return _.sortBy(comments, ["score"]).reverse();
         };
+        const ownerInteract = _.find(this.post.interacts, [
+          "user.id",
+          this.user.id
+        ]);
+        if (ownerInteract) {
+          let userInteract = {};
+          switch (ownerInteract.emoji) {
+            case "love":
+              userInteract = {
+                color: "#ED2E4E",
+                emoji: "Love",
+                image: require("../icons/emoji/love.svg")
+              };
+              break;
+            case "care":
+              userInteract = {
+                color: "#F7B126",
+                emoji: "Care",
+                image: require("../icons/emoji/care.svg")
+              };
+              break;
+            case "wow":
+              userInteract = {
+                color: "#F7B126",
+                emoji: "Wow",
+                image: require("../icons/emoji/wow.svg")
+              };
+              break;
+            case "like":
+              userInteract = {
+                color: "#1D69F8",
+                emoji: "Like",
+                image: require("../icons/emoji/like.svg")
+              };
+              break;
+            case "dislike":
+              userInteract = {
+                color: "red",
+                emoji: "Dislike",
+                image: require("../icons/emoji/dislike.png")
+              };
+              break;
+            case "angry":
+              userInteract = {
+                color: "#E85E07",
+                emoji: "Angry",
+                image: require("../icons/emoji/angry.svg")
+              };
+              break;
+          }
+          this.post.ownerInteract = userInteract;
+        }
         this.post.topInteracts = topEmoji(this.post.interacts);
         this.post.totalComments = totalComments(this.post.comments);
         this.post.showAllChilds = true;
         if (this.post.comments.length > 3) this.post.showAllChilds = false;
         this.post.comments = mapComments(this.post.comments);
-        this.post.comments = sortComments(this.post.comments);
         this.post.detailInteracts = createDetailInteracts(this.post.interacts);
-        this.post.interactsTab = this.post.detailInteracts[0];
         for (const comment of this.post.comments) {
           comment.childComments = mapComments(comment.childComments, true);
-          comment.childComments = sortComments(comment.childComments);
-          comment.interactsTab = comment.detailInteracts[0];
         }
+        this.basePost = JSON.parse(JSON.stringify(this.post));
+
+        this.post.comments = sortComments(this.post.comments);
+        for (const comment of this.post.comments) {
+          comment.childComments = sortComments(comment.childComments);
+        }
+        this.basePost = JSON.parse(JSON.stringify(this.post));
         document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
       }
