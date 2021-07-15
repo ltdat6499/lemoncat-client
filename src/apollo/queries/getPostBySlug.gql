@@ -14,6 +14,10 @@ query getPostBySlug($slug: String) {
         name
         slug
         image
+        role
+        data {
+          working
+        }
       }
       content
       score
@@ -23,6 +27,10 @@ query getPostBySlug($slug: String) {
           name
           slug
           image
+          role
+          data {
+            working
+          }
         }
         interacts {
           id
@@ -30,6 +38,10 @@ query getPostBySlug($slug: String) {
             name
             slug
             image
+            role
+            data {
+              working
+            }
           }
           emoji
         }
@@ -42,6 +54,10 @@ query getPostBySlug($slug: String) {
           name
           slug
           image
+          role
+          data {
+            working
+          }
         }
         emoji
         score
@@ -53,6 +69,10 @@ query getPostBySlug($slug: String) {
         name
         slug
         image
+        role
+        data {
+          working
+        }
       }
       emoji
       score

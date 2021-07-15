@@ -91,8 +91,8 @@
               <b-link
                 :href="'/user/' + post.user.slug"
                 style="text-decoration:none;"
-                >{{ post.user.name }}</b-link
-              >
+                >{{ post.user.name }}
+              </b-link>
               <span style="color:gray"> | {{ post.updatedAt }}</span>
               <b-link href="#comment" style="text-decoration:none;">
                 | <v-icon small>mdi-message</v-icon> Comments</b-link
@@ -226,8 +226,17 @@
                         <b-link
                           :href="'/user/' + item.user.slug"
                           style="float:left;margin-right:auto;text-decoration:none;"
-                          ><strong>{{ item.user.name }} </strong></b-link
+                          ><strong
+                            >{{ item.user.name }}
+                            <span v-if="item.user.role === 's-user'">
+                              <v-icon style="color:red">mdi-star</v-icon>
+                              <i style="color:red"
+                                >Working for {{ item.user.data.working }}</i
+                              >
+                            </span>
+                          </strong></b-link
                         >
+
                         <span
                           style="float:left;margin-right:auto;text-align: justify"
                           >{{ item.content }}</span
@@ -242,6 +251,7 @@
                         <strong style="float:left; color:gray"
                           >&nbsp;·&nbsp;</strong
                         ><b-link
+                          @click="showReply(item.id, '@' + item.user.name)"
                           style="text-decoration:none;color:gray;float:left;font-size:12px"
                           ><strong>Reply</strong></b-link
                         ><strong style="float:left;color:gray"
@@ -320,10 +330,8 @@
                               >
                                 <b-link
                                   style="float:left;margin-right:auto;text-decoration:none;"
-                                  ><strong>{{
-                                    child.user.name
-                                  }}</strong></b-link
-                                >
+                                  ><strong>{{ child.user.name }}</strong>
+                                </b-link>
                                 <span
                                   style="text-align:justify;over-flow:hidden"
                                   >{{ child.content }}</span
@@ -338,6 +346,9 @@
                                 <strong style="float:left; color:gray"
                                   >&nbsp;·&nbsp;</strong
                                 ><b-link
+                                  @click="
+                                    showReply(item.id, '@' + child.user.name)
+                                  "
                                   style="text-decoration:none;color:gray;float:left;font-size:12px"
                                   ><strong>Reply</strong></b-link
                                 ><strong style="float:left;color:gray"
@@ -394,6 +405,7 @@
                         </div>
                         <!-- Reply -->
                         <div
+                          v-if="item.reply"
                           style="width:100%;display:flex;align-items: center;margin-bottom: 10px"
                         >
                           <img
@@ -401,6 +413,7 @@
                             style="height:25px;width:25px;float:left;margin-right:10px;border-radius: 50%"
                           />
                           <b-form-input
+                            v-model="item.replyContent"
                             style="border-radius: 30px !important;float:left;background-color: #F0F2F5"
                             placeholder="Write your comment"
                           />
@@ -415,9 +428,7 @@
                           <b-link style="text-decoration:none;color:gray"
                             ><strong>
                               Show more
-                              {{
-                                item.childComments.length - 3
-                              }}
+                              {{ item.childComments.length - 3 }}
                               comments</strong
                             ></b-link
                           >
@@ -505,6 +516,13 @@ export default {
     }
   },
   methods: {
+    showReply(id, content) {
+      const data = JSON.parse(JSON.stringify(this.post));
+      const index = _.findIndex(data.comments, ["id", id]);
+      data.comments[index].reply = true;
+      data.comments[index].replyContent = content + " ";
+      this.post = data;
+    },
     showAllChilds(parent) {
       const data = JSON.parse(JSON.stringify(this.post));
       if (parent === "post") {
@@ -588,22 +606,29 @@ export default {
             const index = _.findIndex(comments, ["id", item.id]);
             if (index > 2) item.show = false;
             item.reply = false;
+            item.replyContent = "";
+            item.score = parseFloat(item.score);
             item.fromNow = moment(item.updatedAt).fromNow();
             item.content = item.content.replace(
-              /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
+              /[`~!#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
               " "
             );
             item.topInteracts = topEmoji(item.interacts);
             return item;
           });
         };
+        const sortComments = comments => {
+          return _.sortBy(comments, ["score"]).reverse();
+        };
         this.post.topInteracts = topEmoji(this.post.interacts);
         this.post.totalComments = totalComments(this.post.comments);
         this.post.showAllChilds = true;
         if (this.post.comments.length > 3) this.post.showAllChilds = false;
         this.post.comments = mapComments(this.post.comments);
+        this.post.comments = sortComments(this.post.comments);
         for (const comment of this.post.comments) {
           comment.childComments = mapComments(comment.childComments, true);
+          comment.childComments = sortComments(comment.childComments);
         }
         document.title = this.post.title.toUpperCase() + " - LEMONCAT";
         this.isLoading = false;
