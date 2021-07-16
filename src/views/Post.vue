@@ -501,6 +501,7 @@
                                 style="margin-bottom:5px;border-radius: 10px !important;float:left;background-color: #F0F2F5;display:flex;flex-direction: column;padding:10px;max-width: 513px;min-width: 250px"
                               >
                                 <b-link
+                                  :href="'/user/' + child.user.slug"
                                   style="float:left;margin-right:auto;text-decoration:none;"
                                   ><strong>{{ child.user.name }}</strong>
                                 </b-link>
@@ -563,7 +564,8 @@
                                         'interact',
                                         'comment',
                                         child.id,
-                                        'love'
+                                        'love',
+                                        'child'
                                       )
                                     "
                                   />
@@ -575,7 +577,8 @@
                                         'interact',
                                         'comment',
                                         child.id,
-                                        'care'
+                                        'care',
+                                        'child'
                                       )
                                     "
                                   />
@@ -587,7 +590,8 @@
                                         'interact',
                                         'comment',
                                         child.id,
-                                        'wow'
+                                        'wow',
+                                        'child'
                                       )
                                     "
                                   />
@@ -599,7 +603,8 @@
                                         'interact',
                                         'comment',
                                         child.id,
-                                        'like'
+                                        'like',
+                                        'child'
                                       )
                                     "
                                   />
@@ -611,7 +616,8 @@
                                         'interact',
                                         'comment',
                                         child.id,
-                                        'dislike'
+                                        'dislike',
+                                        'child'
                                       )
                                     "
                                   />
@@ -623,7 +629,8 @@
                                         'interact',
                                         'comment',
                                         child.id,
-                                        'angry'
+                                        'angry',
+                                        'child'
                                       )
                                     "
                                   />
@@ -665,8 +672,8 @@
                           <v-icon small>mdi-subdirectory-arrow-right</v-icon>
                           <b-link style="text-decoration:none;color:gray"
                             ><strong>
-                              Show more
-                              {{ item.childComments.length - 3 }}
+                              Show full
+                              {{ item.childComments.length }}
                               comments</strong
                             ></b-link
                           >
@@ -743,8 +750,8 @@
                     <v-icon small>mdi-subdirectory-arrow-right</v-icon>
                     <b-link style="text-decoration:none;color:gray"
                       ><strong>
-                        Show more
-                        {{ post.comments.length - 3 }} comments</strong
+                        Show full
+                        {{ post.comments.length }} comments</strong
                       ></b-link
                     >
                   </div>
@@ -838,6 +845,7 @@
 
 <script>
 import _ from "lodash";
+import genId from "genid";
 import moment from "moment";
 import getPostBySlug from "@/apollo/queries/getPostBySlug.gql";
 import createAction from "@/apollo/mutations/createAction.gql";
@@ -861,7 +869,8 @@ export default {
       slug: "",
       selected: "Top",
       basePost: {},
-      rawPost: {}
+      rawPost: {},
+      max: 0
     };
   },
   created() {
@@ -903,7 +912,13 @@ export default {
       }
       this.post = data;
     },
-    createAction(type, parentType, parent, data) {
+    createAction(type, parentType, parent, data, param) {
+      let updateCommentId;
+      const insertAtIndex = (arr, index, newItem) => [
+        ...arr.slice(0, index),
+        newItem,
+        ...arr.slice(index)
+      ];
       const topEmoji = interacts => {
         const allEmoji = _.uniqBy(interacts.map(item => item.emoji)).map(
           item => {
@@ -1095,6 +1110,94 @@ export default {
       const sortComments = comments => {
         return _.sortBy(comments, ["score"]).reverse();
       };
+      const updatePost = commentId => {
+        this.post = JSON.parse(JSON.stringify(this.rawPost));
+        this.post.updatedAt = moment(this.post.updatedAt).format("LL");
+        const ownerInteract = _.find(this.post.interacts, [
+          "user.id",
+          this.user.id
+        ]);
+        if (ownerInteract) {
+          let userInteract = {};
+          switch (ownerInteract.emoji) {
+            case "love":
+              userInteract = {
+                color: "#ED2E4E",
+                emoji: "Love",
+                image: require("../icons/emoji/love.svg")
+              };
+              break;
+            case "care":
+              userInteract = {
+                color: "#F7B126",
+                emoji: "Care",
+                image: require("../icons/emoji/care.svg")
+              };
+              break;
+            case "wow":
+              userInteract = {
+                color: "#F7B126",
+                emoji: "Wow",
+                image: require("../icons/emoji/wow.svg")
+              };
+              break;
+            case "like":
+              userInteract = {
+                color: "#1D69F8",
+                emoji: "Like",
+                image: require("../icons/emoji/like.svg")
+              };
+              break;
+            case "dislike":
+              userInteract = {
+                color: "red",
+                emoji: "Dislike",
+                image: require("../icons/emoji/dislike.png")
+              };
+              break;
+            case "angry":
+              userInteract = {
+                color: "#E85E07",
+                emoji: "Angry",
+                image: require("../icons/emoji/angry.svg")
+              };
+              break;
+          }
+          this.post.ownerInteract = userInteract;
+        }
+        this.post.replyContent = "";
+        this.post.topInteracts = topEmoji(this.post.interacts);
+        this.post.totalComments = totalComments(this.post.comments);
+        this.post.showAllChilds = true;
+        if (this.post.comments.length > 3) this.post.showAllChilds = false;
+        this.post.comments = mapComments(this.post.comments);
+        this.post.detailInteracts = createDetailInteracts(this.post.interacts);
+        for (const comment of this.post.comments) {
+          comment.childComments = mapComments(comment.childComments, true);
+        }
+        this.basePost = JSON.parse(JSON.stringify(this.post));
+
+        this.post.comments = sortComments(this.post.comments);
+        for (const comment of this.post.comments) {
+          comment.childComments = sortComments(comment.childComments);
+        }
+
+        if (commentId && commentId.length > 0) {
+          const commentIndex = _.findIndex(this.post.comments, [
+            "id",
+            commentId
+          ]);
+          for (let i = 0; i <= commentIndex; i++) {
+            this.post.comments[i].show = true;
+          }
+          this.post.comments[commentIndex].showAllChilds = true;
+          for (const iterator of this.post.comments[commentIndex]
+            .childComments) {
+            iterator.show = true;
+          }
+        }
+        this.post = JSON.parse(JSON.stringify(this.post));
+      };
       if (type === "interact") {
         const interact = {
           user: {
@@ -1113,92 +1216,88 @@ export default {
             "user.id",
             this.user.id
           ]);
-          console.log('🚀 -----------------------------------------------')
-          console.log('🚀 ~ createAction ~ interactIndex', interactIndex)
-          console.log('🚀 -----------------------------------------------')
-          if (interactIndex != -1) {
+          if (interactIndex != -1)
             this.rawPost.interacts[interactIndex].emoji = data;
-          } else {
-            this.rawPost.interacts.push(interact);
-          }
-          this.isLoading = true;
-
-          this.post = JSON.parse(JSON.stringify(this.rawPost));
-          this.post.updatedAt = moment(this.post.updatedAt).format("LL");
-          const ownerInteract = _.find(this.post.interacts, [
-            "user.id",
-            this.user.id
-          ]);
-          if (ownerInteract) {
-            let userInteract = {};
-            switch (ownerInteract.emoji) {
-              case "love":
-                userInteract = {
-                  color: "#ED2E4E",
-                  emoji: "Love",
-                  image: require("../icons/emoji/love.svg")
-                };
-                break;
-              case "care":
-                userInteract = {
-                  color: "#F7B126",
-                  emoji: "Care",
-                  image: require("../icons/emoji/care.svg")
-                };
-                break;
-              case "wow":
-                userInteract = {
-                  color: "#F7B126",
-                  emoji: "Wow",
-                  image: require("../icons/emoji/wow.svg")
-                };
-                break;
-              case "like":
-                userInteract = {
-                  color: "#1D69F8",
-                  emoji: "Like",
-                  image: require("../icons/emoji/like.svg")
-                };
-                break;
-              case "dislike":
-                userInteract = {
-                  color: "red",
-                  emoji: "Dislike",
-                  image: require("../icons/emoji/dislike.png")
-                };
-                break;
-              case "angry":
-                userInteract = {
-                  color: "#E85E07",
-                  emoji: "Angry",
-                  image: require("../icons/emoji/angry.svg")
-                };
-                break;
+          else this.rawPost.interacts.push(interact);
+        } else if (param && param === "child") {
+          const resultIndex = {
+            comment: "",
+            childComment: "",
+            interact: ""
+          };
+          let parentIndex = -1;
+          for (const comment of this.rawPost.comments) {
+            parentIndex = _.findIndex(comment.childComments, ["id", parent]);
+            if (parentIndex != -1) {
+              resultIndex.comment = _.findIndex(this.rawPost.comments, [
+                "id",
+                comment.id
+              ]);
+              resultIndex.childComment = parentIndex;
+              resultIndex.interact = _.findIndex(
+                comment.childComments[parentIndex].interacts,
+                ["user.id", this.user.id]
+              );
+              break;
             }
-            this.post.ownerInteract = userInteract;
           }
-          this.post.replyContent = "";
-          this.post.topInteracts = topEmoji(this.post.interacts);
-          this.post.totalComments = totalComments(this.post.comments);
-          this.post.showAllChilds = true;
-          if (this.post.comments.length > 3) this.post.showAllChilds = false;
-          this.post.comments = mapComments(this.post.comments);
-          this.post.detailInteracts = createDetailInteracts(
-            this.post.interacts
+          if (resultIndex.interact != -1) {
+            this.rawPost.comments[resultIndex.comment].childComments[
+              resultIndex.childComment
+            ].interacts[resultIndex.interact].emoji = data;
+          } else {
+            this.rawPost.comments[resultIndex.comment].childComments[
+              resultIndex.childComment
+            ].interacts.push(interact);
+          }
+          updateCommentId = this.rawPost.comments[resultIndex.comment].id;
+        } else {
+          const commentIndex = _.findIndex(this.rawPost.comments, [
+            "id",
+            parent
+          ]);
+          const ownerIndex = _.findIndex(
+            this.rawPost.comments[commentIndex].interacts,
+            ["user.id", this.user.id]
           );
-          for (const comment of this.post.comments) {
-            comment.childComments = mapComments(comment.childComments, true);
+          if (ownerIndex != -1) {
+            this.rawPost.comments[commentIndex].interacts[
+              ownerIndex
+            ].emoji = data;
+          } else {
+            this.rawPost.comments[commentIndex].interacts.push(interact);
           }
-          this.basePost = JSON.parse(JSON.stringify(this.post));
-
-          this.post.comments = sortComments(this.post.comments);
-          for (const comment of this.post.comments) {
-            comment.childComments = sortComments(comment.childComments);
-          }
-          this.post = JSON.parse(JSON.stringify(this.post));
-          this.isLoading = false;
+          updateCommentId = this.rawPost.comments[commentIndex].id;
+        }
+      } else if (type === "comment") {
+        const comment = {
+          id: genId(32, "temp-comment-"),
+          user: {
+            id: this.user.id,
+            name: this.user.name,
+            slug: this.user.slug,
+            image: this.user.image,
+            role: this.user.role,
+            data: this.user.data
+          },
+          content: data,
+          score: 9999 + ++this.max,
+          childComments: [],
+          interacts: [],
+          updatedAt: moment()
+            .format()
+            .toString()
+        };
+        if (parentType === "post") {
+          this.rawPost.comments = insertAtIndex(this.rawPost.comments, 0, comment)
+        } else {
+          comment.score -= 2 * comment.score;
+          const index = _.findIndex(this.rawPost.comments, ["id", parent]);
+          this.rawPost.comments[index].childComments.push(comment);
+          updateCommentId = parent;
         }
       }
+      updatePost(updateCommentId);
       console.log(type, parentType, parent, data);
     }
   },

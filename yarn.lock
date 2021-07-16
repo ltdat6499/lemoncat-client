@@ -3275,6 +3275,11 @@
   dependencies:
     "globule" "^1.0.0"
 
+"genid@^0.1.0":
+  "integrity" "sha1-QgeB/vIszD1lSxdTI1BXTOl7WNk="
+  "resolved" "https://registry.npmjs.org/genid/-/genid-0.1.0.tgz"
+  "version" "0.1.0"
+
 "get-caller-file@^1.0.1":
   "integrity" "sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w=="
   "resolved" "https://registry.npmjs.org/get-caller-file/-/get-caller-file-1.0.3.tgz"
