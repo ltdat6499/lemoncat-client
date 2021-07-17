@@ -253,7 +253,7 @@
                   <v-select
                     style="max-width:20%;float:right"
                     v-model="selected"
-                    :items="['Top', 'Time']"
+                    :items="['Top', 'Dev']"
                     label="View Mode"
                   ></v-select>
                 </div>
@@ -280,8 +280,8 @@
                       >
                         <b-link
                           :href="'/user/' + item.user.slug"
-                          style="float:left;margin-right:auto;text-decoration:none;"
-                          ><strong
+                          style="float:left;margin-right:auto;text-decoration:none;width:100%"
+                          ><strong style="float:left;margin-right:auto;"
                             >{{ item.user.name }}
                             <span v-if="item.user.role === 's-user'">
                               <v-icon style="color:red">mdi-star</v-icon>
@@ -289,7 +289,7 @@
                                 >Working for {{ item.user.data.working }}</i
                               >
                             </span>
-                          </strong></b-link
+                          </strong><strong v-if="selected === 'Dev'" style="float:right;margin-left:auto;color:red">{{item.score}}</strong></b-link
                         >
 
                         <span
@@ -502,8 +502,8 @@
                               >
                                 <b-link
                                   :href="'/user/' + child.user.slug"
-                                  style="float:left;margin-right:auto;text-decoration:none;"
-                                  ><strong
+                                  style="float:left;margin-right:auto;text-decoration:none;width:100%"
+                                  ><strong style="float:left;margin-right:auto;"
                                     >{{ child.user.name }}
                                     <span v-if="child.user.role === 's-user'">
                                       <v-icon style="color:red"
@@ -514,7 +514,7 @@
                                         {{ child.user.data.working }}</i
                                       >
                                     </span></strong
-                                  >
+                                  ><span v-if="selected === 'Dev'" style="float:right;margin-left:auto;color:red">{{child.score}}</span>
                                 </b-link>
                                 <span
                                   style="text-align:justify;over-flow:hidden"
@@ -829,6 +829,15 @@
                 style="width: 90%;margin-left: auto;margin-right: auto;padding-bottom:20px"
               ></div>
             </div>
+            <div id="comment" v-else style="margin-bottom: 30px">
+              <b-link href="/login">
+                <b-button size="lg" variant="outline-success">
+                  <strong
+                    >Sign in to join us and rate this post</strong
+                  ></b-button
+                >
+              </b-link>
+            </div>
           </b-col>
           <b-col cols="3">
             <div>
@@ -897,13 +906,6 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
-    }
-  },
-  watch: {
-    selected(val, old) {
-      const temp = JSON.parse(JSON.stringify(this.post));
-      this.post = JSON.parse(JSON.stringify(this.basePost));
-      this.basePost = temp;
     }
   },
   methods: {
@@ -1348,14 +1350,13 @@ export default {
       }
       updatePost(updateCommentId);
 
-      this.$apollo
-        .mutate({
-          mutation: updateAction,
-          manual: true,
-          variables: {
-            input
-          }
-        })
+      this.$apollo.mutate({
+        mutation: updateAction,
+        manual: true,
+        variables: {
+          input
+        }
+      });
     }
   },
   apollo: {
@@ -1367,8 +1368,8 @@ export default {
         };
       },
       result(result) {
-        if (!this.first) return
-        this.first = false
+        if (!this.first) return;
+        this.first = false;
         this.post = result.data.postBySlug;
         this.rawPost = JSON.parse(JSON.stringify(result.data.postBySlug));
 
