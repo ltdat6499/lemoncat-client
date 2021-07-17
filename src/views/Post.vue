@@ -857,7 +857,6 @@
 <script>
 import axios from "axios";
 import _ from "lodash";
-import genId from "genid";
 import moment from "moment";
 import getPostBySlug from "@/apollo/queries/getPostBySlug.gql";
 import updateAction from "@/apollo/mutations/updateAction.gql";
@@ -883,7 +882,8 @@ export default {
       basePost: {},
       rawPost: {},
       max: 0,
-      ids: []
+      ids: [],
+      first: true
     };
   },
   async created() {
@@ -1347,6 +1347,15 @@ export default {
         }
       }
       updatePost(updateCommentId);
+
+      this.$apollo
+        .mutate({
+          mutation: updateAction,
+          manual: true,
+          variables: {
+            input
+          }
+        })
     }
   },
   apollo: {
@@ -1358,6 +1367,8 @@ export default {
         };
       },
       result(result) {
+        if (!this.first) return
+        this.first = false
         this.post = result.data.postBySlug;
         this.rawPost = JSON.parse(JSON.stringify(result.data.postBySlug));
 
