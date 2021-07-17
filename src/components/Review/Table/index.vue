@@ -36,8 +36,8 @@
           <div
             style="display:flex;flex-direction:column;align-items: flex-start;justify-content:center;margin-left:10px"
           >
-            <span style="color:black;"
-              ><strong>{{ row.value }}</strong></span
+            <span style="color:black;float:left;margin-right:auto"
+              ><strong style="text-align:left">{{ row.value }}</strong></span
             >
             <span style="color:#757A84"
               ><i>{{ row.item.workingNews }}</i></span
@@ -47,19 +47,19 @@
       </template>
 
       <template #cell(content)="row">
-        <div style="display:flex">
+        <div style="display:flex;width:100%">
           <img
             :src="row.item.score"
             style="width:25px;height:25px;margin-right:10px"
           />
-          <div style="display:flex;flex-direction: column">
+          <div style="display:flex;flex-direction: column;width:100%">
             <span style="font-size:16px;text-align:justify">
               {{ row.value }}
             </span>
-            <div style="float:left">
-              <b-link style="text-decoration:none;">Full Review</b-link>
+            <div style="float:left;margin-top: 5px">
+              <b-link :href="'/post/' + row.item.slug" style="text-decoration:none;">Full Review</b-link>
               <span> | </span>
-              <span>Original Score: 5/5</span>
+              <span>Original Score: {{row.item.displayScore}}%</span>
               <span> | </span>
               <span style="color:gray"> {{ row.item.date }} </span>
             </div>
@@ -89,101 +89,18 @@
   </b-container>
 </template>
 <script>
+import moment from "moment";
 export default {
+  props: {
+    posts: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
   data() {
     return {
-      items: [
-        {
-          name: "LYT",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "A Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019"
-        }
-      ],
       fields: [
         {
           key: "name",
@@ -211,12 +128,41 @@ export default {
       currentPage: 1,
       perPage: 5,
       pageOptions: [5, 10, 50, 100],
-      sortBy: { text: "none", value: null },
+      sortBy: "name",
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
       filterOn: ["name", "date", "content"]
     };
+  },
+  computed: {
+    items() {
+      return this.posts.map(item => {
+        return {
+          name: item.user.name,
+          workingNews:
+            item.user.data.working != null
+              ? item.user.data.working
+              : "Lemoncat",
+          imageSrc:
+            item.user.image || require("../../../assets/img/sample-person.jpg"),
+          score: (() => {
+            if (item.data.score >= 80)
+              return "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+            else if (item.data.score >= 60 && item.data.score < 80)
+              return "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+            else if (item.data.score < 60 && item.data.score >= 0)
+              return "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+            else
+              return "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
+          })(),
+          content: item.title,
+          date: moment(item.updatedAt).format("ll"),
+          slug: item.slug,
+          displayScore: item.data.score
+        };
+      });
+    }
   },
   mounted() {
     this.totalRows = this.items.length;

@@ -1,0 +1,13 @@
+query getPreviewFlim($slug: String) {
+  flimBySlug(slug: $slug) {
+    id
+    info {
+      name     
+      genres
+      poster
+      rating
+      runtime    
+      theatersDate
+    }
+  }
+}

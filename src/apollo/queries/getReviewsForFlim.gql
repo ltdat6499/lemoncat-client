@@ -1,5 +1,5 @@
-query getReviewsForFlim($flimId: String) {
-  reviewsForFlim(flimId: $flimId) {
+query getReviewsForFlim($flimId: String, $slug: String) {
+  reviewsForFlim(flimId: $flimId, slug: $slug) {
     id
     user {
       id
