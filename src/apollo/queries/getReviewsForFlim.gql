@@ -1,0 +1,22 @@
+query getReviewsForFlim($flimId: String) {
+  reviewsForFlim(flimId: $flimId) {
+    id
+    user {
+      id
+      name
+      image
+      slug
+      role
+      data {
+        working
+      }
+    }
+    title
+    score
+    slug
+    data {
+      score
+    }
+    updatedAt
+  }
+}

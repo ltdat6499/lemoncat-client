@@ -3,7 +3,7 @@
     <div class="box sb">
       <div style="display:flex;flex-direction:column;align-items: center;">
         <b-form-rating
-          v-model="audienceRating"
+          v-model="thisRating"
           readonly
           inline
           no-border
@@ -11,17 +11,19 @@
           color="#ff8800"
         ></b-form-rating>
         <div>
-          <span style="text-align:justify;display:flex;padding-left:10px"
-            >Maybe nothing could have possibly matched the original for me.
-            [But] everyone is very good in it. The kids, Noah Jupe and Millicent
-            Simmonds, really are the stars here.</span
-          >
+          <span style="text-align:justify;display:flex;padding-left:10px">{{
+            thisTitle
+          }}</span>
           <div
             style="text-align:right;font-size:11px;width:100%;margin-top:10px"
           >
             <span
-              >June 2, 2021 | Rating: 3/5 |
-              <b-link style="text-decoration:none;">Full Review</b-link></span
+              >{{ thisDate }} | Rating: {{ thisRating }}/5 |
+              <b-link
+                :href="'/post/' + thisReviewSlug"
+                style="text-decoration:none;"
+                >Full Review</b-link
+              ></span
             >
           </div>
         </div>
@@ -30,12 +32,11 @@
     <b-row>
       <b-col cols="2"></b-col>
       <b-col cols="10" style="display:flex;align-items: center;">
-        <img
-          src="../../../assets/img/sample-person.jpg"
-          style="width:50px;height:50px"
-        />
+        <img :src="thisUserImage" style="width:50px;height:50px" />
         <div style="display: flex;flex-direction: column;margin-left:15px">
-          <b-link class="name">Christy Lemire</b-link>
+          <b-link :href="'/user/' + thisUserSlug" class="name">{{
+            thisUserName
+          }}</b-link>
           <span style="color:red"> <strong>SUPER REVIEWER</strong></span>
         </div>
       </b-col>
@@ -43,11 +44,69 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
+  props: {
+    title: {
+      type: String,
+      default:
+        "Maybe nothing could have possibly matched the original for me. [But] everyone is very good in it. The kids, Noah Jupe and Millicent Simmonds, really are the stars here."
+    },
+    reviewSlug: {
+      type: String,
+      default: ""
+    },
+    userSlug: {
+      type: String,
+      default: ""
+    },
+    userName: {
+      type: String,
+      default: "Christy Lemire"
+    },
+    userImage: {
+      type: String,
+      default: require("../../../assets/img/sample-person.jpg")
+    },
+    date: {
+      type: Date,
+      default: Date.now()
+    },
+    score: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
       audienceRating: 3.5
     };
+  },
+  computed: {
+    thisTitle() {
+      return this.title;
+    },
+    thisReviewSlug() {
+      return this.reviewSlug;
+    },
+    thisUserSlug() {
+      return this.userSlug;
+    },
+    thisUserName() {
+      return this.userName;
+    },
+    thisUserImage() {
+      return this.userImage;
+    },
+    thisDate() {
+      return moment(this.date).format("LL");
+    },
+    thisScore() {
+      return this.score;
+    },
+    thisRating() {
+      return (this.score * 5) / 100;
+    }
   }
 };
 </script>

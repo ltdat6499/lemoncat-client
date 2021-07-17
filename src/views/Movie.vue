@@ -733,74 +733,7 @@
                 </header-bar>
               </div></b-row
             >
-            <b-row style="padding-top: 20px;padding-bottom:10px">
-              <div style="padding-left:10px;padding-right:10px; display:flex">
-                <div
-                  style="padding-left:5px;padding-right:5px;display:flex;text-align: left;"
-                >
-                  <b-link style="text-decoration:none;"
-                    >All Critics (223)</b-link
-                  >
-                  |
-                  <b-link style="text-decoration:none;"
-                    >Top Critics (62)
-                  </b-link>
-                  | <b-link style="text-decoration:none;">Fresh (191)</b-link> |
-                  <b-link style="text-decoration:none;">Rotten (32)</b-link>
-                </div>
-              </div>
-            </b-row>
-            <b-row style="padding-top: 20px;padding-bottom:10px">
-              <div style="padding-left:10px;padding-right:10px; display:flex">
-                <div
-                  style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
-  flex-wrap: wrap;justify-content:space-around"
-                >
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <top-critic-card></top-critic-card>
-                  <b-link
-                    style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"
-                    ><strong>View All Critic Reviews (252)</strong>
-                  </b-link>
-                </div>
-              </div>
-            </b-row>
-            <b-row>
-              <div style="padding-left:10px;padding-right:10px;width:100%">
-                <header-bar>
-                  <span slot="header"
-                    >AUDIENCE REVIEWS FOR
-                    {{ flim.info.name.toUpperCase() }}</span
-                  >
-                </header-bar>
-              </div></b-row
-            >
-            <b-row style="padding-top: 20px;padding-bottom:10px">
-              <div style="padding-left:10px;padding-right:10px; display:flex">
-                <div
-                  style="padding-left:5px;padding-right:5px;display:flex;text-align: left;display: flex;
-  flex-wrap: wrap;justify-content:space-around"
-                >
-                  <critic-card></critic-card>
-                  <critic-card></critic-card>
-                  <critic-card></critic-card>
-                  <critic-card></critic-card>
-                  <critic-card></critic-card>
-                  <critic-card></critic-card>
-
-                  <b-link
-                    style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;"
-                    ><strong>See all Audience reviews</strong>
-                  </b-link>
-                </div>
-              </div>
-            </b-row>
+            <critic v-if="!isLoading" :id="flim.id" :name="flim.info.name" style="width:100%;"/>
             <b-row>
               <div style="padding-left:10px;padding-right:10px;width:100%">
                 <header-bar>
@@ -863,9 +796,9 @@ import StreamingCard from "@/components/Movie/StreamingCard";
 import SliderImage from "@/components/Movie/SliderImage";
 import CastCard from "@/components/CastCard";
 import NewsCard from "@/components/Movie/NewsCard";
-import TopCriticCard from "@/components/Movie/TopCriticCard";
-import CriticCard from "@/components/Movie/CriticCard";
+
 import QuoteCard from "@/components/Movie/QuoteCard";
+import Critic from "@/components/Movie/Critic";
 
 export default {
   components: {
@@ -878,12 +811,11 @@ export default {
     SliderImage,
     CastCard,
     NewsCard,
-    TopCriticCard,
-    CriticCard,
     QuoteCard,
     Tinymce,
     Loading,
-    SliderMovie
+    SliderMovie,
+    Critic
   },
   data() {
     return {
