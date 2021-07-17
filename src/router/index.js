@@ -85,14 +85,14 @@ export default new Router({
     //   },
     //   component: TvShowEpisode
     // },
-    // {
-    //   path: "/tv/:slug/:season/:episode/reviews",
-    //   name: "TVReviews",
-    //   meta: {
-    //     requiresAuth: false
-    //   },
-    //   component: Reviews
-    // },
+    {
+      path: "/m/:slug/reviews/",
+      name: "TVReviews",
+      meta: {
+        requiresAuth: false
+      },
+      component: Reviews
+    },
     {
       path: "/post/:slug",
       name: "Post",

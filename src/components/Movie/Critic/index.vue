@@ -35,7 +35,7 @@
             :date="new Date(item.updatedAt)"
             :score="item.data.score"
           ></top-critic-card>
-          <b-link
+          <b-link :href="'/m/' + slug + '/reviews/'"
             style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px"
             ><strong>View All Critic Reviews ({{ allCritic }})</strong>
           </b-link>
@@ -70,6 +70,7 @@
           ></critic-card>
 
           <b-link
+            :href="'/m/' + slug + '/reviews/'"
             style="text-decoration:none;width:100%;text-align:right;padding-right:10px;padding-top:15px;"
             ><strong>See all Audience reviews</strong>
           </b-link>
@@ -96,6 +97,10 @@ export default {
       default: ""
     },
     id: {
+      type: String,
+      default: ""
+    },
+    slug: {
       type: String,
       default: ""
     }
@@ -138,9 +143,6 @@ export default {
               this.audience.push(item);
             }
           }
-        console.log(this.posts);
-        console.log(this.top);
-        console.log(this.audience);
         this.isLoading = false;
       }
     }

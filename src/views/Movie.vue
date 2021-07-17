@@ -733,7 +733,7 @@
                 </header-bar>
               </div></b-row
             >
-            <critic v-if="!isLoading" :id="flim.id" :name="flim.info.name" style="width:100%;"/>
+            <critic v-if="!isLoading" :id="flim.id" :name="flim.info.name" :slug="slug" style="width:100%;"/>
             <b-row>
               <div style="padding-left:10px;padding-right:10px;width:100%">
                 <header-bar>
