@@ -2,6 +2,7 @@ query getPostBySlug($slug: String) {
   postBySlug(slug: $slug) {
     id
     user {
+      id
       name
       slug
     }
@@ -12,6 +13,7 @@ query getPostBySlug($slug: String) {
     comments {
       id
       user {
+        id
         name
         slug
         image
@@ -25,6 +27,7 @@ query getPostBySlug($slug: String) {
       childComments {
         id
         user {
+          id
           name
           slug
           image
@@ -36,6 +39,7 @@ query getPostBySlug($slug: String) {
         interacts {
           id
           user {
+            id
             name
             slug
             image
@@ -51,7 +55,9 @@ query getPostBySlug($slug: String) {
         updatedAt
       }
       interacts {
+        id
         user {
+          id
           name
           slug
           image
@@ -66,7 +72,9 @@ query getPostBySlug($slug: String) {
       updatedAt
     }
     interacts {
+      id
       user {
+        id
         name
         slug
         image

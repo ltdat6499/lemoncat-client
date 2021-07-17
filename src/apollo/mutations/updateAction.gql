@@ -1,0 +1,8 @@
+mutation updateAction($input: ActionInput) {
+  updateAction(input: $input) {
+    result {
+      id
+    }
+    error
+  }
+}

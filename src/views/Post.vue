@@ -503,7 +503,18 @@
                                 <b-link
                                   :href="'/user/' + child.user.slug"
                                   style="float:left;margin-right:auto;text-decoration:none;"
-                                  ><strong>{{ child.user.name }}</strong>
+                                  ><strong
+                                    >{{ child.user.name }}
+                                    <span v-if="child.user.role === 's-user'">
+                                      <v-icon style="color:red"
+                                        >mdi-star</v-icon
+                                      >
+                                      <i style="color:red"
+                                        >Working for
+                                        {{ child.user.data.working }}</i
+                                      >
+                                    </span></strong
+                                  >
                                 </b-link>
                                 <span
                                   style="text-align:justify;over-flow:hidden"
@@ -844,11 +855,12 @@
 </template>
 
 <script>
+import axios from "axios";
 import _ from "lodash";
 import genId from "genid";
 import moment from "moment";
 import getPostBySlug from "@/apollo/queries/getPostBySlug.gql";
-import createAction from "@/apollo/mutations/createAction.gql";
+import updateAction from "@/apollo/mutations/updateAction.gql";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import HeaderBar from "@/components/Movie/HeaderBar";
@@ -870,11 +882,17 @@ export default {
       selected: "Top",
       basePost: {},
       rawPost: {},
-      max: 0
+      max: 0,
+      ids: []
     };
   },
-  created() {
+  async created() {
     this.slug = this.$route.params.slug;
+    let ids = await axios({
+      method: "get",
+      url: "http://127.0.0.1:3841/genIds"
+    });
+    this.ids = ids.data;
   },
   computed: {
     user() {
@@ -914,6 +932,16 @@ export default {
     },
     createAction(type, parentType, parent, data, param) {
       let updateCommentId;
+      const input = {
+        postId: this.post.id,
+        token: this.$cookies.get("token"),
+        parent,
+        type,
+        parentType,
+        data,
+        score: this.user.data.elo / 100,
+        action: "create"
+      };
       const insertAtIndex = (arr, index, newItem) => [
         ...arr.slice(0, index),
         newItem,
@@ -1200,6 +1228,7 @@ export default {
       };
       if (type === "interact") {
         const interact = {
+          id: this.ids.splice(0, 1)[0],
           user: {
             id: this.user.id,
             name: this.user.name,
@@ -1216,9 +1245,14 @@ export default {
             "user.id",
             this.user.id
           ]);
-          if (interactIndex != -1)
+          if (interactIndex != -1) {
             this.rawPost.interacts[interactIndex].emoji = data;
-          else this.rawPost.interacts.push(interact);
+            input.id = this.rawPost.interacts[interactIndex].id;
+            input.action = "update";
+          } else {
+            this.rawPost.interacts.push(interact);
+            input.id = interact.id;
+          }
         } else if (param && param === "child") {
           const resultIndex = {
             comment: "",
@@ -1245,10 +1279,15 @@ export default {
             this.rawPost.comments[resultIndex.comment].childComments[
               resultIndex.childComment
             ].interacts[resultIndex.interact].emoji = data;
+            input.id = this.rawPost.comments[resultIndex.comment].childComments[
+              resultIndex.childComment
+            ].interacts[resultIndex.interact].id;
+            input.action = "update";
           } else {
             this.rawPost.comments[resultIndex.comment].childComments[
               resultIndex.childComment
             ].interacts.push(interact);
+            input.id = interact.id;
           }
           updateCommentId = this.rawPost.comments[resultIndex.comment].id;
         } else {
@@ -1264,14 +1303,19 @@ export default {
             this.rawPost.comments[commentIndex].interacts[
               ownerIndex
             ].emoji = data;
+            input.id = this.rawPost.comments[commentIndex].interacts[
+              ownerIndex
+            ].id;
+            input.action = "update";
           } else {
             this.rawPost.comments[commentIndex].interacts.push(interact);
+            input.id = interact.id;
           }
           updateCommentId = this.rawPost.comments[commentIndex].id;
         }
       } else if (type === "comment") {
         const comment = {
-          id: genId(32, "temp-comment-"),
+          id: this.ids.splice(0, 1)[0],
           user: {
             id: this.user.id,
             name: this.user.name,
@@ -1288,8 +1332,13 @@ export default {
             .format()
             .toString()
         };
+        input.id = comment.id;
         if (parentType === "post") {
-          this.rawPost.comments = insertAtIndex(this.rawPost.comments, 0, comment)
+          this.rawPost.comments = insertAtIndex(
+            this.rawPost.comments,
+            0,
+            comment
+          );
         } else {
           comment.score -= 2 * comment.score;
           const index = _.findIndex(this.rawPost.comments, ["id", parent]);
@@ -1298,7 +1347,6 @@ export default {
         }
       }
       updatePost(updateCommentId);
-      console.log(type, parentType, parent, data);
     }
   },
   apollo: {
