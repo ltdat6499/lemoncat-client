@@ -192,148 +192,6 @@
                         >{{ flim.userReviewCount }} Ratings</span
                       >
                     </div>
-                    <!-- <b-modal
-                    size="lg"
-                    hide-footer
-                    hide-header
-                    id="modal-1"
-                    centered
-                  >
-                    <b-row>
-                      <b-col
-                        style="margin-left:20px;margin-top:20px;border-right:1px solid #E9E9EA"
-                      >
-                        <h4>
-                          <strong>LEMONCATER</strong>
-                          <v-icon id="popover-target-1"
-                            >mdi-help-circle-outline</v-icon
-                          >
-                        </h4>
-                        <b-popover
-                          target="popover-target-1"
-                          triggers="hover"
-                          placement="topleft"
-                        >
-                          The percentage of Approved Lemoncater Critics who have
-                          given this movie a positive review.
-                        </b-popover>
-                        <b-form-group>
-                          <b-form-radio-group
-                            id="btn-radios-1"
-                            v-model="popoverCriticSelected"
-                            :options="[
-                              { text: 'ALL CRITICS', value: 'all' },
-                              { text: 'TOP CRITICS', value: 'top' }
-                            ]"
-                            button-variant="outline-secondary"
-                            size="md"
-                            name="radios-btn-default"
-                            buttons
-                          ></b-form-radio-group
-                          ><br />
-                          <div style="display: flex;align-items: center;">
-                            <img
-                              style="margin-top:20px;width:45px;height:45px"
-                              :src="flim.lemonIcon"
-                            />
-                            <h1 style="margin-top:20px;margin-right:30px">
-                              {{ flim.lemonScore }}
-                            </h1>
-                          </div>
-                          <span style="color:#707176"
-                            >{{ flim.lemonReviewCount }} Reviews</span
-                          ><br /><br />
-                          <span style="color: #707176"
-                            ><strong style="color: #707176"
-                              >{{ flim.lemonScore.replace("%", "") }} out of
-                              100</strong
-                            >
-                            average rating</span
-                          >
-                          <div class="row mb-1">
-                            <div style="color:#707176" class="col-sm-2">
-                              Fresh:
-                            </div>
-                            <div class="col-sm-8 pt-1 w-50">
-                              <b-progress
-                                :value="75"
-                                :variant="'secondary'"
-                              ></b-progress>
-                            </div>
-                            <div
-                              style="color:#707176;padding-left:20px"
-                              class="col-sm-2"
-                            >
-                              191
-                            </div>
-                          </div>
-                          <div class="row mb-1">
-                            <div style="color:#707176" class="col-sm-2">
-                              Rotten:
-                            </div>
-                            <div class="col-sm-8 pt-1 w-50">
-                              <b-progress
-                                height="15px"
-                                :value="35"
-                                :variant="'secondary'"
-                              ></b-progress>
-                            </div>
-                            <div
-                              style="color:#707176;padding-left:20px"
-                              class="col-sm-2"
-                            >
-                              32
-                            </div>
-                          </div>
-                        </b-form-group>
-                      </b-col>
-                      <b-col style="margin-left:20px;margin-top:20px"
-                        ><h4>
-                          <strong>AUDIENCE </strong
-                          ><v-icon id="popover-target-2"
-                            >mdi-help-circle-outline</v-icon
-                          >
-                        </h4>
-                        <b-popover
-                          target="popover-target-2"
-                          triggers="hover"
-                          placement="topleft"
-                        >
-                          The percentage of users who rated this 3.5 stars or
-                          higher.
-                        </b-popover>
-                        <div style="display: flex;align-items: center;">
-                          <img
-                            style="margin-top:20px;width:45px;height:45px"
-                            :src="flim.userIcon"
-                          />
-                          <h1 style="margin-top:20px;margin-right:30px">
-                            {{ flim.userScore }}
-                          </h1>
-                        </div>
-                        <span style="color:#707176"
-                          >{{ flim.userReviewCount }} Ratings</span
-                        ><br /><br />
-                        <div style="dislay:flex;align-items: center;">
-                          <b-form-rating
-                            v-model="audienceRating"
-                            readonly
-                            inline
-                            no-border
-                            precision="2"
-                            color="#ff8800"
-                          ></b-form-rating>
-                          <span style="color: #707176"
-                            ><strong style="color: #707176"
-                              >{{ flim.userScore.replace("%", "") }} out of
-                              100</strong
-                            >
-                            average rating</span
-                          >
-                        </div>
-                      </b-col>
-                    </b-row>
-                  </b-modal> -->
                   </div>
                 </div>
               </div>
@@ -391,39 +249,6 @@
                 :name="item"
                 style="margin-bottom:15px"
               ></streaming-card>
-            </b-row>
-            <b-row>
-              <div style="padding-left:10px;padding-right:10px;width:100%">
-                <header-bar>
-                  <span slot="header">RATE AND REVIEW</span>
-                </header-bar>
-              </div></b-row
-            ><b-row style="padding-top: 20px;padding-bottom:10px;width:100%">
-              <div
-                style="padding-left:10px;padding-right:10px; display:flex;justify-content:center"
-              >
-                <v-card elevation="5" outlined shaped>
-                  <div v-if="showReview" style="padding: 5px">
-                    <b-form-rating
-                      v-model="ratingValue"
-                      variant="warning"
-                      size="lg"
-                      stars="10"
-                      no-border
-                    ></b-form-rating>
-                    <tinymce ref="editor" v-model="content"></tinymce>
-                    <b-button
-                      style="margin-top:15px;margin-bottom:10px"
-                      block
-                      variant="outline-success"
-                      >Submit your Review</b-button
-                    >
-                  </div>
-                  <b-button v-else size="lg" variant="outline-success"
-                    >Write Your Review</b-button
-                  >
-                </v-card>
-              </div>
             </b-row>
             <b-row>
               <div style="padding-left:10px;padding-right:10px;width:100%">
@@ -727,13 +552,83 @@
             <b-row>
               <div style="padding-left:10px;padding-right:10px;width:100%">
                 <header-bar>
+                  <span slot="header">RATE AND REVIEW</span>
+                </header-bar>
+              </div></b-row
+            ><b-row style="padding-top: 20px;padding-bottom:10px;width:100%">
+              <div
+                style="padding-left:10px;padding-right:10px; display:flex;justify-content:center"
+              >
+                <v-card elevation="5" outlined shaped style="width:90%">
+                  <div v-if="user.id.length" style="padding: 5px;">
+                    <b-form-input
+                      v-model="title"
+                      ref="title"
+                      :state="title.length > 20 ? true : false"
+                      aria-describedby="input-live-feedback"
+                      placeholder="Enter your review title"
+                      trim
+                      required
+                    ></b-form-input>
+
+                    <b-form-invalid-feedback id="input-live-feedback">
+                      Enter at least 20 letters
+                    </b-form-invalid-feedback>
+
+                    <b-form-rating
+                      v-model="ratingValue"
+                      variant="warning"
+                      size="lg"
+                      stars="10"
+                      no-border
+                    ></b-form-rating>
+                    <tinymce style="max-width: 693px" ref="editor" v-model="form.content"></tinymce>
+                    <b-button
+                      style="margin-top:15px;margin-bottom:10px"
+                      block
+                      variant="outline-success"
+                      @click="submitReview()"
+                      >Submit your Review</b-button
+                    >
+                  </div>
+                  <b-link href="/login" v-else>
+                    <b-button size="lg" variant="outline-success"
+                      >Write Your Review</b-button
+                    >
+                  </b-link>
+                </v-card>
+              </div>
+            </b-row>
+            <b-alert
+              :show="dismissCountDown"
+              class="fixed-top m-0 rounded-0"
+              style="z-index: 2000;"
+              variant="success"
+              dismissible
+              @dismissed="dismissCountDown = 0"
+              @dismiss-count-down="countDownChanged"
+              >{{
+                `Your review has been ${
+                  this.haveReview ? "Updated" : "Created"
+                }`
+              }}
+            </b-alert>
+            <b-row>
+              <div style="padding-left:10px;padding-right:10px;width:100%">
+                <header-bar>
                   <span slot="header"
                     >CRITIC REVIEWS FOR {{ flim.info.name.toUpperCase() }}</span
                   >
                 </header-bar>
               </div></b-row
             >
-            <critic v-if="!isLoading" :id="flim.id" :name="flim.info.name" :slug="slug" style="width:100%;"/>
+            <critic
+              v-if="!isLoading"
+              :id="flim.id"
+              :name="flim.info.name"
+              :slug="slug"
+              style="width:100%;"
+            />
             <b-row>
               <div style="padding-left:10px;padding-right:10px;width:100%">
                 <header-bar>
@@ -781,6 +676,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import updatePost from "@/apollo/mutations/updatePost.gql";
 import getFlimBySlug from "@/apollo/queries/getFlimBySlug.gql";
 import Loading from "@/components/Loading";
 import moment from "moment";
@@ -819,7 +716,10 @@ export default {
   },
   data() {
     return {
+      dismissCountDown: 0,
+      showDismissibleAlert: false,
       flim: {},
+      first: true,
       isLoading: true,
       slug: "",
       popoverCriticSelected: "all",
@@ -827,13 +727,44 @@ export default {
       showAllCrew: false,
       showReview: false,
       ratingValue: 5,
-      content: "<p><strong>gsdfgdfgsdfgsdfgsdfgdfgfdgsdfgfdgsdfg</strong></p>"
+      title: "",
+      id: "",
+      form: {
+        content: ""
+      },
+      haveReview: false
     };
   },
-  created() {
+  async created() {
     this.slug = this.$route.params.slug;
+    if (this.$cookies.get("token")) {
+      let data = await axios({
+        method: "post",
+        url: "http://127.0.0.1:3841/ownerReviewByFlim",
+        data: {
+          token: this.$cookies.get("token"),
+          slug: this.slug
+        }
+      });
+      if (data.data !== "") {
+        this.haveReview = true;
+        this.id = data.data.id;
+        this.ratingValue = data.data.data.score / 10;
+        this.title = data.data.title;
+        this.form.content = data.data.content;
+      } else {
+        let ids = await axios({
+          method: "get",
+          url: "http://127.0.0.1:3841/genIds"
+        });
+        this.id = ids.data[0];
+      }
+    }
   },
   computed: {
+    user() {
+      return this.$store.state.user;
+    },
     crews() {
       let max = 6;
       if (this.showAllCrew) max = this.flim.crews.length;
@@ -842,10 +773,51 @@ export default {
         results.push(this.flim.crews[i]);
       }
       return results;
+    },
+    review() {
+      return {
+        id: this.id,
+        type: "review",
+        title: this.title,
+        data: {
+          flim: this.flim.id,
+          score: this.ratingValue * 10
+        },
+        content: this.form.content,
+        slug:
+          "review-" +
+          this.title
+            .toLowerCase()
+            .replace(/[`~!#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, "")
+            .replaceAll(" ", "-") +
+          "-" +
+          this.slug +
+          "-" +
+          this.user.slug,
+        token: this.$cookies.get("token"),
+        action: this.haveReview ? "update" : "create"
+      };
     }
   },
-  methods: {},
-
+  methods: {
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    submitReview() {
+      if (this.title.length < 20) this.$refs.title.$el.focus();
+      else {
+        this.$apollo.mutate({
+          mutation: updatePost,
+          manual: true,
+          variables: {
+            input: this.review
+          }
+        });
+        this.dismissCountDown = 3;
+        this.haveReview = true;
+      }
+    }
+  },
   apollo: {
     flimBySlug: {
       query: getFlimBySlug,
@@ -855,6 +827,8 @@ export default {
         };
       },
       result(result) {
+        if (!this.first) return;
+        this.first = false;
         this.isLoading = true;
         this.flim = result.data.flimBySlug;
         this.flim.info.name = this.flim.info.name.toUpperCase();

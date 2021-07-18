@@ -153,7 +153,7 @@
         <span style="display: flex;margin-top:15px;margin-bottom:10px"
           ><strong>MOST POPULAR TV ON LC</strong></span
         >
-        <div v-for="i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i">
+        <div v-for="i of [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]" :key="i">
           <p style="display: flex;margin-bottom:5px">
             <img
               src="https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png"
@@ -172,7 +172,7 @@
         <span style="display: flex;margin-top:15px;margin-bottom:10px"
           ><strong>CERTIFIED FRESH TV</strong></span
         >
-        <div v-for="i of [1, 2, 3, 4, 5]" :key="i">
+        <div v-for="i of [16, 17, 18, 19, 20]" :key="i">
           <p style="display: flex;margin-bottom:5px">
             <img
               src="https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png"
