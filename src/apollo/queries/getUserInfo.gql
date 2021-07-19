@@ -20,6 +20,16 @@ query getUserInfo($token: String) {
         }
       }
     }
+    news {
+      id
+      title
+      slug
+      updatedAt
+      data {
+        previewPoster
+        section
+      }
+    }
     histories {
       id
       type

@@ -112,7 +112,9 @@
               <span
                 ><strong>{{ reviews.length }}</strong> Reviews</span
               >
-              <span><strong>20</strong> News</span>
+              <span
+                ><strong>{{ news.length }}</strong> News</span
+              >
               <span
                 ><strong>{{ histories.length }}</strong> Histories</span
               >
@@ -129,6 +131,7 @@
         <hr style="width: 85%;margin-left: auto;margin-right: auto;" />
         <b-row style="width:100%">
           <v-tabs fixed-tabs style="width:100%;" v-model="tab">
+            <v-tabs-slider color="green"></v-tabs-slider>
             <v-tab style="font-weight:bold" v-for="item in items" :key="item">
               {{ item }}
             </v-tab>
@@ -141,8 +144,8 @@
               <div v-if="item === 'Reviews'">
                 <reviews :posts="reviews"></reviews>
               </div>
-              <div v-if="item === 'News'"><news></news></div>
-              <div v-if="item === 'News'"><news></news></div>
+              <div v-else-if="item === 'News'"><news :posts="news"></news></div>
+              <div v-else><histories :posts="histories"></histories></div>
             </v-tab-item>
           </v-tabs-items>
         </b-row>
@@ -180,7 +183,8 @@ export default {
     NewsCard,
     Reviews,
     News,
-    Loading
+    Loading,
+    Histories
   },
   data() {
     return {
@@ -208,6 +212,7 @@ export default {
       result(res) {
         this.reviews = res.data.getUserInfo.reviews;
         this.histories = res.data.getUserInfo.histories;
+        this.news = res.data.getUserInfo.news;
         this.isLoading = false;
         document.title = this.user.name.toUpperCase() + " - LEMONCAT";
       }

@@ -16,7 +16,7 @@
     </b-row>
 
     <b-table
-      :items="items"
+      :items="thisPost"
       :fields="fields"
       :current-page="currentPage"
       :per-page="perPage"
@@ -30,26 +30,19 @@
       fixed
       @filtered="onFiltered"
     >
-      <template #cell(name)="row">
-        <b-link style="display:flex;text-decoration:none;">
-          <img :src="row.item.imageSrc" style="width:50px;height:50px" />
-          <div
-            style="display:flex;flex-direction:column;align-items: flex-start;justify-content:center;margin-left:10px"
-          >
-            <span style="color:black;"
-              ><strong>{{ row.value }}</strong></span
-            >
-            <span style="color:#757A84"
-              ><i>{{ row.item.workingNews }}</i></span
-            >
-          </div>
+      <template #cell(data)="row">
+        <b-link
+          :href="'/post/' + row.value.slug"
+          style="display:flex;text-decoration:none;"
+        >
+          {{ row.value.section }}
         </b-link>
       </template>
 
-      <template #cell(content)="row">
+      <template #cell(title)="row">
         <div style="display:flex">
           <img
-            :src="row.item.score"
+            :src="row.item.data.icon"
             style="width:25px;height:25px;margin-right:10px"
           />
           <div style="display:flex;flex-direction: column">
@@ -57,25 +50,20 @@
               {{ row.value }}
             </span>
             <div style="float:left">
-              <b-link style="text-decoration:none;">Full Review</b-link>
+              <b-link
+                :href="'/post/' + row.item.slug"
+                style="text-decoration:none;"
+                >Full Review</b-link
+              >
               <span> | </span>
-              <span>Original Score: 5/5</span>
+              <span>Original Score: {{ row.item.data.score }}%</span>
               <span> | </span>
-              <span style="color:gray"> {{ row.item.date }} </span>
+              <span style="color:gray"> {{ row.item.updatedAt }} </span>
             </div>
           </div>
         </div>
       </template>
 
-      <template #cell(editable)>
-        <b-link style="display:flex;text-decoration:none;">
-          <v-btn icon small>
-            <v-icon>
-              mdi-wrench
-            </v-icon>
-          </v-btn>
-        </b-link>
-      </template>
     </b-table>
     <div style="width: 100%;display:flex;align-items: center;">
       <span style="margin-right:10px;float:right">Reviews/Page: </span>
@@ -99,138 +87,37 @@
   </b-container>
 </template>
 <script>
+import moment from "moment";
 export default {
+  props: {
+    posts: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
   data() {
     return {
-      items: [
-        {
-          name: "LYT",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "A Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        }
-      ],
       fields: [
         {
-          key: "name",
-          label: "Reporter",
+          key: "data",
+          label: "Section",
           sortable: true,
           sortDirection: "desc",
-          class: "w-25"
+          class: "text-left"
         },
         {
-          key: "content",
+          key: "title",
           label: "Content",
           sortable: true,
-          class: "text-left, w-75"
+          class: "text-left"
         },
         {
-          key: "editable",
-          label: "Action"
+          key: "updatedAt",
+          label: "Date",
+          class: "text-left"
         }
-
-        // {
-        //   formatter: (value, key, item) => {
-        //     return value ? "Yes" : "No";
-        //   },
-        //   sortable: true,
-        //   sortByFormatted: true,
-        //   filterByFormatted: true
-        // },
       ],
       totalRows: 1,
       currentPage: 1,
@@ -240,11 +127,19 @@ export default {
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
-      filterOn: ["name", "date", "content"]
+      filterOn: ["title", "data", "updatedAt"]
     };
   },
+  computed: {
+    thisPost() {
+      return this.posts.map(item => {
+        item.updatedAt = moment(item.updatedAt).format("ll");
+        return item;
+      });
+    }
+  },
   mounted() {
-    this.totalRows = this.items.length;
+    this.totalRows = this.thisPost.length;
   },
   methods: {
     onFiltered(filteredItems) {
