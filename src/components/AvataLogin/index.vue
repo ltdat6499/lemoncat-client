@@ -1,5 +1,13 @@
 <template>
-  <v-menu v-if="user.id !== ''" open-on-hover bottom right min-width="110px" rounded offset-y>
+  <v-menu
+    v-if="user.id !== ''"
+    open-on-hover
+    bottom
+    right
+    min-width="110px"
+    rounded
+    offset-y
+  >
     <template v-slot:activator="{ on }">
       <v-btn icon x-large v-on="on">
         <v-avatar>
@@ -17,7 +25,12 @@
                   mdi-account-circle-outline
                 </v-icon></span
               >
-              <span>Profile</span>
+              <b-link
+                :href="'/user/' + user.slug"
+                class="link-user"
+                style="text-decoration:none;"
+                >Profile</b-link
+              >
             </span>
           </b-button>
           <b-button tile class="block" variant="outline-success">
@@ -81,6 +94,12 @@ export default {
 </script>
 
 <style scoped>
+.link-user {
+  color: black;
+}
+.link-user:hover {
+  color: white;
+}
 .title-container {
   display: flex;
   align-items: center;

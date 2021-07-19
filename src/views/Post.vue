@@ -941,6 +941,7 @@ export default {
         type,
         parentType,
         data,
+        post: this.slug,
         score: this.user.data.elo / 100,
         action: "create"
       };
