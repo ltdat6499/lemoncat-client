@@ -496,7 +496,6 @@ import ListCard from "@/components/Movies/ListCard";
 import Loading from "@/components/Loading";
 
 export default {
-  name: "Home",
   components: {
     Navbar,
     PageFooter,

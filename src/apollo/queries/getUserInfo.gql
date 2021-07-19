@@ -1,0 +1,31 @@
+query getUserInfo($token: String) {
+  getUserInfo(token: $token) {
+    reviews {
+      id
+      title
+      slug
+      updatedAt
+      data {
+        score
+        flim {
+          lemonScore
+          userScore
+          info {
+            name
+            poster
+            summary
+            theatersDate
+          }
+          slug
+        }
+      }
+    }
+    histories {
+      id
+      type
+      data
+      post
+      updatedAt
+    }
+  }
+}

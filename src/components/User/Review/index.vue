@@ -16,7 +16,7 @@
     </b-row>
 
     <b-table
-      :items="items"
+      :items="thisPost"
       :fields="fields"
       :current-page="currentPage"
       :per-page="perPage"
@@ -30,26 +30,57 @@
       fixed
       @filtered="onFiltered"
     >
-      <template #cell(name)="row">
-        <b-link style="display:flex;text-decoration:none;">
-          <img :src="row.item.imageSrc" style="width:50px;height:50px" />
+      <template #cell(data)="row">
+        <b-link
+          :href="'/m/' + row.value.flim.slug"
+          style="display:flex;text-decoration:none;"
+        >
+          <img
+            :src="row.value.flim.info.poster"
+            style="width:85px;height:110px"
+          />
           <div
             style="display:flex;flex-direction:column;align-items: flex-start;justify-content:center;margin-left:10px"
           >
             <span style="color:black;"
-              ><strong>{{ row.value }}</strong></span
+              ><strong>{{ row.value.flim.info.name }}</strong></span
             >
-            <span style="color:#757A84"
-              ><i>{{ row.item.workingNews }}</i></span
+            <span style="color:gray;text-align: justify">{{
+              row.value.flim.info.summary
+            }}</span>
+            <span style="color:black;text-align: left"
+              >Release at: {{ row.value.flim.info.theatersDate }}</span
             >
+            <div style="display:flex;color:black">
+              <div
+                style="display:flex;align-items:center;justify-content: center;margin-right: 10px"
+              >
+                <img
+                  :src="row.value.flim.lemonIcon"
+                  alt=""
+                  style="width:20px;height:20px"
+                />
+                <span>{{ row.value.flim.lemonScore }}% </span>
+              </div>
+              <div
+                style="display:flex;align-items:center;justify-content: center"
+              >
+                <img
+                  :src="row.value.flim.userIcon"
+                  alt=""
+                  style="width:20px;height:20px"
+                />
+                <span>{{ row.value.flim.userScore }}%</span>
+              </div>
+            </div>
           </div>
         </b-link>
       </template>
 
-      <template #cell(content)="row">
+      <template #cell(title)="row">
         <div style="display:flex">
           <img
-            :src="row.item.score"
+            :src="row.item.data.icon"
             style="width:25px;height:25px;margin-right:10px"
           />
           <div style="display:flex;flex-direction: column">
@@ -57,11 +88,11 @@
               {{ row.value }}
             </span>
             <div style="float:left">
-              <b-link style="text-decoration:none;">Full Review</b-link>
+              <b-link :href="'/post/' + row.item.slug" style="text-decoration:none;">Full Review</b-link>
               <span> | </span>
-              <span>Original Score: 5/5</span>
+              <span>Original Score: {{ row.item.data.score }}%</span>
               <span> | </span>
-              <span style="color:gray"> {{ row.item.date }} </span>
+              <span style="color:gray"> {{ row.item.updatedAt }} </span>
             </div>
           </div>
         </div>
@@ -99,138 +130,31 @@
   </b-container>
 </template>
 <script>
+import moment from "moment";
 export default {
+  props: {
+    posts: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
   data() {
     return {
-      items: [
-        {
-          name: "LYT",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "A Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        },
-        {
-          name: "Paul M. Bradshaw",
-          workingNews: "USA Today",
-          imageSrc: require("../../../assets/img/sample-person.jpg"),
-          score: require("../../../icons/certified-fresh.svg"),
-          content:
-            "Like the Force, The Mandalorian is communicating to us what it thinks we need to know. It's holding back on the rest, but it seems like we'll all be better for it in the end.",
-          date: "November 26, 2019",
-          editable: true
-        }
-      ],
       fields: [
         {
-          key: "name",
-          label: "Reporter",
+          key: "data",
+          label: "Flim",
           sortable: true,
-          sortDirection: "desc",
-          class: "w-25"
+          sortDirection: "desc"
         },
         {
-          key: "content",
+          key: "title",
           label: "Content",
           sortable: true,
-          class: "text-left, w-75"
-        },
-        {
-          key: "editable",
-          label: "Action"
+          class: "text-left"
         }
-
-        // {
-        //   formatter: (value, key, item) => {
-        //     return value ? "Yes" : "No";
-        //   },
-        //   sortable: true,
-        //   sortByFormatted: true,
-        //   filterByFormatted: true
-        // },
       ],
       totalRows: 1,
       currentPage: 1,
@@ -240,11 +164,69 @@ export default {
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
-      filterOn: ["name", "date", "content"]
+      filterOn: ["data", "title"]
     };
   },
+  computed: {
+    thisPost() {
+      return this.posts.map(item => {
+        if (item.data.flim.info.summary.length > 80)
+          item.data.flim.info.summary =
+            item.data.flim.info.summary.substring(0, 80) + " ...";
+
+        item.data.flim.info.theatersDate = moment(
+          item.data.flim.info.theatersDate
+        ).format("ll");
+
+        if (item.data.score >= 80)
+          item.data.icon =
+            "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+        else if (item.data.score >= 60 && item.data.score < 80)
+          item.data.icon =
+            "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+        else if (item.data.score < 60 && item.data.score >= 0)
+          item.data.icon =
+            "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+        else
+          item.data.icon =
+            "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
+
+        if (item.data.flim.lemonScore >= 80)
+          item.data.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51280469111_d17f4e62ea_o.png";
+        else if (
+          item.data.flim.lemonScore >= 60 &&
+          item.data.flim.lemonScore < 80
+        )
+          item.data.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51280643468_b13c69ff22_o.png";
+        else if (
+          item.data.flim.lemonScore < 60 &&
+          item.data.flim.lemonScore >= 0
+        )
+          item.data.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51278099823_29be28c9b3_o.png";
+        else
+          item.data.flim.lemonIcon =
+            "https://live.staticflickr.com/65535/51278655199_d54f32f82e_o.png";
+
+        if (item.data.flim.userScore >= 60)
+          item.data.flim.userIcon =
+            "https://live.staticflickr.com/65535/51277934536_26d8b990e5_o.png";
+        else if (item.data.flim.userScore < 60 && item.data.flim.userScore >= 0)
+          item.data.flim.userIcon =
+            "https://live.staticflickr.com/65535/51278953920_e842d17506_o.png";
+        else
+          item.data.flim.userIcon =
+            "https://live.staticflickr.com/65535/51277185452_0092492af4_o.png";
+
+        item.updatedAt = moment(item.updatedAt).format("ll");
+        return item;
+      });
+    }
+  },
   mounted() {
-    this.totalRows = this.items.length;
+    this.totalRows = this.thisPost.length;
   },
   methods: {
     onFiltered(filteredItems) {

@@ -217,7 +217,6 @@ import NewsCard from "@/components/NewsMenuCard";
 import SliderMovie from "@/components/PersonSliderMovie";
 import FlimTable from "@/components/Person/Table";
 export default {
-  name: "Home",
   components: {
     Navbar,
     PageFooter,
