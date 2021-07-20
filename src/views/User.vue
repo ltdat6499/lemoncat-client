@@ -209,12 +209,14 @@ export default {
   },
   async created() {
     this.slug = this.$route.params.slug;
-    if (
-      this.slug &&
-      this.slug.length &&
-      this.slug !== this.$store.state.user.slug
-    ) {
-      this.visitMode = true;
+    let ownerUser = await axios({
+      method: "post",
+      url: "http://127.0.0.1:3841/profile",
+      data: {
+        token: this.$cookies.get("token")
+      }
+    });
+    if (ownerUser.data.data.slug !== this.slug) {
       let data = await axios({
         method: "post",
         url: "http://127.0.0.1:3841/userInfo",
@@ -223,6 +225,7 @@ export default {
         }
       });
       this.visitUser = data.data;
+      this.visitMode = true;
     }
   },
   computed: {
