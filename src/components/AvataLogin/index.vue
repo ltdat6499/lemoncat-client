@@ -19,19 +19,16 @@
       <div>
         <div class="mx-auto">
           <b-button tile class="block" variant="outline-success">
-            <span class="title-container">
-              <span
-                ><v-icon class="icon">
-                  mdi-account-circle-outline
-                </v-icon></span
-              >
-              <b-link
-                :href="'/user/' + user.slug"
-                class="link-user"
-                style="text-decoration:none;"
-                >Profile</b-link
-              >
-            </span>
+            <b-link :href="'/user/' + user.slug" style="text-decoration:none;" class="link-user">
+              <span class="title-container">
+                <span
+                  ><v-icon class="icon">
+                    mdi-account-circle-outline
+                  </v-icon></span
+                >
+                <span style="text-decoration:none;">Profile</span>
+              </span>
+            </b-link>
           </b-button>
           <b-button tile class="block" variant="outline-success">
             <span class="title-container">
