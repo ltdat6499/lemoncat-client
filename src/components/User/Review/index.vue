@@ -83,7 +83,7 @@
             :src="row.item.data.icon"
             style="width:25px;height:25px;margin-right:10px"
           />
-          <div style="display:flex;flex-direction: column">
+          <div style="display:flex;flex-direction: column;width:100%">
             <span style="font-size:16px;text-align:justify">
               {{ row.value }}
             </span>
@@ -153,7 +153,7 @@ export default {
           key: "title",
           label: "Content",
           sortable: true,
-          class: "text-left"
+          class: "text-left align-middle"
         }
       ],
       totalRows: 1,

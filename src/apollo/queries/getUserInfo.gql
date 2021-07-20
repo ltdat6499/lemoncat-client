@@ -1,5 +1,5 @@
-query getUserInfo($token: String) {
-  getUserInfo(token: $token) {
+query getUserInfo($token: String, $slug: String) {
+  getUserInfo(token: $token, slug: $slug) {
     reviews {
       id
       title
@@ -24,6 +24,7 @@ query getUserInfo($token: String) {
       id
       title
       slug
+      sideTitle
       updatedAt
       data {
         previewPoster

@@ -31,39 +31,41 @@
       @filtered="onFiltered"
     >
       <template #cell(data)="row">
-        <b-link
-          :href="'/post/' + row.value.slug"
-          style="display:flex;text-decoration:none;"
-        >
+        <b-link style="text-decoration:none;">
           {{ row.value.section }}
         </b-link>
       </template>
 
+      <template #cell(poster)="row">
+        <img
+          :src="row.value"
+          style="width:140px;height: 80px;border-radius:4px"
+        />
+      </template>
+
       <template #cell(title)="row">
         <div style="display:flex">
-          <img
-            :src="row.item.data.icon"
-            style="width:25px;height:25px;margin-right:10px"
-          />
           <div style="display:flex;flex-direction: column">
-            <span style="font-size:16px;text-align:justify">
+            <span style="text-align:justify">
               {{ row.value }}
             </span>
-            <div style="float:left">
-              <b-link
-                :href="'/post/' + row.item.slug"
-                style="text-decoration:none;"
-                >Full Review</b-link
-              >
-              <span> | </span>
-              <span>Original Score: {{ row.item.data.score }}%</span>
-              <span> | </span>
-              <span style="color:gray"> {{ row.item.updatedAt }} </span>
-            </div>
           </div>
         </div>
       </template>
 
+      <template #cell(sideTitle)="row">
+        <div style="display:flex;padding-left:10px;">
+          <div style="display:flex;flex-direction: column">
+            <span style="text-align:justify">
+              {{ row.value }} <b-link
+                :href="'/post/' + row.item.slug"
+                style="text-decoration:none;float:right"
+                >Full Post</b-link
+              >
+            </span>
+          </div>
+        </div>
+      </template>
     </b-table>
     <div style="width: 100%;display:flex;align-items: center;">
       <span style="margin-right:10px;float:right">Reviews/Page: </span>
@@ -105,10 +107,22 @@ export default {
           label: "Section",
           sortable: true,
           sortDirection: "desc",
-          class: "text-left"
+          class: "text-left align-middle"
+        },
+        {
+          key: "poster",
+          label: "Poster",
+          sortable: true,
+          class: "text-left align-middle"
         },
         {
           key: "title",
+          label: "Title",
+          sortable: true,
+          class: "text-left align-middle"
+        },
+        {
+          key: "sideTitle",
           label: "Content",
           sortable: true,
           class: "text-left"
@@ -116,7 +130,7 @@ export default {
         {
           key: "updatedAt",
           label: "Date",
-          class: "text-left"
+          class: "text-left align-middle"
         }
       ],
       totalRows: 1,
@@ -127,13 +141,14 @@ export default {
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
-      filterOn: ["title", "data", "updatedAt"]
+      filterOn: ["title", "data", "updatedAt", "sideTitle"]
     };
   },
   computed: {
     thisPost() {
       return this.posts.map(item => {
         item.updatedAt = moment(item.updatedAt).format("ll");
+        item.poster = item.data.previewPoster;
         return item;
       });
     }

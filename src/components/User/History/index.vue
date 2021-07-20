@@ -83,18 +83,18 @@ export default {
           label: "Type Action",
           sortable: true,
           sortDirection: "desc",
-          class: "text-left"
+          class: "text-left  align-middle"
         },
         {
           key: "data",
           label: "Action",
           sortable: true,
-          class: "text-center"
+          class: "text-center  align-middle"
         },
         {
           key: "updatedAt",
           label: "Date",
-          class: "text-left"
+          class: "text-left  align-middle"
         }
       ],
       totalRows: 1,

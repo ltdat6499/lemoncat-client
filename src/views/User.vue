@@ -97,17 +97,19 @@
                 ></span
               >
               <b-button
+                v-if="!visitMode"
                 style="font-weight:bold;font-size:14px;color:black"
                 variant="outline-secondary"
                 >Edit your info</b-button
               >
-              <v-btn elevation="4" icon><v-icon>mdi-wrench</v-icon></v-btn>
             </div>
             <div
               style="display:flex;align-items:center;justify-content:space-between;font-size:17px;width:70%;margin-bottom:15px"
             >
               <span
-                ><strong>{{ user.data.working }}</strong></span
+                ><strong>{{
+                  user.data.working || "LEMONCAT USER"
+                }}</strong></span
               >
               <span
                 ><strong>{{ reviews.length }}</strong> Reviews</span
@@ -123,7 +125,12 @@
               style="display:flex;align-items:center;font-size:17px;width:70%"
             >
               <strong
-                >Contact at <i>{{ user.email }}</i></strong
+                >Click To Contact
+                <a
+                  :href="'mailto: ' + user.email"
+                  style="text-decoration: underline;color:green;cursor: pointer"
+                  ><i>{{ user.email }}</i></a
+                ></strong
               >
             </div>
           </b-col>
@@ -165,6 +172,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import getUserInfo from "@/apollo/queries/getUserInfo.gql";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
@@ -192,12 +200,34 @@ export default {
       reviews: [],
       histories: [],
       news: [],
+      slug: "",
       tab: null,
-      items: ["Reviews", "News", "Histories"]
+      items: ["Reviews", "News", "Histories"],
+      visitMode: false,
+      visitUser: {}
     };
+  },
+  async created() {
+    this.slug = this.$route.params.slug;
+    if (
+      this.slug &&
+      this.slug.length &&
+      this.slug !== this.$store.state.user.slug
+    ) {
+      this.visitMode = true;
+      let data = await axios({
+        method: "post",
+        url: "http://127.0.0.1:3841/userInfo",
+        data: {
+          slug: this.slug
+        }
+      });
+      this.visitUser = data.data;
+    }
   },
   computed: {
     user() {
+      if (this.visitMode) return this.visitUser;
       return this.$store.state.user;
     }
   },
@@ -206,7 +236,8 @@ export default {
       query: getUserInfo,
       variables() {
         return {
-          token: this.$cookies.get("token")
+          token: this.$cookies.get("token"),
+          slug: this.slug
         };
       },
       result(res) {
