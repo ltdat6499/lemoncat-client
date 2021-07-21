@@ -14,6 +14,7 @@ import Tops from "@/views/Tops";
 import DetailTop from "@/views/DetailTop";
 import Person from "@/views/Person";
 import User from "@/views/User";
+import CallBack from "@/views/CallBack";
 
 Vue.use(Router);
 
@@ -36,6 +37,14 @@ export default new Router({
         notIncludeToken: true
       },
       component: Login
+    },
+    {
+      path: "/l/:slug",
+      name: "AfterLogin",
+      meta: {
+        requiresAuth: false,
+      },
+      component: CallBack
     },
     {
       path: "/m/:slug",

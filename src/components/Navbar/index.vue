@@ -124,7 +124,7 @@
       <b-navbar-nav class="navbar-row-item">
         <menu-movies />
         <menu-t-v-shows />
-        <no-menu :name="'LC PODCAST'" />
+        <no-menu :name="'CINEMA EXPS'" :href="'/c/full'" />
         <news />
         <no-menu :name="'SHOWTIMES'" />
         <no-menu v-if="!isLogin" :name="'LOGIN'" :href="'/login'" />
