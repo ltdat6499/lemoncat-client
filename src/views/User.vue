@@ -269,7 +269,13 @@
               <div v-if="item === 'Reviews'">
                 <reviews :posts="reviews"></reviews>
               </div>
-              <div v-else-if="item === 'News'"><news :posts="news"></news></div>
+              <div v-else-if="item === 'News'">
+                <news
+                  :visit="visitMode"
+                  :posts="news"
+                  @update-id="setUpdateId"
+                ></news>
+              </div>
               <div v-else-if="item === 'Histories'">
                 <histories :posts="histories"></histories>
               </div>
@@ -488,10 +494,12 @@ export default {
         type: "news",
         data: {
           section: this.post.data.section,
-          previewPoster:
-            this.file != null
-              ? this.post.data.previewPoster
-              : "https://img.freepik.com/free-vector/news-papers-communication-hanging-with-clips-illustration_24908-67082.jpg?size=626&ext=jpg"
+          previewPoster: (() => {
+            if (this.post.id.length) return this.post.data.previewPoster;
+
+            if (this.file != null) return this.post.data.previewPoster;
+            return "https://img.freepik.com/free-vector/news-papers-communication-hanging-with-clips-illustration_24908-67082.jpg?size=626&ext=jpg";
+          })()
         }
       };
     },
@@ -508,12 +516,33 @@ export default {
   },
   methods: {
     submitNews() {
-      this.$apollo.mutate({
-        mutation: updatePost,
-        variables: {
-          input: this.thisPost
-        }
-      });
+      const input = JSON.parse(JSON.stringify(this.thisPost));
+      if (input.action === "update") input.id = this.post.id;
+      this.$apollo
+        .mutate({
+          mutation: updatePost,
+          variables: {
+            input
+          }
+        })
+        .then(data => {
+          const id = data.data.updatePost.result.id;
+          alert("Your news have been " + this.thisPost.action + "d");
+          if (this.thisPost.action === "create") {
+            this.news.push({
+              id,
+              title: this.post.title,
+              slug: this.thisPost.slug,
+              sideTitle: this.post.title,
+              updatedAt: Date.now().toString(),
+              data: {
+                previewPoster: this.post.data.previewPoster,
+                section: this.post.data.section
+              }
+            });
+            this.news = JSON.parse(JSON.stringify(this.news));
+          }
+        });
     },
     changeEditMode(reset) {
       this.edit = !this.edit;
@@ -574,6 +603,7 @@ export default {
     },
 
     closeEdit() {
+      this.tab = 1;
       this.post = {
         id: "",
         title: "",
@@ -583,6 +613,28 @@ export default {
           section: "Critics Consensus",
           previewPoster:
             "https://img.freepik.com/free-vector/news-papers-communication-hanging-with-clips-illustration_24908-67082.jpg?size=626&ext=jpg"
+        }
+      };
+    },
+
+    async setUpdateId(id) {
+      let data = await axios({
+        method: "post",
+        url: "http://127.0.0.1:3841/getPost",
+        data: {
+          id
+        }
+      });
+      this.tab = 3;
+
+      this.post = {
+        id,
+        title: data.data.title,
+        content: data.data.content,
+        action: "update",
+        data: {
+          section: data.data.data.section,
+          previewPoster: data.data.data.preview_poster
         }
       };
     }

@@ -57,7 +57,8 @@
         <div style="display:flex;padding-left:10px;">
           <div style="display:flex;flex-direction: column">
             <span style="text-align:justify">
-              {{ row.value }} <b-link
+              {{ row.value }}
+              <b-link
                 :href="'/post/' + row.item.slug"
                 style="text-decoration:none;float:right"
                 >Full Post</b-link
@@ -65,6 +66,10 @@
             </span>
           </div>
         </div>
+      </template>
+
+      <template #cell(edit)="row">
+        <b-button style="align: middle" variant="warning" @click="updateId(row.value)">Edit</b-button>
       </template>
     </b-table>
     <div style="width: 100%;display:flex;align-items: center;">
@@ -97,42 +102,85 @@ export default {
       default() {
         return [];
       }
+    },
+    visit: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      fields: [
-        {
-          key: "data",
-          label: "Section",
-          sortable: true,
-          sortDirection: "desc",
-          class: "text-left align-middle"
-        },
-        {
-          key: "poster",
-          label: "Poster",
-          sortable: true,
-          class: "text-left align-middle"
-        },
-        {
-          key: "title",
-          label: "Title",
-          sortable: true,
-          class: "text-left align-middle"
-        },
-        {
-          key: "sideTitle",
-          label: "Content",
-          sortable: true,
-          class: "text-left"
-        },
-        {
-          key: "updatedAt",
-          label: "Date",
-          class: "text-left align-middle"
-        }
-      ],
+      fields:
+        this.visit === false
+          ? [
+              {
+                key: "data",
+                label: "Section",
+                sortable: true,
+                sortDirection: "desc",
+                class: "text-left align-middle"
+              },
+              {
+                key: "poster",
+                label: "Poster",
+                sortable: true,
+                class: "text-left align-middle"
+              },
+              {
+                key: "title",
+                label: "Title",
+                sortable: true,
+                class: "text-left align-middle"
+              },
+              {
+                key: "sideTitle",
+                label: "Content",
+                sortable: true,
+                class: "text-left"
+              },
+              {
+                key: "updatedAt",
+                label: "Date",
+                class: "text-left align-middle"
+              },
+              {
+                key: "edit",
+                label: "Action",
+                class: "text-left align-middle"
+              }
+            ]
+          : [
+              {
+                key: "data",
+                label: "Section",
+                sortable: true,
+                sortDirection: "desc",
+                class: "text-left align-middle"
+              },
+              {
+                key: "poster",
+                label: "Poster",
+                sortable: true,
+                class: "text-left align-middle"
+              },
+              {
+                key: "title",
+                label: "Title",
+                sortable: true,
+                class: "text-left align-middle"
+              },
+              {
+                key: "sideTitle",
+                label: "Content",
+                sortable: true,
+                class: "text-left"
+              },
+              {
+                key: "updatedAt",
+                label: "Date",
+                class: "text-left align-middle"
+              }
+            ],
       totalRows: 1,
       currentPage: 1,
       perPage: 5,
@@ -147,8 +195,11 @@ export default {
   computed: {
     thisPost() {
       return this.posts.map(item => {
+        if (typeof item.updatedAt === "string")
+          item.updatedAt = new Date(item.updatedAt);
         item.updatedAt = moment(item.updatedAt).format("ll");
         item.poster = item.data.previewPoster;
+        if (!this.visit) item.edit = item.id;
         return item;
       });
     }
@@ -157,6 +208,9 @@ export default {
     this.totalRows = this.thisPost.length;
   },
   methods: {
+    updateId(id) {
+      this.$emit("update-id", id);
+    },
     onFiltered(filteredItems) {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
