@@ -127,7 +127,7 @@
                       block
                       :disabled="!valid"
                       color="light-green accent-3"
-                      @click="validate"
+                      @click="register"
                       >Register</v-btn
                     >
                   </b-col>
@@ -199,7 +199,7 @@ export default {
               token: this.$cookies.get("token")
             }
           });
-          
+
           const user = {
             id: res.data.data.id,
             image: res.data.data.image,
@@ -222,6 +222,42 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    async register() {
+      let data = await axios({
+        method: "post",
+        url: "http://127.0.0.1:3841/register",
+        data: {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        }
+      });
+      if (data.error) alert("Email is already exists")
+      else {
+        console.log(data.data);
+        this.$cookies.set("token", data.data);
+          let res = await axios({
+            method: "post",
+            url: "http://127.0.0.1:3841/profile",
+            data: {
+              token: this.$cookies.get("token")
+            }
+          });
+
+          const user = {
+            id: res.data.data.id,
+            image: res.data.data.image,
+            name: res.data.data.name,
+            email: res.data.data.email,
+            slug: res.data.data.slug,
+            role: res.data.data.role,
+            data: res.data.data.data
+          };
+          this.$store.dispatch("handleUpdateUser", user);
+          // alert(JSON.stringify(this.$cookies.get("token")));
+          this.$router.push("/");
+      }
     }
   },
   data: () => ({
