@@ -280,6 +280,7 @@
 
 <script>
 import axios from "axios";
+import updateUser from "@/apollo/mutations/updateUser.gql";
 import getUserInfo from "@/apollo/queries/getUserInfo.gql";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
@@ -365,7 +366,27 @@ export default {
           working: this.user.data.working
         };
       } else {
-        console.log(this.editUser);
+        const input = {
+          ...this.editUser,
+          action: "update",
+          token: this.$cookies.get("token")
+        };
+        this.$apollo.mutate({
+          mutation: updateUser,
+          manual: true,
+          variables: {
+            input
+          }
+        });
+        this.$store.dispatch("handleUpdateUser", {
+          ...this.$store.state.user,
+          name: this.editUser.name,
+          data: {
+            ...this.$store.state.user.data,
+            working: this.editUser.working
+          },
+          image: this.editUser.image
+        });
         alert("Profile have been Updated");
       }
     },
