@@ -146,6 +146,7 @@
               accept="image/png,image/jpeg"
               :defaultPreview="editUser.image"
               :max-size="3"
+              :imageMode="'avata'"
               @size-exceeded="onSizeExceeded"
               @file="onFile"
               @load="onLoad"
@@ -269,7 +270,67 @@
                 <reviews :posts="reviews"></reviews>
               </div>
               <div v-else-if="item === 'News'"><news :posts="news"></news></div>
-              <div v-else><histories :posts="histories"></histories></div>
+              <div v-else-if="item === 'Histories'">
+                <histories :posts="histories"></histories>
+              </div>
+              <div v-else style="margin-top:10px">
+                <div v-if="visitMode">
+                  <h3>YOU DON'T DAVE PERMISSIONS TO VIEW THIS FEATURE</h3>
+                </div>
+                <div v-else>
+                  <img
+                    :src="previewNews"
+                    style="width:300px;height:150px;align: middle;border-radius:4px"
+                  />
+                  <br />
+                  <b-form-file
+                    ref="file"
+                    style="margin-bottom: 10px;margin-top: 10px"
+                    v-model="file"
+                    :state="Boolean(file)"
+                    plain
+                    accept="image/*"
+                    size="lg"
+                    placeholder="Click to upload your news poster"
+                  ></b-form-file>
+
+                  <b-form-input
+                    v-model="post.title"
+                    ref="title"
+                    :state="post.title.length > 20 ? true : false"
+                    aria-describedby="input-live-feedback"
+                    placeholder="Enter your news title"
+                    trim
+                    required
+                  ></b-form-input>
+
+                  <v-select
+                    v-model="post.data.section"
+                    :items="sections"
+                    outlined
+                  ></v-select>
+
+                  <tinymce ref="editor" v-model="post.content"></tinymce>
+                  <div>
+                    <b-button
+                      style="margin-top:15px;margin-bottom:10px;margin-right:10px"
+                      block
+                      size="lg"
+                      variant="outline-success"
+                      @click="submitNews()"
+                      >Submit your News</b-button
+                    ><b-button
+                      v-if="post.id.length"
+                      style="margin-top:15px;margin-bottom:10px"
+                      block
+                      size="lg"
+                      variant="outline-warning"
+                      @click="closeEdit()"
+                      >Close Edit</b-button
+                    >
+                  </div>
+                </div>
+              </div>
             </v-tab-item>
           </v-tabs-items>
         </b-row>
@@ -290,6 +351,7 @@
 
 <script>
 import axios from "axios";
+import updatePost from "@/apollo/mutations/updatePost.gql";
 import updateUser from "@/apollo/mutations/updateUser.gql";
 import getUserInfo from "@/apollo/queries/getUserInfo.gql";
 import Navbar from "@/components/Navbar";
@@ -300,6 +362,7 @@ import Reviews from "@/components/User/Review";
 import News from "@/components/User/News";
 import Histories from "@/components/User/History";
 import Loading from "@/components/Loading";
+import Tinymce from "@/components/Tinymce";
 import FileUpload from "vue-base64-file-upload";
 
 export default {
@@ -312,26 +375,60 @@ export default {
     News,
     Loading,
     Histories,
-    FileUpload
+    FileUpload,
+    Tinymce
   },
   data() {
     return {
+      sections: [
+        "24 Frames",
+        "All-Time Lists",
+        "Binge Guide",
+        "Countdown",
+        "Comics on TV",
+        "Critics Consensus",
+        "Five Favorite Films",
+        "The Zeros",
+        "Parental Guidance",
+        "Red Carpet Roundup",
+        "Video Interviews",
+        "Weekly Ketchup",
+        "Sub-Cult",
+        "Weekend Box Office",
+        "Scorecards",
+        "Total Recall",
+        "Now Streaming",
+        "What to Watch"
+      ],
       isLoading: true,
+      first: true,
       reviews: [],
       histories: [],
       news: [],
       slug: "",
       tab: null,
-      items: ["Reviews", "News", "Histories"],
+      items: ["Reviews", "News", "Histories", "Write your news"],
       visitMode: false,
       visitUser: {},
       edit: false,
+      file: null,
       editUser: {
         image:
           "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars.png",
         name: "",
         password: "lemoncat",
         working: ""
+      },
+      post: {
+        id: "",
+        title: "",
+        content: "",
+        action: "create",
+        data: {
+          section: "Critics Consensus",
+          previewPoster:
+            "https://img.freepik.com/free-vector/news-papers-communication-hanging-with-clips-illustration_24908-67082.jpg?size=626&ext=jpg"
+        }
       }
     };
   },
@@ -356,16 +453,68 @@ export default {
       this.visitMode = true;
     }
   },
+  watch: {
+    file(val, old) {
+      if (val.size > 23000) {
+        this.$refs.file.value = null;
+        alert("Image size must lower than 23000");
+      }
+      if (val && val != null) {
+        const reader = new FileReader();
+        reader.readAsDataURL(val);
+        reader.onload = () => {
+          this.post.data.previewPoster = reader.result;
+        };
+      }
+    }
+  },
   computed: {
+    thisPost() {
+      return {
+        slug:
+          "post-" +
+          this.post.title
+            .toLowerCase()
+            .replace(/[`~!#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, "")
+            .replaceAll(" ", "-") +
+          "-" +
+          this.user.id +
+          "-" +
+          Date.now().toString(),
+        title: this.post.title,
+        token: this.$cookies.get("token"),
+        action: this.post.id.length ? "update" : "create",
+        content: this.post.content || "",
+        type: "news",
+        data: {
+          section: this.post.data.section,
+          previewPoster:
+            this.file != null
+              ? this.post.data.previewPoster
+              : "https://img.freepik.com/free-vector/news-papers-communication-hanging-with-clips-illustration_24908-67082.jpg?size=626&ext=jpg"
+        }
+      };
+    },
     user() {
       if (this.visitMode) return this.visitUser;
       return this.$store.state.user;
     },
     validation() {
       return this.editUser.name.length > 4 && this.editUser.name.length < 13;
+    },
+    previewNews() {
+      return this.post.data.previewPoster;
     }
   },
   methods: {
+    submitNews() {
+      this.$apollo.mutate({
+        mutation: updatePost,
+        variables: {
+          input: this.thisPost
+        }
+      });
+    },
     changeEditMode(reset) {
       this.edit = !this.edit;
       if (reset) return;
@@ -409,10 +558,33 @@ export default {
       this.editUser.image = dataUri;
     },
 
+    onChange() {
+      console.log("New picture selected!");
+      if (this.$refs.pictureInput.image) {
+        console.log(this.$refs.pictureInput.image);
+      } else {
+        console.log("FileReader API not supported: use the <form>, Luke!");
+      }
+    },
+
     onSizeExceeded(size) {
       alert(
         `Image ${size}Mb size exceeds limits of ${this.customImageMaxSize}Mb!`
       );
+    },
+
+    closeEdit() {
+      this.post = {
+        id: "",
+        title: "",
+        content: "",
+        action: "create",
+        data: {
+          section: "Critics Consensus",
+          previewPoster:
+            "https://img.freepik.com/free-vector/news-papers-communication-hanging-with-clips-illustration_24908-67082.jpg?size=626&ext=jpg"
+        }
+      };
     }
   },
   apollo: {
@@ -425,6 +597,8 @@ export default {
         };
       },
       result(res) {
+        if (!this.first) return;
+        this.first = false;
         this.reviews = res.data.getUserInfo.reviews;
         this.histories = res.data.getUserInfo.histories;
         this.news = res.data.getUserInfo.news;
