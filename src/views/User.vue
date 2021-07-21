@@ -230,14 +230,24 @@
                   Looks Good
                 </b-form-valid-feedback>
               </div>
-              <b-button
-                v-if="!visitMode"
-                style="font-weight:bold;font-size:14px;"
-                variant="outline-success"
-                @click="changeEditMode()"
-              >
-                Save
-              </b-button>
+              <div>
+                <b-button
+                  v-if="!visitMode"
+                  style="font-weight:bold;font-size:14px;margin-right:10px"
+                  variant="success"
+                  @click="changeEditMode()"
+                >
+                  Save
+                </b-button>
+                <b-button
+                  v-if="!visitMode"
+                  style="font-weight:bold;font-size:14px;"
+                  variant="warning"
+                  @click="changeEditMode(true)"
+                >
+                  Cancel
+                </b-button>
+              </div>
             </div>
           </b-col>
         </b-row>
@@ -356,8 +366,9 @@ export default {
     }
   },
   methods: {
-    changeEditMode() {
+    changeEditMode(reset) {
       this.edit = !this.edit;
+      if (reset) return;
       if (this.edit) {
         this.editUser = {
           image: this.user.image,
