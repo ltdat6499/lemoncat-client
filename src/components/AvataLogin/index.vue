@@ -30,17 +30,7 @@
               </span>
             </b-link>
           </b-button>
-          <b-button tile class="block" variant="outline-success">
-            <span class="title-container">
-              <span
-                ><v-icon class="icon">
-                  mdi-settings
-                </v-icon></span
-              >
-              <span>Settings</span>
-            </span>
-          </b-button>
-          <v-divider></v-divider>
+          
           <b-button
             tile
             class="block"

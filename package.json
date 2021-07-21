@@ -29,6 +29,7 @@
     "vue": "^2.6.12",
     "vue-apollo": "^3.0.7",
     "vue-axios": "^2.1.4",
+    "vue-base64-file-upload": "^1.0.4",
     "vue-carousel": "^0.18.0",
     "vue-fullcalendar": "^1.0.9",
     "vue-range-component": "^1.0.3",

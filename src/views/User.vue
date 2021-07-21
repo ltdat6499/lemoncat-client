@@ -79,7 +79,7 @@
         elevation="0"
         class="container body-container row-style"
       >
-        <b-row style="padding-top:50px;padding-bottom:20px">
+        <b-row v-if="!edit" style="padding-top:50px;padding-bottom:20px">
           <b-col cols="3">
             <img
               :src="user.image"
@@ -98,10 +98,12 @@
               >
               <b-button
                 v-if="!visitMode"
-                style="font-weight:bold;font-size:14px;color:black"
+                style="font-weight:bold;font-size:14px;"
                 variant="outline-secondary"
-                >Edit your info</b-button
+                @click="changeEditMode()"
               >
+                Edit Profile
+              </b-button>
             </div>
             <div
               style="display:flex;align-items:center;justify-content:space-between;font-size:17px;width:70%;margin-bottom:15px"
@@ -135,6 +137,111 @@
             </div>
           </b-col>
         </b-row>
+
+        <b-row v-else style="padding-top:50px;padding-bottom:20px">
+          <b-col cols="3" style="display:flex;justify-content:center">
+            <file-upload
+              style="width:150px;height:150px;vertical-align:middle;"
+              class="align-middle"
+              accept="image/png,image/jpeg"
+              :defaultPreview="editUser.image"
+              :max-size="3"
+              @size-exceeded="onSizeExceeded"
+              @file="onFile"
+              @load="onLoad"
+            ></file-upload>
+          </b-col>
+          <b-col cols="9">
+            <div
+              style="display:flex;align-items:left;flex-direction: column;margin-bottom:15px;float:left;margin-right:auto;"
+            >
+              <div style="margin-right:20px">
+                <b-form-input
+                  style="font-size: 16px;width:300px"
+                  v-model="editUser.name"
+                  :state="validation"
+                ></b-form-input>
+                <b-form-invalid-feedback
+                  :state="validation"
+                  style="font-size: 16px;float:left;margin-right:auto;max-width:300px"
+                >
+                  Name must be 5-12 characters long
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback
+                  :state="validation"
+                  style="font-size: 16px;float:left;margin-right:auto;max-width:300px"
+                >
+                  Looks Good
+                </b-form-valid-feedback>
+              </div>
+
+              <div style="margin-right:20px">
+                <b-form-input
+                  style="font-size: 16px;width:300px"
+                  v-model="editUser.working"
+                  :state="
+                    editUser.working.length > 4 && editUser.working.length < 13
+                  "
+                ></b-form-input>
+                <b-form-invalid-feedback
+                  :state="
+                    editUser.working.length > 4 && editUser.working.length < 13
+                  "
+                  style="font-size: 16px;float:left;margin-right:auto;max-width:300px"
+                >
+                  Working news must be 5-12 chars long
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback
+                  :state="
+                    editUser.working.length > 4 && editUser.working.length < 13
+                  "
+                  style="font-size: 16px;float:left;margin-right:auto;max-width:300px"
+                >
+                  Looks Good
+                </b-form-valid-feedback>
+              </div>
+
+              <div style="margin-right:20px">
+                <b-form-input
+                  type="password"
+                  style="font-size: 16px;width:300px"
+                  v-model="editUser.password"
+                  :state="
+                    editUser.password.length >= 8 &&
+                      editUser.password.length <= 16
+                  "
+                ></b-form-input>
+                <b-form-invalid-feedback
+                  :state="
+                    editUser.password.length >= 8 &&
+                      editUser.password.length <= 16
+                  "
+                  style="font-size: 16px;float:left;margin-right:auto;max-width:300px"
+                >
+                  Password must be 8-16 chars long
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback
+                  :state="
+                    editUser.password.length >= 8 &&
+                      editUser.password.length <= 16
+                  "
+                  style="font-size: 16px;float:left;margin-right:auto;max-width:300px"
+                >
+                  Looks Good
+                </b-form-valid-feedback>
+              </div>
+              <b-button
+                v-if="!visitMode"
+                style="font-weight:bold;font-size:14px;"
+                variant="outline-success"
+                @click="changeEditMode()"
+              >
+                Save
+              </b-button>
+            </div>
+          </b-col>
+        </b-row>
+
         <hr style="width: 85%;margin-left: auto;margin-right: auto;" />
         <b-row style="width:100%">
           <v-tabs fixed-tabs style="width:100%;" v-model="tab">
@@ -182,6 +289,7 @@ import Reviews from "@/components/User/Review";
 import News from "@/components/User/News";
 import Histories from "@/components/User/History";
 import Loading from "@/components/Loading";
+import FileUpload from "vue-base64-file-upload";
 
 export default {
   components: {
@@ -192,7 +300,8 @@ export default {
     Reviews,
     News,
     Loading,
-    Histories
+    Histories,
+    FileUpload
   },
   data() {
     return {
@@ -204,7 +313,15 @@ export default {
       tab: null,
       items: ["Reviews", "News", "Histories"],
       visitMode: false,
-      visitUser: {}
+      visitUser: {},
+      edit: false,
+      editUser: {
+        image:
+          "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars.png",
+        name: "",
+        password: "lemoncat",
+        working: ""
+      }
     };
   },
   async created() {
@@ -232,6 +349,38 @@ export default {
     user() {
       if (this.visitMode) return this.visitUser;
       return this.$store.state.user;
+    },
+    validation() {
+      return this.editUser.name.length > 4 && this.editUser.name.length < 13;
+    }
+  },
+  methods: {
+    changeEditMode() {
+      this.edit = !this.edit;
+      if (this.edit) {
+        this.editUser = {
+          image: this.user.image,
+          name: this.user.name,
+          password: "lemoncat",
+          working: this.user.data.working
+        };
+      } else {
+        console.log(this.editUser);
+        alert("Profile have been Updated");
+      }
+    },
+    onFile(file) {
+      // console.log(file); // file object
+    },
+
+    onLoad(dataUri) {
+      this.editUser.image = dataUri;
+    },
+
+    onSizeExceeded(size) {
+      alert(
+        `Image ${size}Mb size exceeds limits of ${this.customImageMaxSize}Mb!`
+      );
     }
   },
   apollo: {
