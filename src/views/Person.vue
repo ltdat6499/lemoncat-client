@@ -163,14 +163,10 @@
           <b-col cols="3">
             <div>
               <header-bar>
-                <span slot="header">MOVIE & TV NEWS</span>
+                <span slot="header">FRESH NEWS IN WEEK</span>
               </header-bar>
-              <news-card></news-card> <news-card></news-card
-              ><news-card></news-card> <news-card></news-card>
-              <news-card></news-card>
-              <b-link style="text-decoration:none;float:right;margin-right:20px"
-                >More on LC</b-link
-              >
+              <news-card> </news-card>
+              
             </div>
             <!-- <div>
             <header-bar>
@@ -208,12 +204,13 @@
 import _ from "lodash";
 import moment from "moment";
 import getPersonBySlug from "@/apollo/queries/getPersonBySlug.gql";
+import NewsCard from "@/components/SideBestNewsWeek";
 import Loading from "@/components/Loading";
 import SliderImage from "@/components/Movie/SliderImage";
 import Navbar from "@/components/Navbar";
 import PageFooter from "@/components/Footer";
 import HeaderBar from "@/components/Movie/HeaderBar";
-import NewsCard from "@/components/NewsMenuCard";
+// import NewsCard from "@/components/NewsMenuCard";
 import SliderMovie from "@/components/PersonSliderMovie";
 import FlimTable from "@/components/Person/Table";
 export default {
@@ -225,7 +222,8 @@ export default {
     SliderMovie,
     SliderImage,
     FlimTable,
-    Loading
+    Loading,
+    NewsCard
   },
   computed: {
     tags() {

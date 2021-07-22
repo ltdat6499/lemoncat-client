@@ -15,6 +15,7 @@ import DetailTop from "@/views/DetailTop";
 import Person from "@/views/Person";
 import User from "@/views/User";
 import CallBack from "@/views/CallBack";
+import SeatPreview from "@/views/SeatPreview";
 
 Vue.use(Router);
 
@@ -28,6 +29,14 @@ export default new Router({
         requiresAuth: false
       },
       component: Home
+    },
+    {
+      path: "/c/:slug",
+      name: "Cinema",
+      meta: {
+        requiresAuth: false
+      },
+      component: SeatPreview
     },
     {
       path: "/login",
